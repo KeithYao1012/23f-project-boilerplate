@@ -84,8 +84,8 @@ def update_producer(producerID):
 
 # Delete the producer with the given <ProducerID>
 @producers.route('/producers/<producerrID>', methods=['DELETE'])
-def delete_producer(userID):
-    prod = producers.query.get_or_404(userID)
+def delete_producer(producerID):
+    prod = producers.query.get_or_404(producerID)
     db.session.delete(prod)
     db.session.commit()
-    return jsonify({'message': 'User deleted successfully'}), 200
+    return jsonify({'message': 'Producer deleted successfully'}), 200
