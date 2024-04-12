@@ -80,7 +80,7 @@ def add_new_community():
     #extracting the variable
     id = the_data['CommunityID']
     name = the_data['Com_Name']
-    genreId = the_data['GenreID']
+    genreName = the_data['GenreName']
     com_desc = the_data['Com_Desc']
 
 
@@ -88,7 +88,7 @@ def add_new_community():
     query = 'insert into community (CommunityID, Com_Name, GenreID, Com_Desc) values ("'
     query += id + '", "'
     query += name + '", "'
-    query += genreId + '", "'
+    query += '(SELECT GenreID FROM Genre WHERE GenreName = ' + str(genreName) + '", "'
     query += com_desc + '", "'
     current_app.logger.info(query)
 
