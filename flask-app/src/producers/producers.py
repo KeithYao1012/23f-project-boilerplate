@@ -3,16 +3,16 @@ import json
 from src import db
 
 
-users = Blueprint('products', __name__)
+producers  = Blueprint('products', __name__)
 
-# Get all the users
-@users.route('/users', methods=['GET'])
-def get_users():
+# Get all the producers
+@producers.route('/producers', methods=['GET'])
+def get_producers():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT UserID, Username FROM Users')
+    cursor.execute('SELECT Name, ProducerID FROM Producer')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -31,11 +31,11 @@ def get_users():
 
     return jsonify(json_data)
 
-# Get a specific user
-@users.route('/users/<userID>', methods=['GET'])
-def get_user(userID):
+# Get a specific producer
+@producers.route('/producers/<producerID>', methods=['GET'])
+def get_producer(producerID):
 
-    query = 'SELECT UserID, Username FROM Users WHERE id = ' + str(userID)
+    query = 'SELECT Name, ProducerID FROM Producer WHERE ProducerID = ' + str(producerID)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -47,21 +47,21 @@ def get_user(userID):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Adds a new user
-@users.route('/users', methods=['POST'])
-def add_new_user():
+# Adds a new producer
+@producers.route('/producers', methods=['POST'])
+def add_new_producer():
     
     # collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
 
     #extracting the variable
-    id = the_data['UserID']
-    name = the_data['Username']
+    id = the_data['ProducerID']
+    name = the_data['Name']
 
 
     # Constructing the query
-    query = 'insert into users (UserID, Username) values ("'
+    query = 'insert into producers (ProducerID, Name) values ("'
     query += id + '", "'
     query += name + '", "'
     current_app.logger.info(query)
@@ -73,38 +73,19 @@ def add_new_user():
     
     return 'Success!'
 
-# Updates a current user
-@users.route('/users/<userID>', methods=['PUT'])
-def update_user(userID):
-    user = users.query.get_or_404(userID)
+# Updates a current producer
+@producers.route('/producers/<producerID>', methods=['PUT'])
+def update_producer(producerID):
+    prod = producers.query.get_or_404(producerID)
     data = request.get_json()
-    user.username = data['username']
+    prod.name = data['name']
     db.session.commit()
-    return jsonify({'message': 'User updated successfully!'}), 200
+    return jsonify({'message': 'Producer updated successfully!'}), 200
 
-# Delete the user with user_id
-@app.route('/users/<userID>', methods=['DELETE'])
-def delete_user(userID):
-    user = users.query.get_or_404(userID)
-    db.session.delete(user)
+# Delete the producer with the given <ProducerID>
+@producers.route('/producers/<producerrID>', methods=['DELETE'])
+def delete_producer(userID):
+    prod = producers.query.get_or_404(userID)
+    db.session.delete(prod)
     db.session.commit()
     return jsonify({'message': 'User deleted successfully'}), 200
-
-# Gets all users in a certain community
-@users.route('/users/<communityID>', methods=['GET'])
-def get_users_from_community(communityID):
-
-    query = 'SELECT u.UserID, u.Username FROM Users u \
-        JOIN User_Communities uc ON u.UserID = uc.UserID \
-        JOIN Community c ON uc.CommunityID = c.CommunityID \
-        WHERE c.CommunityID = ' + str(communityID)
-    current_app.logger.info(query)
-
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    column_headers = [x[0] for x in cursor.description]
-    json_data = []
-    the_data = cursor.fetchall()
-    for row in the_data:
-        json_data.append(dict(zip(column_headers, row)))
-    return jsonify(json_data)
