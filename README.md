@@ -20,6 +20,7 @@ This repo contains a boilerplate setup for spinning up 3 Docker containers:
 ## Developers:
 
 AgentKettlepot - Keith Yao (NUID: 002603831)
+beastmodeactivated123 - Ray Gutierrez (NUID: 002935468)
 
 ## Spotigram
 
