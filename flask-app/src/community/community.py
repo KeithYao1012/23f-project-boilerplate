@@ -78,7 +78,6 @@ def add_new_community():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    id = the_data['CommunityID']
     name = the_data['Com_Name']
     genreName = the_data['GenreName']
     com_desc = the_data['Com_Desc']
@@ -86,10 +85,9 @@ def add_new_community():
 
     # Constructing the query
     query = 'insert into community (CommunityID, Com_Name, GenreID, Com_Desc) values ("'
-    query += id + '", "'
-    query += name + '", "'
-    query += '(SELECT GenreID FROM Genre WHERE GenreName = ' + str(genreName) + '", "'
-    query += com_desc + '", "'
+    query += str(name) + '", '
+    query += '(SELECT GenreID FROM Genre WHERE GenreName = ' + str(genreName) + ', "'
+    query += str(com_desc) + '")'
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
@@ -110,9 +108,9 @@ def update_community(CommunityID):
     return jsonify({'message': 'Community updated successfully!'}), 200
 
 # Delete the community with the given <CommunityID>
-@community.route('/community/<CommunityID>', methods=['DELETE'])
-def delete_community(CommunityID):
-    community = community.query.get_or_404(CommunityID)
+@community.route('/community/<Com_Name>', methods=['DELETE'])
+def delete_community(Com_Name):
+    community = community.query.get_or_404(Com_Name)
     db.session.delete(community)
     db.session.commit()
     return jsonify({'message': 'Community deleted successfully'}), 200
