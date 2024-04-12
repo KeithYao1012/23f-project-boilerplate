@@ -33,7 +33,7 @@ def get_communities():
     return jsonify(json_data)
 
 # Get a specific community
-@community.route('/comunity/<Community>', methods=['GET'])
+@community.route('/comunity/<Com_Name>', methods=['GET'])
 def get_community(Com_Name):
 
     query = 'SELECT Com_Name, GenreName, Com_Desc FROM Community c \

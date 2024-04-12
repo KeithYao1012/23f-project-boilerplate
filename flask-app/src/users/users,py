@@ -12,7 +12,7 @@ def get_users():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT UserID, Username FROM Users')
+    cursor.execute('SELECT Username FROM Users')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -32,10 +32,10 @@ def get_users():
     return jsonify(json_data)
 
 # Get a specific user
-@users.route('/users/<userID>', methods=['GET'])
-def get_user(userID):
+@users.route('/users/<username>', methods=['GET'])
+def get_user(username):
 
-    query = 'SELECT UserID, Username FROM Users WHERE id = ' + str(userID)
+    query = 'SELECT Username FROM Users WHERE Username = ' + str(username)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -91,13 +91,13 @@ def delete_user(userID):
     return jsonify({'message': 'User deleted successfully'}), 200
 
 # Gets all users in a certain community
-@users.route('/users/<communityID>', methods=['GET'])
-def get_users_from_community(communityID):
+@users.route('/users/<com_name>', methods=['GET'])
+def get_users_from_community(com_name):
 
-    query = 'SELECT u.UserID, u.Username FROM Users u \
-        JOIN User_Communities uc ON u.UserID = uc.UserID \
+    query = 'SELECT u.Username FROM Users u \
+        JOIN User_Community uc ON u.UserID = uc.UserID \
         JOIN Community c ON uc.CommunityID = c.CommunityID \
-        WHERE c.CommunityID = ' + str(communityID)
+        WHERE c.Com_Name = ' + str(com_name)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()

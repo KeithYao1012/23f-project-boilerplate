@@ -3,7 +3,7 @@ import json
 from src import db
 
 
-artists  = Blueprint('products', __name__)
+artists  = Blueprint('artists', __name__)
 
 # Get all the artists
 @artists.route('/artists', methods=['GET'])
@@ -12,7 +12,7 @@ def get_artists():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT ArtistID, Artist_Name FROM Artists')
+    cursor.execute('SELECT Artist_Name FROM Artists')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -32,10 +32,10 @@ def get_artists():
     return jsonify(json_data)
 
 # Get a specific artist
-@artists.route('/artists/<ArtistID>', methods=['GET'])
-def get_artist(ArtistID):
+@artists.route('/artists/<Artist_Name>', methods=['GET'])
+def get_artist(Artist_Name):
 
-    query = 'SELECT Artist_Name, ArtistID FROM Artists WHERE ArtistID = ' + str(ArtistID)
+    query = 'SELECT Artist_Name FROM Artists WHERE Artist_Name = ' + str(Artist_Name)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -48,13 +48,13 @@ def get_artist(ArtistID):
     return jsonify(json_data)
 
 # Gets all artists that a specific user follows
-@artists.route('/artists/<userID>', methods=['GET'])
-def get_artistsSupported(userID):
+@artists.route('/artists/<Username>', methods=['GET'])
+def get_artistsSupported(Username):
 
-    query = 'SELECT a.ArtistID, a.Artist_Name FROM Users u \
-        JOIN User_Following uf ON u.UserID = uc.UserID \
+    query = 'SELECT a.Artist_Name FROM Users u \
+        JOIN User_Following uf ON u.UserID = uf.UserID \
         JOIN Artists a ON uf.ArtistID = a.ArtistID \
-        WHERE u.UserID = ' + str(userID)
+        WHERE u.Username = ' + str(Username)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
