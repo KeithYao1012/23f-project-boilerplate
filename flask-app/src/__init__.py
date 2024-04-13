@@ -45,9 +45,9 @@ def create_app():
     # and give a url prefix to each
     app.register_blueprint(users,   url_prefix='/u')
     app.register_blueprint(artists,    url_prefix='/a')
-    app.register_blueprint(community,   url_prefix='/cm/')
+    app.register_blueprint(community,   url_prefix='/cm')
     app.register_blueprint(curators,    url_prefix='/c')
-    app.register_blueprint(producers,    url_prefix='/p')
+    app.register_blueprint(producers,    url_prefix='/pr')
     app.register_blueprint(playlists,    url_prefix='/pl')
     app.register_blueprint(downloads,    url_prefix='/d')
 

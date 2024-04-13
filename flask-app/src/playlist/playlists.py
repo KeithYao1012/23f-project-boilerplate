@@ -168,7 +168,7 @@ def get_paylist_by_genre(genreID):
 
 # Adds a new playlist to user downloads
 @playlists.route('/playlist/<userID>', methods=['POST'])
-def add_new_playlist(userID):
+def add_new_playlist_to_user(userID):
     
     # collecting data from the request object 
     the_data = request.json
@@ -189,11 +189,3 @@ def add_new_playlist(userID):
     db.get_db().commit()
     
     return 'Success!'
-
- # Deletes a playlist given the pID
-@playlists.route('/playlist/<userID>/<playlistID>', methods=['DELETE'])
-def delete_playlist(userID, playlistID):
-    playlist = playlists.query.get_or_404(playlistID)
-    db.session.delete(playlist)
-    db.session.commit()
-    return jsonify({'message': 'Playlist deleted successfully'}), 200

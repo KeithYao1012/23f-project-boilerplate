@@ -3,7 +3,7 @@ import json
 from src import db
 
 
-producers  = Blueprint('products', __name__)
+producers  = Blueprint('Producer', __name__)
 
 # Get all the producers
 @producers.route('/producers', methods=['GET'])
