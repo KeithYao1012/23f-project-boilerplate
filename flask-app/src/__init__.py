@@ -40,6 +40,7 @@ def create_app():
     from src.producers.producers import producers
     from src.playlist.playlists import playlists
     from src.userDownload.userdownload import downloads
+    from src.songs.songs import songs
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
@@ -50,6 +51,7 @@ def create_app():
     app.register_blueprint(producers,    url_prefix='/pr')
     app.register_blueprint(playlists,    url_prefix='/pl')
     app.register_blueprint(downloads,    url_prefix='/d')
+    app.register_blueprint(songs, url_prefix='/s')
 
     # Don't forget to return the app object
     return app
