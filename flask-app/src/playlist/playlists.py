@@ -12,7 +12,7 @@ def get_playlists():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT PlaylistID, PlaylistName FROM Playlists')
+    cursor.execute('SELECT PlaylistID, PlaylistName FROM Playlist')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
