@@ -7,7 +7,7 @@ follows  = Blueprint('User_Following', __name__)
 
 
 
-# Adds a user who supporsts an artist
+# Adds a user who supports an artist
 @follows.route('/users/<userID>/<artistID>', methods=['POST'])
 def user_support_artist(userID, artistID):
  # collecting data from the request object 
