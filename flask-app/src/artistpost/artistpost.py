@@ -31,7 +31,7 @@ def get_artistsposts():
 
     return jsonify(json_data)
 
-# Adds a new artist
+# Adds a new artistpost
 @artistpost.route('/artistpost', methods=['POST'])
 def add_new_artistpost():
     
@@ -40,18 +40,16 @@ def add_new_artistpost():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    artist_id = the_data['ArtistID']
-    post_id = the_data['PostID']
-    creation_date = the_data['Creation_Date']
+    artist_name = the_data['Artist_Name']
     content = the_data['Post_Content']
 
 
     # Constructing the query
-    query = 'insert into artist_post (ArtistID, PostID, Creation_Date, Post_Content) values ("'
-    query += artist_id + '", "'
-    query += post_id + '", "'
-    query += creation_date + '", "'
-    query += content + ')'
+    query = 'insert into Artist_Post (ArtistID, Content) values ('
+    query += '(select ArtistID FROM Artists WHERE Artist_name = ' + str(artist_name) + '), "'
+    # query += post_id + '", "'
+    # query += creation_date + '", "'
+    query += content + '")'
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
@@ -60,5 +58,22 @@ def add_new_artistpost():
     db.get_db().commit()
     
     return 'Success!'
+
+# Get a specific artistpost
+@artistpost.route('/artistpost/<artist_name>', methods=['GET'])
+def get_producer(artist_name):
+
+    query = 'SELECT Artist_Name, Creation_Date, Content \
+          FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
 
 
