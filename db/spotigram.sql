@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS Curator(
 );
 CREATE TABLE IF NOT EXISTS Curator_Post(
     PostID integer AUTO_INCREMENT PRIMARY KEY,
-    Creation_Date datetime DEFAULT CURRENT_TIMESTAMP,
+    Creation_Date date DEFAULT (CURRENT_DATE),
+    CuratorID integer NOT NULL,
     Post_Content VARCHAR(300) NOT NULL,
-    CuratorID int not null,
     FOREIGN KEY (CuratorID) REFERENCES Curator(CuratorID) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 CREATE TABLE IF NOT EXISTS Artists(
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Genre(
 );
 CREATE TABLE IF NOT EXISTS Playlist(
     PlaylistID INTEGER AUTO_INCREMENT PRIMARY KEY,
-    PlaylistName VARCHAR(50) NOT NULL,
+    PlaylistName VARCHAR(100) NOT NULL,
     GenreID INTEGER NOT NULL,
     FOREIGN KEY (GenreID) REFERENCES Genre(GenreID) ON UPDATE RESTRICT ON DELETE CASCADE
 );
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS User_Following(
 CREATE TABLE IF NOT EXISTS UserCurator_Interact(
     UserID INTEGER,
     PostID INTEGER,
-    Comments VARCHAR(150),
+    Comments VARCHAR(300),
     Interactions BOOLEAN,
     PRIMARY KEY(UserID, PostID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON UPDATE RESTRICT ON DELETE CASCADE,
@@ -723,464 +723,465 @@ VALUES(59, 'Glyn');
 INSERT INTO Producer
 VALUES(60, 'Kippie');
 -- Data for table Artist_Post
+SQL STATEMENT
 INSERT INTO Artist_Post
 Values(
         1,
         16,
-        '11-13-2023 04-05-00',
+        '2023-11-13 04:05:00',
         'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.'
     );
 INSERT INTO Artist_Post
 Values(
         2,
         36,
-        '03-17-2024 20-12-00',
+        '2024-03-17 20:12:00',
         'Pellentesque viverra pede ac diam.'
     );
 INSERT INTO Artist_Post
 Values(
         3,
         46,
-        '10-13-2023 13-48-00',
+        '2023-10-13 13:48:00',
         'Praesent id massa id nisl venenatis lacinia.'
     );
 INSERT INTO Artist_Post
 Values(
         4,
         37,
-        '04-28-2023 13-49-00',
+        '2023-04-28 13:49:00',
         'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.'
     );
 INSERT INTO Artist_Post
 Values(
         5,
         13,
-        '02-26-2024 14-51-00',
+        '2024-02-26 14:51:00',
         'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.'
     );
 INSERT INTO Artist_Post
 Values(
         6,
         46,
-        '01-11-2024 11-32-00',
+        '2024-01-11 11:32:00',
         'Mauris sit amet eros.'
     );
 INSERT INTO Artist_Post
 Values(
         7,
         27,
-        '03-21-2024 17-52-00',
+        '2024-03-21 17:52:00',
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
     );
 INSERT INTO Artist_Post
-Values(8, 6, '05-24-2023 14-50-00', 'In quis justo.');
+Values(8, 6, '2023-05-24 14:50:00', 'In quis justo.');
 INSERT INTO Artist_Post
 Values(
         9,
         38,
-        '02-22-2024 17-44-00',
+        '2024-02-22 17:44:00',
         'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.'
     );
 INSERT INTO Artist_Post
 Values(
         10,
         42,
-        '01-22-2024 06-32-00',
+        '2024-01-22 06:32:00',
         'Vestibulum rutrum rutrum neque.'
     );
 INSERT INTO Artist_Post
 Values(
         11,
         24,
-        '04-23-2023 12-22-00',
+        '2023-04-23 12:22:00',
         'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.'
     );
 INSERT INTO Artist_Post
 Values(
         12,
         10,
-        '09-01-2023 03-58-00',
+        '2023-09-01 03:58:00',
         'Suspendisse potenti.'
     );
 INSERT INTO Artist_Post
 Values(
         13,
         2,
-        '05-29-2023 17-49-00',
+        '2023-05-29 17:49:00',
         'Mauris lacinia sapien quis libero.'
     );
 INSERT INTO Artist_Post
 Values(
         14,
         52,
-        '08-21-2023 06-47-00',
+        '2023-08-21 06:47:00',
         'Ut at dolor quis odio consequat varius.'
     );
 INSERT INTO Artist_Post
 Values(
         15,
         3,
-        '08-29-2023 23-54-00',
+        '2023-08-29 23:54:00',
         'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
     );
 INSERT INTO Artist_Post
 Values(
         16,
         34,
-        '01-30-2024 21-59-00',
+        '2024-01-30 21:59:00',
         'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.'
     );
 INSERT INTO Artist_Post
 Values(
         17,
         37,
-        '12-01-2023 07-13-00',
+        '2023-12-01 07:13:00',
         'Cras in purus eu magna vulputate luctus.'
     );
 INSERT INTO Artist_Post
 Values(
         18,
         39,
-        '04-01-2024 23-19-00',
+        '2024-04-01 23:19:00',
         'Pellentesque at nulla.'
     );
 INSERT INTO Artist_Post
-Values(19, 58, '07-18-2023 05-28-00', 'Nunc purus.');
+Values(19, 58, '2023-07-18 05:28:00', 'Nunc purus.');
 INSERT INTO Artist_Post
-Values(20, 7, '12-10-2023 13-35-00', 'Aenean lectus.');
+Values(20, 7, '2023-12-10 13:35:00', 'Aenean lectus.');
 INSERT INTO Artist_Post
 Values(
         21,
         33,
-        '08-03-2023 15-40-00',
+        '2023-08-03 15:40:00',
         'Pellentesque viverra pede ac diam.'
     );
 INSERT INTO Artist_Post
 Values(
         22,
         25,
-        '02-25-2024 17-38-00',
+        '2024-02-25 17:38:00',
         'Suspendisse ornare consequat lectus.'
     );
 INSERT INTO Artist_Post
-Values(23, 56, '01-04-2024 23-39-00', 'Integer ac leo.');
+Values(23, 56, '2024-01-04 23:39:00', 'Integer ac leo.');
 INSERT INTO Artist_Post
 Values(
         24,
         52,
-        '12-29-2023 04-51-00',
+        '2023-12-29 04:51:00',
         'Aenean fermentum.'
     );
 INSERT INTO Artist_Post
 Values(
         25,
         56,
-        '10-10-2023 18-49-00',
+        '2023-10-10 18:49:00',
         'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.'
     );
 INSERT INTO Artist_Post
 Values(
         26,
         16,
-        '01-19-2024 15-37-00',
+        '2024-01-19 15:37:00',
         'In hac habitasse platea dictumst.'
     );
 INSERT INTO Artist_Post
-Values(27, 41, '09-05-2023 09-57-00', 'Integer ac leo.');
+Values(27, 41, '2023-09-05 09:57:00', 'Integer ac leo.');
 INSERT INTO Artist_Post
 Values(
         28,
         4,
-        '06-18-2023 09-11-00',
+        '2023-06-18 09:11:00',
         'Etiam faucibus cursus urna.'
     );
 INSERT INTO Artist_Post
 Values(
         29,
         20,
-        '01-30-2024 18-45-00',
+        '2024-01-30 18:45:00',
         'Phasellus in felis.'
     );
 INSERT INTO Artist_Post
 Values(
         30,
         27,
-        '09-09-2023 16-02-00',
+        '2023-09-09 16:02:00',
         'Duis at velit eu est congue elementum.'
     );
 INSERT INTO Artist_Post
 Values(
         31,
         29,
-        '12-25-2023 18-52-00',
+        '2023-12-25 18:52:00',
         'Sed vel enim sit amet nunc viverra dapibus.'
     );
 INSERT INTO Artist_Post
 Values(
         32,
         2,
-        '02-11-2024 14-16-00',
+        '2024-02-11 14:16:00',
         'Donec posuere metus vitae ipsum.'
     );
 INSERT INTO Artist_Post
-Values(33, 52, '03-12-2024 10-06-00', 'In congue.');
+Values(33, 52, '2024-03-12 10:06:00', 'In congue.');
 INSERT INTO Artist_Post
 Values(
         34,
         51,
-        '05-13-2023 11-39-00',
+        '2023-05-13 11:39:00',
         'Nulla suscipit ligula in lacus.'
     );
 INSERT INTO Artist_Post
-Values(35, 58, '05-14-2023 10-04-00', 'Nunc purus.');
+Values(35, 58, '2023-05-14 10:04:00', 'Nunc purus.');
 INSERT INTO Artist_Post
 Values(
         36,
         5,
-        '08-29-2023 22-48-00',
+        '2023-08-29 22:48:00',
         'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.'
     );
 INSERT INTO Artist_Post
 Values(
         37,
         1,
-        '05-02-2023 06-27-00',
+        '2023-05-02 06:27:00',
         'Curabitur in libero ut massa volutpat convallis.'
     );
 INSERT INTO Artist_Post
-Values(38, 44, '11-09-2023 22-28-00', 'In quis justo.');
+Values(38, 44, '2023-11-09 22:28:00', 'In quis justo.');
 INSERT INTO Artist_Post
 Values(
         39,
         33,
-        '05-16-2023 04-41-00',
+        '2023-05-16 04:41:00',
         'Proin interdum mauris non ligula pellentesque ultrices.'
     );
 INSERT INTO Artist_Post
-Values(40, 31, '02-19-2024 14-50-00', 'Vivamus tortor.');
+Values(40, 31, '2024-02-19 14:50:00', 'Vivamus tortor.');
 INSERT INTO Artist_Post
-Values(41, 33, '08-14-2023 10-09-00', 'Donec ut dolor.');
+Values(41, 33, '2023-08-14 10:09:00', 'Donec ut dolor.');
 INSERT INTO Artist_Post
 Values(
         42,
         43,
-        '07-03-2023 10-53-00',
+        '2023-07-03 10:53:00',
         'Pellentesque eget nunc.'
     );
 INSERT INTO Artist_Post
-Values(43, 45, '03-05-2024 21-46-00', 'Ut tellus.');
+Values(43, 45, '2024-03-05 21:46:00', 'Ut tellus.');
 INSERT INTO Artist_Post
 Values(
         44,
         47,
-        '05-23-2023 19-00-00',
+        '2023-05-23 19:00:00',
         'Suspendisse accumsan tortor quis turpis.'
     );
 INSERT INTO Artist_Post
 Values(
         45,
         50,
-        '12-30-2023 02-21-00',
+        '2023-12-30 02:21:00',
         'Duis consequat dui nec nisi volutpat eleifend.'
     );
 INSERT INTO Artist_Post
 Values(
         46,
         51,
-        '12-27-2023 17-10-00',
+        '2023-12-27 17:10:00',
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.'
     );
 INSERT INTO Artist_Post
 Values(
         47,
         35,
-        '01-26-2024 15-07-00',
+        '2024-01-26 15:07:00',
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
     );
 INSERT INTO Artist_Post
 Values(
         48,
         19,
-        '01-15-2024 00-48-00',
+        '2024-01-15 00:48:00',
         'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.'
     );
 INSERT INTO Artist_Post
-Values(49, 22, '10-12-2023 05-28-00', 'Nulla facilisi.');
+Values(49, 22, '2023-10-12 05:28:00', 'Nulla facilisi.');
 INSERT INTO Artist_Post
 Values(
         50,
         43,
-        '09-19-2023 07-15-00',
+        '2023-09-19 07:15:00',
         'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
     );
 INSERT INTO Artist_Post
 Values(
         51,
         34,
-        '08-23-2023 20-39-00',
+        '2023-08-23 20:39:00',
         'Mauris ullamcorper purus sit amet nulla.'
     );
 INSERT INTO Artist_Post
 Values(
         52,
         2,
-        '04-26-2023 02-36-00',
+        '2023-04-26 02:36:00',
         'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.'
     );
 INSERT INTO Artist_Post
 Values(
         53,
         3,
-        '01-04-2024 01-39-00',
+        '2024-01-04 01:39:00',
         'Proin at turpis a pede posuere nonummy.'
     );
 INSERT INTO Artist_Post
 Values(
         54,
         34,
-        '04-06-2024 16-19-00',
+        '2024-04-06 16:19:00',
         'Nam tristique tortor eu pede.'
     );
 INSERT INTO Artist_Post
 Values(
         55,
         16,
-        '06-05-2023 12-15-00',
+        '2023-06-05 12:15:00',
         'Nunc rhoncus dui vel sem.'
     );
 INSERT INTO Artist_Post
 Values(
         56,
         41,
-        '05-26-2023 03-37-00',
+        '2023-05-26 03:37:00',
         'Duis aliquam convallis nunc.'
     );
 INSERT INTO Artist_Post
-Values(57, 43, '08-08-2023 17-05-00', 'Integer a nibh.');
+Values(57, 43, '2023-08-08 17:05:00', 'Integer a nibh.');
 INSERT INTO Artist_Post
 Values(
         58,
         3,
-        '09-13-2023 08-53-00',
+        '2023-09-13 08:53:00',
         'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.'
     );
 INSERT INTO Artist_Post
-Values(59, 2, '12-15-2023 22-42-00', 'Ut tellus.');
+Values(59, 2, '2023-12-15 22:42:00', 'Ut tellus.');
 INSERT INTO Artist_Post
 Values(
         60,
         9,
-        '10-08-2023 22-37-00',
+        '2023-10-08 22:37:00',
         'Sed accumsan felis.'
     );
 INSERT INTO Artist_Post
 Values(
         61,
         1,
-        '05-31-2023 11-58-00',
+        '2023-05-31 11:58:00',
         'Aliquam sit amet diam in magna bibendum imperdiet.'
     );
 INSERT INTO Artist_Post
 Values(
         62,
         26,
-        '08-17-2023 13-11-00',
+        '2023-08-17 13:11:00',
         'Pellentesque at nulla.'
     );
 INSERT INTO Artist_Post
 Values(
         63,
         12,
-        '03-06-2024 07-51-00',
+        '2024-03-06 07:51:00',
         'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.'
     );
 INSERT INTO Artist_Post
 Values(
         64,
         16,
-        '09-01-2023 08-32-00',
+        '2023-09-01 08:32:00',
         'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.'
     );
 INSERT INTO Artist_Post
-Values(65, 10, '06-18-2023 06-34-00', 'In congue.');
+Values(65, 10, '2023-06-18 06:34:00', 'In congue.');
 INSERT INTO Artist_Post
 Values(
         66,
         17,
-        '08-26-2023 17-38-00',
+        '2023-08-26 17:38:00',
         'In blandit ultrices enim.'
     );
 INSERT INTO Artist_Post
-Values(67, 22, '05-08-2023 23-58-00', 'Nunc nisl.');
+Values(67, 22, '2023-05-08 23:58:00', 'Nunc nisl.');
 INSERT INTO Artist_Post
 Values(
         68,
         55,
-        '09-21-2023 17-37-00',
+        '2023-09-21 17:37:00',
         'In blandit ultrices enim.'
     );
 INSERT INTO Artist_Post
 Values(
         69,
         11,
-        '12-08-2023 13-24-00',
+        '2023-12-08 13:24:00',
         'In hac habitasse platea dictumst.'
     );
 INSERT INTO Artist_Post
 Values(
         70,
         1,
-        '11-08-2023 09-19-00',
+        '2023-11-08 09:19:00',
         'Nullam sit amet turpis elementum ligula vehicula consequat.'
     );
 INSERT INTO Artist_Post
 Values(
         71,
         35,
-        '12-05-2023 07-06-00',
+        '2023-12-05 07:06:00',
         'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.'
     );
 INSERT INTO Artist_Post
 Values(
         72,
         13,
-        '03-19-2024 00-57-00',
+        '2024-03-19 00:57:00',
         'Pellentesque ultrices mattis odio.'
     );
 INSERT INTO Artist_Post
-Values(73, 39, '12-04-2023 09-54-00', 'Proin risus.');
+Values(73, 39, '2023-12-04 09:54:00', 'Proin risus.');
 INSERT INTO Artist_Post
-Values(74, 59, '11-13-2023 21-42-00', 'Vivamus tortor.');
+Values(74, 59, '2023-11-13 21:42:00', 'Vivamus tortor.');
 INSERT INTO Artist_Post
 Values(
         75,
         2,
-        '10-23-2023 15-38-00',
+        '2023-10-23 15:38:00',
         'Vestibulum ac est lacinia nisi venenatis tristique.'
     );
 INSERT INTO Artist_Post
-Values(76, 4, '02-29-2024 09-27-00', 'Nam dui.');
+Values(76, 4, '2024-02-29 09:27:00', 'Nam dui.');
 INSERT INTO Artist_Post
 Values(
         77,
         37,
-        '12-22-2023 17-58-00',
+        '2023-12-22 17:58:00',
         'Nulla mollis molestie lorem.'
     );
 INSERT INTO Artist_Post
-Values(78, 9, '08-17-2023 00-39-00', 'Etiam vel augue.');
+Values(78, 9, '2023-08-17 00:39:00', 'Etiam vel augue.');
 INSERT INTO Artist_Post
 Values(
         79,
         23,
-        '11-19-2023 18-37-00',
+        '2023-11-19 18:37:00',
         'Morbi porttitor lorem id ligula.'
     );
 INSERT INTO Artist_Post
 Values(
         80,
         26,
-        '03-16-2024 03-30-00',
+        '2024-03-16 03:30:00',
         'Donec posuere metus vitae ipsum.'
     );
 -- Data for table Community
@@ -1536,126 +1537,123 @@ VALUES(
         37,
         8,
         'Reverse-engineered',
+        120,
         45807,
-        '08-22-2023'
+        '2023-08-22'
     );
 INSERT INTO Songs
-VALUES(2, 9, 39, 'mission-critical', 8643, '12-18-2023');
+VALUES(2, 9, 39, 'mission-critical', 96, 8643, '2023-12-18');
 INSERT INTO Songs
-VALUES(3, 23, 18, 'Sharable', 98523, '08-16-2023');
+VALUES(3, 23, 18, 'Sharable', 86, 98523, '2023-08-16');
 INSERT INTO Songs
-VALUES(4, 15, 15, 'moderator', 32946, '01-18-2024');
+VALUES(4, 15, 15, 'moderator', 70, 32946, '2024-01-18');
 INSERT INTO Songs
-VALUES(5, 43, 12, 'leading edge', 38332, '05-23-2023');
+VALUES(5, 43, 12, 'leading edge', 23, 38332, '2023-05-23');
 INSERT INTO Songs
-VALUES(6, 24, 1, 'Optional', 16456, '09-05-2023');
+VALUES(6, 24, 1, 'Optional', 33, 16456, '2023-09-05');
 INSERT INTO Songs
-VALUES(7, 38, 39, 'Persistent', 23443, '12-02-2023');
+VALUES(7, 38, 39, 'Persistent', 87, 23443, '2023-12-02');
 INSERT INTO Songs
-VALUES(8, 25, 18, 'Intuitive', 86216, '12-07-2023');
+VALUES(8, 25, 18, 'Intuitive', 122, 86216, '2023-12-07');
 INSERT INTO Songs
-VALUES(9, 60, 27, 'homogeneous', 79413, '09-02-2023');
+VALUES(9, 60, 27, 'homogeneous', 11, 79413, '2023-09-02');
 INSERT INTO Songs
-VALUES(10, 49, 1, 'Front-line', 46112, '04-24-2023');
+VALUES(10, 49, 1, 'Front-line', 31, 46112, '2023-04-24');
 INSERT INTO Songs
-VALUES(11, 22, 20, 'Implemented', 44418, '09-26-2023');
+VALUES(11, 22, 20, 'Implemented', 105, 44418, '2023-09-26');
 INSERT INTO Songs
-VALUES(12, 48, 38, 'executive', 87751, '09-10-2023');
+VALUES(12, 48, 38, 'executive', 117, 87751, '2023-09-10');
 INSERT INTO Songs
-VALUES(13, 34, 39, 'non-volatile', 78738, '03-11-2024');
+VALUES(13, 34, 39, 'non-volatile', 99, 78738, '2024-03-11');
 INSERT INTO Songs
-VALUES(14, 19, 10, 'full-range', 45238, '06-05-2023');
+VALUES(14, 19, 10, 'full-range', 34, 45238, '2023-06-05');
 INSERT INTO Songs
-VALUES(15, 46, 32, 'hybrid', 22724, '12-15-2023');
+VALUES(15, 46, 32, 'hybrid', 84, 22724, '2023-12-15');
 INSERT INTO Songs
-VALUES(16, 39, 8, 'Function-based', 82401, '02-29-2024');
+VALUES(16, 39, 8, 'Function-based', 120, 82401, '2024-02-29');
 INSERT INTO Songs
-VALUES(17, 14, 27, 'Focused', 95495, '12-10-2023');
+VALUES(17, 14, 27, 'Focused', 110, 95495, '2023-12-10');
 INSERT INTO Songs
-VALUES(18, 41, 4, 'Polarised', 87, '08-19-2023');
+VALUES(18, 41, 4, 'Polarised', 12, 87, '2023-08-19');
 INSERT INTO Songs
-VALUES(19, 35, 12, 'Monitored', 25931, '07-25-2023');
+VALUES(19, 35, 12, 'Monitored', 83, 25931, '2023-07-25');
 INSERT INTO Songs
-VALUES(20, 25, 26, 'scalable', 25566, '01-29-2024');
+VALUES(20, 25, 26, 'scalable', 13, 25566, '2024-01-29');
 INSERT INTO Songs
-VALUES(21, 27, 19, 'incremental', 89208, '09-27-2023');
+VALUES(21, 27, 19, 'incremental', 105, 89208, '2023-09-27');
 INSERT INTO Songs
 VALUES(
         22,
         40,
         21,
         'artificial intelligence',
+        55,
         72146,
-        '07-17-2023'
+        '2023-07-17'
     );
 INSERT INTO Songs
-VALUES(23, 4, 37, 'optimizing', 13899, '08-17-2023');
+VALUES(23, 4, 37, 'optimizing', 125, 13899, '2023-08-17');
 INSERT INTO Songs
-VALUES(24, 48, 40, 'open system', 58780, '09-30-2023');
+VALUES(24, 48, 40, 'open system', 81, 58780, '2023-09-30');
 INSERT INTO Songs
-VALUES(25, 20, 25, 'demand-driven', 65080, '01-22-2024');
+VALUES(25, 20, 25, 'demand-driven', 44, 65080, '2024-01-22');
 INSERT INTO Songs
-VALUES(26, 3, 5, 'installation', 53398, '06-21-2023');
+VALUES(26, 3, 5, 'installation', 19, 53398, '2023-06-21');
 INSERT INTO Songs
-VALUES(27, 21, 28, 'discrete', 5136, '02-07-2024');
+VALUES(27, 21, 28, 'discrete', 12, 5136, '2024-02-07');
 INSERT INTO Songs
-VALUES(28, 19, 40, 'Self-enabling', 15297, '08-19-2023');
+VALUES(28, 19, 40, 'Self-enabling', 39, 15297, '2023-08-19');
 INSERT INTO Songs
-VALUES(29, 42, 6, 'Streamlined', 52787, '11-09-2023');
+VALUES(29, 42, 6, 'Streamlined', 32, 52787, '2023-11-09');
 INSERT INTO Songs
-VALUES(30, 45, 8, 'Organic', 82953, '08-15-2023');
+VALUES(30, 45, 8, 'Organic', 87, 82953, '2023-08-15');
 INSERT INTO Songs
-VALUES(31, 47, 35, 'Multi-lateral', 59463, '03-11-2024');
+VALUES(31, 47, 35, 'Multi-lateral', 58, 59463, '2024-03-11');
 INSERT INTO Songs
-VALUES(32, 19, 37, 'capability', 25683, '03-29-2024');
+VALUES(32, 19, 37, 'capability', 12, 25683, '2024-03-29');
 INSERT INTO Songs
-VALUES(
-        33,
-        45,
-        20,
-        'human-resource',
-        59032,
-        '01-05-2024'
-    );
+VALUES(33, 45, 20, 'human-resource', 20, 59032, '2024-01-05');
 INSERT INTO Songs
-VALUES(34, 6, 33, 'didactic', 24321, '10-02-2023');
+VALUES(34, 6, 33, 'didactic', 96, 24321, '2023-10-02');
 INSERT INTO Songs
-VALUES(35, 57, 30, 'array', 59937, '01-31-2024');
+VALUES(35, 57, 30, 'array', 91, 59937, '2024-01-31');
 INSERT INTO Songs
-VALUES(36, 35, 31, 'cohesive', 84844, '10-06-2023');
+VALUES(36, 35, 31, 'cohesive', 113, 84844, '2023-10-06');
 INSERT INTO Songs
-VALUES(37, 43, 22, 'complexity', 92491, '06-27-2023');
+VALUES(37, 43, 22, 'complexity', 46, 92491, '2023-06-27');
 INSERT INTO Songs
 VALUES(
         38,
         42,
         7,
         'mission-critical',
+        43,
         71846,
-        '08-04-2023'
+        '2023-08-04'
     );
 INSERT INTO Songs
-VALUES(39, 2, 28, 'Extended', 57639, '03-12-2024');
+VALUES(39, 2, 28, 'Extended', 114, 57639, '2024-03-12');
 INSERT INTO Songs
-VALUES(40, 44, 9, 'Function-based', 10506, '06-16-2023');
+VALUES(40, 44, 9, 'Function-based', 20, 10506, '2023-06-16');
 INSERT INTO Songs
-VALUES(41, 41, 14, 'installation', 58538, '12-31-2023');
+VALUES(41, 41, 14, 'installation', 12, 58538, '2023-12-31');
 INSERT INTO Songs
-VALUES(42, 8, 25, 'alliance', 68847, '10-22-2023');
+VALUES(42, 8, 25, 'alliance', 107, 68847, '2023-10-22');
 INSERT INTO Songs
-VALUES(43, 10, 12, 'real-time', 19178, '05-20-2023');
+VALUES(43, 10, 12, 'real-time', 33, 19178, '2023-05-20');
 INSERT INTO Songs
-VALUES(44, 42, 16, 'product', 74749, '11-05-2023');
+VALUES(44, 42, 16, 'product', 94, 74749, '2023-11-05');
 INSERT INTO Songs
-VALUES(45, 31, 39, 'systemic', 3421, '03-05-2024');
+VALUES(45, 31, 39, 'systemic', 57, 3421, '2024-03-05');
 INSERT INTO Songs
 VALUES(
         46,
         54,
         26,
         'open architecture',
+        64,
         27940,
-        '03-30-2024'
+        '2024-03-30'
     );
 INSERT INTO Songs
 VALUES(
@@ -1663,162 +1661,145 @@ VALUES(
         51,
         19,
         'instruction set',
+        102,
         41582,
-        '04-22-2023'
+        '2023-04-22'
     );
 INSERT INTO Songs
-VALUES(48, 52, 4, '24/7', 48198, '12-19-2023');
+VALUES(48, 52, 4, '24/7', 15, 48198, '2023-12-19');
 INSERT INTO Songs
-VALUES(49, 13, 13, 'Monitored', 55754, '06-06-2023');
+VALUES(49, 13, 13, 'Monitored', 92, 55754, '2023-06-06');
 INSERT INTO Songs
-VALUES(50, 56, 35, 'Face to face', 26505, '03-01-2024');
+VALUES(50, 56, 35, 'Face to face', 20, 26505, '2024-03-01');
 INSERT INTO Songs
-VALUES(51, 5, 24, 'Down-sized', 9458, '09-01-2023');
+VALUES(51, 5, 24, 'Down-sized', 72, 9458, '2023-09-01');
 INSERT INTO Songs
-VALUES(52, 60, 25, 'Integrated', 92093, '05-25-2023');
+VALUES(52, 60, 25, 'Integrated', 41, 92093, '2023-05-25');
 INSERT INTO Songs
-VALUES(53, 58, 18, 'data-warehouse', 8037, '11-29-2023');
+VALUES(53, 58, 18, 'data-warehouse', 121, 8037, '2023-11-29');
 INSERT INTO Songs
-VALUES(54, 24, 3, 'Pre-emptive', 10443, '10-22-2023');
+VALUES(54, 24, 3, 'Pre-emptive', 103, 10443, '2023-10-22');
 INSERT INTO Songs
-VALUES(55, 19, 20, 'explicit', 59869, '01-27-2024');
+VALUES(55, 19, 20, 'explicit', 38, 59869, '2024-01-27');
 INSERT INTO Songs
-VALUES(56, 60, 26, 'heuristic', 17998, '01-25-2024');
+VALUES(56, 60, 26, 'heuristic', 121, 17998, '2024-01-25');
 INSERT INTO Songs
-VALUES(57, 44, 17, '24/7', 97386, '05-16-2023');
+VALUES(57, 44, 17, '24/7', 102, 97386, '2023-05-16');
 INSERT INTO Songs
-VALUES(58, 43, 11, 'real-time', 23956, '12-13-2023');
+VALUES(58, 43, 11, 'real-time', 61, 23956, '2023-12-13');
 INSERT INTO Songs
-VALUES(59, 34, 22, 'Programmable', 24814, '12-29-2023');
+VALUES(59, 34, 22, 'Programmable', 33, 24814, '2023-12-29');
 INSERT INTO Songs
-VALUES(60, 18, 32, 'Profound', 55927, '01-03-2024');
+VALUES(60, 18, 32, 'Profound', 65, 55927, '2024-01-03');
 INSERT INTO Songs
-VALUES(61, 51, 5, 'capacity', 43856, '04-12-2023');
+VALUES(61, 51, 5, 'capacity', 9, 43856, '2023-04-12');
 INSERT INTO Songs
-VALUES(62, 1, 35, 'Grass-roots', 96523, '03-01-2024');
+VALUES(62, 1, 35, 'Grass-roots', 52, 96523, '2024-03-01');
 INSERT INTO Songs
-VALUES(63, 57, 39, 'protocol', 77155, '06-01-2023');
+VALUES(63, 57, 39, 'protocol', 113, 77155, '2023-06-01');
 INSERT INTO Songs
-VALUES(
-        64,
-        3,
-        26,
-        'Quality-focused',
-        66897,
-        '01-01-2024'
-    );
+VALUES(64, 3, 26, 'Quality-focused', 66, 66897, '2024-01-01');
 INSERT INTO Songs
-VALUES(65, 34, 10, '24/7', 27969, '08-12-2023');
+VALUES(65, 34, 10, '24/7', 114, 27969, '2023-08-12');
 INSERT INTO Songs
-VALUES(66, 29, 8, 'Assimilated', 25964, '11-04-2023');
+VALUES(66, 29, 8, 'Assimilated', 122, 25964, '2023-11-04');
 INSERT INTO Songs
-VALUES(67, 19, 11, 'value-added', 62161, '08-19-2023');
+VALUES(67, 19, 11, 'value-added', 118, 62161, '2023-08-19');
 INSERT INTO Songs
-VALUES(68, 33, 23, 'focus group', 13146, '01-18-2024');
+VALUES(68, 33, 23, 'focus group', 87, 13146, '2024-01-18');
 INSERT INTO Songs
-VALUES(69, 20, 6, 'Open-source', 66390, '05-29-2023');
+VALUES(69, 20, 6, 'Open-source', 127, 66390, '2023-05-29');
 INSERT INTO Songs
-VALUES(70, 6, 10, 'Team-oriented', 42187, '12-05-2023');
+VALUES(70, 6, 10, 'Team-oriented', 50, 42187, '2023-12-05');
 INSERT INTO Songs
-VALUES(71, 12, 26, 'motivating', 73137, '01-27-2024');
+VALUES(71, 12, 26, 'motivating', 123, 73137, '2024-01-27');
 INSERT INTO Songs
-VALUES(72, 25, 22, 'heuristic', 1232, '04-26-2023');
+VALUES(72, 25, 22, 'heuristic', 97, 1232, '2023-04-26');
 INSERT INTO Songs
-VALUES(73, 60, 6, 'client-driven', 46366, '08-03-2023');
+VALUES(73, 60, 6, 'client-driven', 55, 46366, '2023-08-03');
 INSERT INTO Songs
-VALUES(74, 34, 4, 'zero defect', 88974, '12-01-2023');
+VALUES(74, 34, 4, 'zero defect', 109, 88974, '2023-12-01');
 INSERT INTO Songs
-VALUES(75, 5, 19, 'Seamless', 45711, '11-09-2023');
+VALUES(75, 5, 19, 'Seamless', 70, 45711, '2023-11-09');
 INSERT INTO Songs
-VALUES(76, 35, 7, 'moratorium', 8038, '09-14-2023');
+VALUES(76, 35, 7, 'moratorium', 13, 8038, '2023-09-14');
 INSERT INTO Songs
-VALUES(77, 39, 15, 'database', 77132, '04-15-2023');
+VALUES(77, 39, 15, 'database', 13, 77132, '2023-04-15');
 INSERT INTO Songs
-VALUES(78, 45, 13, 'matrix', 62628, '01-15-2024');
+VALUES(78, 45, 13, 'matrix', 37, 62628, '2024-01-15');
 INSERT INTO Songs
-VALUES(79, 13, 12, 'mobile', 76033, '07-29-2023');
+VALUES(79, 13, 12, 'mobile', 26, 76033, '2023-07-29');
 INSERT INTO Songs
-VALUES(80, 55, 39, 'Automated', 29470, '06-15-2023');
+VALUES(80, 55, 39, 'Automated', 68, 29470, '2023-06-15');
 INSERT INTO Songs
 VALUES(
         81,
         11,
         27,
         'Vision-oriented',
+        15,
         20586,
-        '10-31-2023'
+        '2023-10-31'
     );
 INSERT INTO Songs
-VALUES(82, 44, 17, 'Multi-lateral', 41880, '11-23-2023');
+VALUES(82, 44, 17, 'Multi-lateral', 65, 41880, '2023-11-23');
 INSERT INTO Songs
-VALUES(83, 54, 13, 'full-range', 56181, '07-09-2023');
+VALUES(83, 54, 13, 'full-range', 99, 56181, '2023-07-09');
 INSERT INTO Songs
-VALUES(84, 51, 38, 'Team-oriented', 12489, '01-17-2024');
+VALUES(84, 51, 38, 'Team-oriented', 127, 12489, '2024-01-17');
 INSERT INTO Songs
-VALUES(85, 40, 27, 'Innovative', 46604, '02-03-2024');
+VALUES(85, 40, 27, 'Innovative', 33, 46604, '2024-02-03');
 INSERT INTO Songs
-VALUES(86, 46, 3, 'Polarised', 54853, '06-06-2023');
+VALUES(86, 46, 3, 'Polarised', 47, 54853, '2023-06-06');
 INSERT INTO Songs
-VALUES(87, 30, 20, 'Networked', 87869, '10-12-2023');
+VALUES(87, 30, 20, 'Networked', 126, 87869, '2023-10-12');
 INSERT INTO Songs
-VALUES(88, 35, 6, 'strategy', 23013, '04-28-2023');
+VALUES(88, 35, 6, 'strategy', 20, 23013, '2023-04-28');
 INSERT INTO Songs
-VALUES(89, 7, 16, 'Adaptive', 26787, '07-29-2023');
+VALUES(89, 7, 16, 'Adaptive', 25, 26787, '2023-07-29');
 INSERT INTO Songs
-VALUES(90, 22, 39, 'directional', 12814, '01-18-2024');
+VALUES(90, 22, 39, 'directional', 20, 12814, '2024-01-18');
 INSERT INTO Songs
-VALUES(91, 21, 31, 'concept', 98231, '04-21-2023');
+VALUES(91, 21, 31, 'concept', 10, 98231, '2023-04-21');
 INSERT INTO Songs
-VALUES(92, 22, 12, 'productivity', 63570, '09-27-2023');
+VALUES(92, 22, 12, 'productivity', 100, 63570, '2023-09-27');
 INSERT INTO Songs
-VALUES(93, 60, 15, 'Streamlined', 91936, '11-11-2023');
+VALUES(93, 60, 15, 'Streamlined', 30, 91936, '2023-11-11');
 INSERT INTO Songs
-VALUES(94, 30, 34, 'regional', 11310, '12-21-2023');
+VALUES(94, 30, 34, 'regional', 117, 11310, '2023-12-21');
 INSERT INTO Songs
 VALUES(
         95,
         39,
         11,
         'Fully-configurable',
+        111,
         14641,
-        '01-25-2024'
+        '2024-01-25'
     );
 INSERT INTO Songs
-VALUES(
-        96,
-        12,
-        21,
-        'implementation',
-        36059,
-        '12-23-2023'
-    );
+VALUES(96, 12, 21, 'implementation', 42, 36059, '2023-12-23');
 INSERT INTO Songs
-VALUES(
-        97,
-        14,
-        34,
-        '4th generation',
-        63399,
-        '10-28-2023'
-    );
+VALUES(97, 14, 34, '4th generation', 48, 63399, '2023-10-28');
 INSERT INTO Songs
-VALUES(98, 35, 25, 'projection', 71253, '04-16-2023');
+VALUES(98, 35, 25, 'projection', 23, 71253, '2023-04-16');
 INSERT INTO Songs
-VALUES(99, 58, 29, 'ability', 58967, '02-21-2024');
+VALUES(99, 58, 29, 'ability', 120, 58967, '2024-02-21');
 INSERT INTO Songs
-VALUES(100, 60, 16, 'Balanced', 87888, '03-16-2024');
+VALUES(100, 60, 16, 'Balanced', 81, 87888, '2024-03-16');
 INSERT INTO Songs
-VALUES(101, 12, 15, 'empowering', 14315, '05-02-2023');
+VALUES(101, 12, 15, 'empowering', 122, 14315, '2023-05-02');
 INSERT INTO Songs
-VALUES(102, 51, 24, 'Organized', 27528, '09-12-2023');
+VALUES(102, 51, 24, 'Organized', 59, 27528, '2023-09-12');
 INSERT INTO Songs
 VALUES(
         103,
         25,
         13,
         'internet solution',
+        40,
         86634,
-        '04-14-2023'
+        '2023-04-14'
     );
 INSERT INTO Songs
 VALUES(
@@ -1826,8 +1807,9 @@ VALUES(
         28,
         34,
         'budgetary management',
+        40,
         82391,
-        '08-06-2023'
+        '2023-08-06'
     );
 INSERT INTO Songs
 VALUES(
@@ -1835,324 +1817,311 @@ VALUES(
         56,
         12,
         'bi-directional',
+        108,
         66215,
-        '03-04-2024'
+        '2024-03-04'
     );
 INSERT INTO Songs
-VALUES(106, 57, 20, 'parallelism', 17795, '09-27-2023');
+VALUES(106, 57, 20, 'parallelism', 10, 17795, '2023-09-27');
 INSERT INTO Songs
-VALUES(107, 2, 40, 'zero defect', 73469, '09-12-2023');
+VALUES(107, 2, 40, 'zero defect', 108, 73469, '2023-09-12');
 INSERT INTO Songs
-VALUES(108, 7, 1, 'benchmark', 65061, '03-07-2024');
+VALUES(108, 7, 1, 'benchmark', 39, 65061, '2024-03-07');
 INSERT INTO Songs
-VALUES(109, 50, 40, 'Persevering', 16917, '07-08-2023');
+VALUES(109, 50, 40, 'Persevering', 127, 16917, '2023-07-08');
 INSERT INTO Songs
-VALUES(110, 4, 9, 'Persevering', 10176, '08-16-2023');
+VALUES(110, 4, 9, 'Persevering', 54, 10176, '2023-08-16');
 INSERT INTO Songs
-VALUES(111, 58, 21, 'asymmetric', 75608, '09-27-2023');
+VALUES(111, 58, 21, 'asymmetric', 67, 75608, '2023-09-27');
 INSERT INTO Songs
-VALUES(112, 43, 25, 'Diverse', 92991, '07-16-2023');
+VALUES(112, 43, 25, 'Diverse', 22, 92991, '2023-07-16');
 INSERT INTO Songs
-VALUES(113, 55, 18, 'Seamless', 46527, '11-15-2023');
+VALUES(113, 55, 18, 'Seamless', 36, 46527, '2023-11-15');
 INSERT INTO Songs
-VALUES(114, 37, 19, 'solution', 75861, '01-21-2024');
+VALUES(114, 37, 19, 'solution', 13, 75861, '2024-01-21');
 INSERT INTO Songs
-VALUES(115, 36, 8, 'solution', 90525, '09-16-2023');
+VALUES(115, 36, 8, 'solution', 29, 90525, '2023-09-16');
 INSERT INTO Songs
-VALUES(116, 33, 31, 'methodology', 52374, '11-11-2023');
+VALUES(116, 33, 31, 'methodology', 48, 52374, '2023-11-11');
 INSERT INTO Songs
-VALUES(117, 38, 21, 'support', 65554, '03-09-2024');
+VALUES(117, 38, 21, 'support', 80, 65554, '2024-03-09');
 INSERT INTO Songs
-VALUES(118, 8, 7, 'Persistent', 51723, '09-25-2023');
+VALUES(118, 8, 7, 'Persistent', 110, 51723, '2023-09-25');
 INSERT INTO Songs
-VALUES(119, 13, 17, 'Front-line', 98247, '08-31-2023');
+VALUES(119, 13, 17, 'Front-line', 120, 98247, '2023-08-31');
 INSERT INTO Songs
-VALUES(120, 2, 19, 'maximized', 68461, '04-17-2023');
+VALUES(120, 2, 19, 'maximized', 10, 68461, '2023-04-17');
 INSERT INTO Songs
-VALUES(121, 37, 36, 'national', 23718, '10-07-2023');
+VALUES(121, 37, 36, 'national', 33, 23718, '2023-10-07');
 INSERT INTO Songs
-VALUES(122, 56, 15, 'hybrid', 30970, '04-21-2023');
+VALUES(122, 56, 15, 'hybrid', 72, 30970, '2023-04-21');
 INSERT INTO Songs
-VALUES(123, 23, 17, 'leverage', 60021, '04-09-2024');
+VALUES(123, 23, 17, 'leverage', 72, 60021, '2024-04-09');
 INSERT INTO Songs
-VALUES(124, 58, 27, 'encompassing', 86905, '09-01-2023');
+VALUES(124, 58, 27, 'encompassing', 27, 86905, '2023-09-01');
 INSERT INTO Songs
-VALUES(125, 11, 33, 'Networked', 34693, '02-22-2024');
+VALUES(125, 11, 33, 'Networked', 85, 34693, '2024-02-22');
 INSERT INTO Songs
 VALUES(
         126,
         43,
         30,
         'bandwidth-monitored',
+        126,
         27533,
-        '03-14-2024'
+        '2024-03-14'
     );
 INSERT INTO Songs
-VALUES(127, 47, 21, 'task-force', 31334, '01-31-2024');
+VALUES(127, 47, 21, 'task-force', 111, 31334, '2024-01-31');
 INSERT INTO Songs
-VALUES(128, 30, 6, 'support', 8381, '04-04-2024');
+VALUES(128, 30, 6, 'support', 24, 8381, '2024-04-04');
 INSERT INTO Songs
-VALUES(129, 14, 8, 'time-frame', 34360, '08-15-2023');
+VALUES(129, 14, 8, 'time-frame', 128, 34360, '2023-08-15');
 INSERT INTO Songs
-VALUES(130, 51, 25, 'multi-state', 21180, '10-28-2023');
+VALUES(130, 51, 25, 'multi-state', 64, 21180, '2023-10-28');
 INSERT INTO Songs
-VALUES(131, 9, 39, 'secured line', 10702, '06-10-2023');
+VALUES(131, 9, 39, 'secured line', 99, 10702, '2023-06-10');
 INSERT INTO Songs
-VALUES(132, 6, 36, 'Automated', 40953, '12-01-2023');
+VALUES(132, 6, 36, 'Automated', 127, 40953, '2023-12-01');
 INSERT INTO Songs
-VALUES(133, 43, 1, 'toolset', 67445, '11-20-2023');
+VALUES(133, 43, 1, 'toolset', 97, 67445, '2023-11-20');
 INSERT INTO Songs
-VALUES(134, 7, 11, 'demand-driven', 45135, '05-20-2023');
+VALUES(134, 7, 11, 'demand-driven', 77, 45135, '2023-05-20');
 INSERT INTO Songs
-VALUES(135, 30, 25, 'neutral', 35348, '01-06-2024');
+VALUES(135, 30, 25, 'neutral', 44, 35348, '2024-01-06');
 INSERT INTO Songs
-VALUES(136, 40, 24, 'radical', 51576, '07-11-2023');
+VALUES(136, 40, 24, 'radical', 33, 51576, '2023-07-11');
 INSERT INTO Songs
-VALUES(137, 37, 40, 'foreground', 43697, '10-15-2023');
+VALUES(137, 37, 40, 'foreground', 43, 43697, '2023-10-15');
 INSERT INTO Songs
 VALUES(
         138,
         38,
         29,
         'Triple-buffered',
+        49,
         35498,
-        '10-20-2023'
+        '2023-10-20'
     );
 INSERT INTO Songs
-VALUES(139, 2, 40, 'Mandatory', 73709, '11-10-2023');
+VALUES(139, 2, 40, 'Mandatory', 51, 73709, '2023-11-10');
 INSERT INTO Songs
-VALUES(140, 3, 2, 'heuristic', 61621, '12-20-2023');
+VALUES(140, 3, 2, 'heuristic', 90, 61621, '2023-12-20');
 INSERT INTO Songs
-VALUES(141, 37, 31, 'User-centric', 12237, '09-25-2023');
+VALUES(141, 37, 31, 'User-centric', 89, 12237, '2023-09-25');
 INSERT INTO Songs
-VALUES(142, 51, 8, 'system engine', 3154, '06-19-2023');
+VALUES(142, 51, 8, 'system engine', 118, 3154, '2023-06-19');
 INSERT INTO Songs
-VALUES(143, 47, 33, 'homogeneous', 73552, '02-08-2024');
+VALUES(143, 47, 33, 'homogeneous', 32, 73552, '2024-02-08');
 INSERT INTO Songs
 VALUES(
         144,
         29,
         22,
         'Reverse-engineered',
+        116,
         19620,
-        '06-24-2023'
+        '2023-06-24'
     );
 INSERT INTO Songs
-VALUES(145, 33, 23, 'structure', 40900, '09-06-2023');
+VALUES(145, 33, 23, 'structure', 10, 40900, '2023-09-06');
 INSERT INTO Songs
-VALUES(146, 48, 9, 'moderator', 34882, '03-06-2024');
+VALUES(146, 48, 9, 'moderator', 101, 34882, '2024-03-06');
 INSERT INTO Songs
 VALUES(
         147,
         26,
         25,
         'Profit-focused',
+        47,
         59837,
-        '01-14-2024'
+        '2024-01-14'
     );
 INSERT INTO Songs
-VALUES(148, 24, 13, 'regional', 3561, '12-08-2023');
+VALUES(148, 24, 13, 'regional', 31, 3561, '2023-12-08');
 INSERT INTO Songs
-VALUES(149, 57, 36, 'background', 46130, '10-03-2023');
+VALUES(149, 57, 36, 'background', 79, 46130, '2023-10-03');
 INSERT INTO Songs
-VALUES(150, 54, 38, 'Ameliorated', 72936, '07-05-2023');
+VALUES(150, 54, 38, 'Ameliorated', 41, 72936, '2023-07-05');
 INSERT INTO Songs
-VALUES(151, 2, 3, 'foreground', 64145, '06-05-2023');
+VALUES(151, 2, 3, 'foreground', 36, 64145, '2023-06-05');
 INSERT INTO Songs
 VALUES(
         152,
         42,
         15,
         '3rd generation',
+        84,
         13315,
-        '09-28-2023'
+        '2023-09-28'
     );
 INSERT INTO Songs
-VALUES(153, 35, 39, 'Secured', 49487, '03-31-2024');
+VALUES(153, 35, 39, 'Secured', 14, 49487, '2024-03-31');
 INSERT INTO Songs
-VALUES(154, 7, 40, 'interactive', 15787, '08-08-2023');
+VALUES(154, 7, 40, 'interactive', 49, 15787, '2023-08-08');
 INSERT INTO Songs
-VALUES(155, 1, 24, 'system engine', 59980, '11-13-2023');
+VALUES(155, 1, 24, 'system engine', 103, 59980, '2023-11-13');
 INSERT INTO Songs
-VALUES(156, 24, 2, 'Face to face', 38269, '12-27-2023');
+VALUES(156, 24, 2, 'Face to face', 84, 38269, '2023-12-27');
 INSERT INTO Songs
-VALUES(157, 17, 2, 'extranet', 65114, '09-17-2023');
+VALUES(157, 17, 2, 'extranet', 32, 65114, '2023-09-17');
 INSERT INTO Songs
-VALUES(158, 51, 7, 'frame', 74714, '05-14-2023');
+VALUES(158, 51, 7, 'frame', 97, 74714, '2023-05-14');
 INSERT INTO Songs
 VALUES(
         159,
         19,
         19,
         'info-mediaries',
+        109,
         76589,
-        '07-12-2023'
+        '2023-07-12'
     );
 INSERT INTO Songs
-VALUES(160, 37, 20, 'multi-state', 88803, '08-29-2023');
+VALUES(160, 37, 20, 'multi-state', 72, 88803, '2023-08-29');
 INSERT INTO Songs
-VALUES(161, 50, 8, 'Operative', 88445, '08-28-2023');
+VALUES(161, 50, 8, 'Operative', 118, 88445, '2023-08-28');
 INSERT INTO Songs
 VALUES(
         162,
         40,
         10,
         'Open-architected',
+        62,
         63084,
-        '11-06-2023'
+        '2023-11-06'
     );
 INSERT INTO Songs
-VALUES(163, 60, 14, 'Networked', 64450, '12-02-2023');
+VALUES(163, 60, 14, 'Networked', 57, 64450, '2023-12-02');
 INSERT INTO Songs
-VALUES(164, 7, 5, 'Distributed', 14920, '11-22-2023');
+VALUES(164, 7, 5, 'Distributed', 83, 14920, '2023-11-22');
 INSERT INTO Songs
-VALUES(
-        165,
-        49,
-        18,
-        'Multi-layered',
-        85857,
-        '08-07-2023'
-    );
+VALUES(165, 49, 18, 'Multi-layered', 28, 85857, '2023-08-07');
 INSERT INTO Songs
-VALUES(
-        166,
-        18,
-        24,
-        'collaboration',
-        40310,
-        '12-15-2023'
-    );
+VALUES(166, 18, 24, 'collaboration', 62, 40310, '2023-12-15');
 INSERT INTO Songs
 VALUES(
         167,
         51,
         12,
         'Fully-configurable',
+        44,
         36557,
-        '02-22-2024'
+        '2024-02-22'
     );
 INSERT INTO Songs
-VALUES(168, 43, 13, 'Customizable', 17916, '08-24-2023');
+VALUES(168, 43, 13, 'Customizable', 71, 17916, '2023-08-24');
 INSERT INTO Songs
-VALUES(169, 21, 9, 'client-server', 95574, '10-24-2023');
+VALUES(169, 21, 9, 'client-server', 128, 95574, '2023-10-24');
 INSERT INTO Songs
 VALUES(
         170,
         34,
         11,
         'bandwidth-monitored',
+        52,
         60965,
-        '05-19-2023'
+        '2023-05-19'
     );
 INSERT INTO Songs
-VALUES(171, 51, 3, 'structure', 48105, '08-20-2023');
+VALUES(171, 51, 3, 'structure', 27, 48105, '2023-08-20');
 INSERT INTO Songs
-VALUES(172, 22, 7, 'Secured', 78192, '09-12-2023');
+VALUES(172, 22, 7, 'Secured', 28, 78192, '2023-09-12');
 INSERT INTO Songs
-VALUES(173, 58, 40, 'Managed', 33841, '03-10-2024');
+VALUES(173, 58, 40, 'Managed', 32, 33841, '2024-03-10');
 INSERT INTO Songs
-VALUES(174, 4, 38, 'Stand-alone', 25151, '04-04-2024');
+VALUES(174, 4, 38, 'Stand-alone', 34, 25151, '2024-04-04');
 INSERT INTO Songs
-VALUES(175, 21, 8, 'Reduced', 6286, '07-01-2023');
+VALUES(175, 21, 8, 'Reduced', 128, 6286, '2023-07-01');
 INSERT INTO Songs
 VALUES(
         176,
         54,
         18,
         'Graphic Interface',
+        106,
         25983,
-        '08-30-2023'
+        '2023-08-30'
     );
 INSERT INTO Songs
-VALUES(177, 46, 27, 'Optional', 99149, '09-15-2023');
+VALUES(177, 46, 27, 'Optional', 100, 99149, '2023-09-15');
 INSERT INTO Songs
-VALUES(178, 31, 30, 'Pre-emptive', 36069, '01-09-2024');
+VALUES(178, 31, 30, 'Pre-emptive', 87, 36069, '2024-01-09');
 INSERT INTO Songs
-VALUES(179, 27, 40, 'high-level', 95927, '07-11-2023');
+VALUES(179, 27, 40, 'high-level', 28, 95927, '2023-07-11');
 INSERT INTO Songs
-VALUES(180, 15, 26, 'Stand-alone', 73596, '04-27-2023');
+VALUES(180, 15, 26, 'Stand-alone', 58, 73596, '2023-04-27');
 INSERT INTO Songs
-VALUES(181, 25, 27, 'installation', 45835, '02-21-2024');
+VALUES(181, 25, 27, 'installation', 98, 45835, '2024-02-21');
 INSERT INTO Songs
-VALUES(182, 2, 33, 'real-time', 20199, '10-20-2023');
+VALUES(182, 2, 33, 'real-time', 30, 20199, '2023-10-20');
 INSERT INTO Songs
-VALUES(
-        183,
-        18,
-        32,
-        'Decentralized',
-        45782,
-        '12-16-2023'
-    );
+VALUES(183, 18, 32, 'Decentralized', 35, 45782, '2023-12-16');
 INSERT INTO Songs
 VALUES(
         184,
         20,
         28,
         'local area network',
+        48,
         85437,
-        '08-06-2023'
+        '2023-08-06'
     );
 INSERT INTO Songs
-VALUES(
-        185,
-        29,
-        5,
-        'zero tolerance',
-        86494,
-        '12-26-2023'
-    );
+VALUES(185, 29, 5, 'zero tolerance', 24, 86494, '2023-12-26');
 INSERT INTO Songs
-VALUES(186, 55, 14, 'framework', 28684, '04-24-2023');
+VALUES(186, 55, 14, 'framework', 90, 28684, '2023-04-24');
 INSERT INTO Songs
-VALUES(187, 52, 23, 'exuding', 62789, '04-07-2024');
+VALUES(187, 52, 23, 'exuding', 81, 62789, '2024-04-07');
 INSERT INTO Songs
-VALUES(188, 40, 29, 'zero defect', 43320, '06-15-2023');
+VALUES(188, 40, 29, 'zero defect', 117, 43320, '2023-06-15');
 INSERT INTO Songs
-VALUES(189, 60, 39, 'Versatile', 84136, '01-11-2024');
+VALUES(189, 60, 39, 'Versatile', 36, 84136, '2024-01-11');
 INSERT INTO Songs
 VALUES(
         190,
         31,
         28,
         'well-modulated',
+        19,
         45036,
-        '04-20-2023'
+        '2023-04-20'
     );
 INSERT INTO Songs
-VALUES(191, 27, 19, 'approach', 79744, '05-21-2023');
+VALUES(191, 27, 19, 'approach', 14, 79744, '2023-05-21');
 INSERT INTO Songs
-VALUES(192, 42, 6, 'methodology', 75138, '03-01-2024');
+VALUES(192, 42, 6, 'methodology', 98, 75138, '2024-03-01');
 INSERT INTO Songs
-VALUES(193, 48, 40, 'Centralized', 89524, '09-30-2023');
+VALUES(193, 48, 40, 'Centralized', 114, 89524, '2023-09-30');
 INSERT INTO Songs
-VALUES(194, 57, 32, 'Public-key', 50134, '06-29-2023');
+VALUES(194, 57, 32, 'Public-key', 109, 50134, '2023-06-29');
 INSERT INTO Songs
-VALUES(195, 44, 3, 'circuit', 7736, '01-23-2024');
+VALUES(195, 44, 3, 'circuit', 103, 7736, '2024-01-23');
 INSERT INTO Songs
-VALUES(196, 37, 9, 'Object-based', 65306, '01-05-2024');
+VALUES(196, 37, 9, 'Object-based', 32, 65306, '2024-01-05');
 INSERT INTO Songs
-VALUES(197, 56, 15, 'Cross-group', 47080, '12-24-2023');
+VALUES(197, 56, 15, 'Cross-group', 16, 47080, '2023-12-24');
 INSERT INTO Songs
 VALUES(
         198,
         20,
         25,
         '4th generation',
+        18,
         65796,
-        '12-11-2023'
+        '2023-12-11'
     );
 INSERT INTO Songs
-VALUES(199, 51, 11, 'Visionary', 31001, '12-13-2023');
+VALUES(199, 51, 11, 'Visionary', 32, 31001, '2023-12-13');
 INSERT INTO Songs
 VALUES(
         200,
         50,
         20,
         'implementation',
+        34,
         96047,
-        '05-12-2023'
+        '2023-05-12'
     );
 -- Data for table Friends
 INSERT INTO Friends
@@ -2206,7 +2175,7 @@ VALUES(49, 20);
 INSERT INTO Friends
 VALUES(40, 32);
 INSERT INTO Friends
-VALUES(28, 50);
+VALUES(28, 51);
 INSERT INTO Friends
 VALUES(13, 47);
 INSERT INTO Friends
@@ -2270,7 +2239,7 @@ VALUES(31, 54);
 INSERT INTO Friends
 VALUES(32, 14);
 INSERT INTO Friends
-VALUES(19, 49);
+VALUES(19, 38);
 INSERT INTO Friends
 VALUES(46, 26);
 INSERT INTO Friends
@@ -2324,7 +2293,7 @@ VALUES(50, 25);
 INSERT INTO Friends
 VALUES(43, 28);
 INSERT INTO Friends
-VALUES(7, 37);
+VALUES(17, 37);
 INSERT INTO Friends
 VALUES(26, 23);
 INSERT INTO Friends
@@ -2346,7 +2315,7 @@ VALUES(56, 35);
 INSERT INTO Friends
 VALUES(59, 59);
 INSERT INTO Friends
-VALUES(39, 10);
+VALUES(39, 20);
 INSERT INTO Friends
 VALUES(45, 55);
 INSERT INTO Friends
@@ -2486,7 +2455,7 @@ VALUES(20, 52);
 INSERT INTO Friends
 VALUES(49, 32);
 INSERT INTO Friends
-VALUES(33, 7);
+VALUES(33, 17);
 INSERT INTO Friends
 VALUES(52, 19);
 INSERT INTO Friends
@@ -2516,7 +2485,7 @@ VALUES(4, 41);
 INSERT INTO Friends
 VALUES(17, 3);
 INSERT INTO Friends
-VALUES(8, 53);
+VALUES(8, 43);
 INSERT INTO Friends
 VALUES(20, 56);
 INSERT INTO Friends
@@ -2534,7 +2503,7 @@ VALUES(43, 12);
 INSERT INTO Friends
 VALUES(23, 32);
 INSERT INTO Friends
-VALUES(52, 19);
+VALUES(52, 9);
 INSERT INTO Friends
 VALUES(26, 37);
 INSERT INTO Friends
@@ -2841,7 +2810,7 @@ Values(
 INSERT INTO Playlist
 Values(
         2,
-        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
+        'Vestibulum ante ipsum primis in faucibus orci luctus et u',
         3
     );
 INSERT INTO Playlist
@@ -2875,7 +2844,7 @@ Values(12, 'Duis aliquam convallis nunc.', 18);
 INSERT INTO Playlist
 Values(
         13,
-        'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
+        'In tempor, turpis nec euismod scelerisque',
         17
     );
 INSERT INTO Playlist
@@ -2913,11 +2882,7 @@ Values(23, 'Nulla mollis molestie lorem.', 40);
 INSERT INTO Playlist
 Values(24, 'Duis bibendum.', 38);
 INSERT INTO Playlist
-Values(
-        25,
-        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.',
-        6
-    );
+Values(25, 'Vestibulum ante ipsum primis in f', 6);
 INSERT INTO Playlist
 Values(26, 'Nulla justo.', 2);
 INSERT INTO Playlist
@@ -2981,27 +2946,15 @@ Values(47, 'Curabitur convallis.', 22);
 INSERT INTO Playlist
 Values(48, 'Integer tincidunt ante vel ipsum.', 17);
 INSERT INTO Playlist
-Values(
-        49,
-        'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
-        21
-    );
+Values(49, 'Nam ultrices, libero non', 21);
 INSERT INTO Playlist
 Values(50, 'Nunc purus.', 30);
 INSERT INTO Playlist
 Values(51, 'Donec posuere metus vitae ipsum.', 39);
 INSERT INTO Playlist
-Values(
-        52,
-        'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
-        1
-    );
+Values(52, 'In tempor, turpis nec euismod sceleris', 1);
 INSERT INTO Playlist
-Values(
-        53,
-        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-        16
-    );
+Values(53, 'Cum sociis natoque penatibus et magn', 16);
 INSERT INTO Playlist
 Values(54, 'Nam dui.', 33);
 INSERT INTO Playlist
@@ -3013,11 +2966,7 @@ Values(
         37
     );
 INSERT INTO Playlist
-Values(
-        57,
-        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-        31
-    );
+Values(57, 'Cum sociis natoque penatibus.', 31);
 INSERT INTO Playlist
 Values(58, 'Cras pellentesque volutpat dui.', 15);
 INSERT INTO Playlist
@@ -3180,7 +3129,7 @@ Values(56, 39);
 INSERT INTO Prod_Artist
 Values(3, 23);
 INSERT INTO Prod_Artist
-Values(4, 43);
+Values(4, 3);
 INSERT INTO Prod_Artist
 Values(13, 40);
 INSERT INTO Prod_Artist
@@ -3228,11 +3177,11 @@ Values(37, 31);
 INSERT INTO Prod_Artist
 Values(25, 34);
 INSERT INTO Prod_Artist
-Values(58, 29);
+Values(58, 19);
 INSERT INTO Prod_Artist
 Values(2, 1);
 INSERT INTO Prod_Artist
-Values(58, 35);
+Values(58, 15);
 INSERT INTO Prod_Artist
 Values(45, 41);
 INSERT INTO Prod_Artist
@@ -3278,7 +3227,7 @@ Values(15, 32);
 INSERT INTO Prod_Artist
 Values(14, 60);
 INSERT INTO Prod_Artist
-Values(56, 39);
+Values(56, 40);
 INSERT INTO Prod_Artist
 Values(54, 58);
 INSERT INTO Prod_Artist
@@ -3286,7 +3235,7 @@ Values(47, 18);
 INSERT INTO Prod_Artist
 Values(50, 59);
 INSERT INTO Prod_Artist
-Values(36, 40);
+Values(36, 41);
 INSERT INTO Prod_Artist
 Values(30, 8);
 INSERT INTO Prod_Artist
@@ -3382,7 +3331,7 @@ Values(12, 14);
 INSERT INTO Prod_Artist
 Values(27, 44);
 INSERT INTO Prod_Artist
-Values(40, 25);
+Values(40, 26);
 INSERT INTO Prod_Artist
 Values(18, 47);
 INSERT INTO Prod_Artist
@@ -3412,7 +3361,7 @@ Values(29, 11);
 INSERT INTO Prod_Artist
 Values(54, 23);
 INSERT INTO Prod_Artist
-Values(43, 58);
+Values(43, 59);
 INSERT INTO Prod_Artist
 Values(57, 41);
 INSERT INTO Prod_Artist
@@ -3651,7 +3600,7 @@ Values(139, 45);
 INSERT INTO Producer_Credit
 Values(61, 9);
 INSERT INTO Producer_Credit
-Values(92, 34);
+Values(92, 35);
 INSERT INTO Producer_Credit
 Values(54, 8);
 INSERT INTO Producer_Credit
@@ -3717,7 +3666,7 @@ Values(89, 2);
 INSERT INTO Producer_Credit
 Values(44, 9);
 INSERT INTO Producer_Credit
-Values(133, 40);
+Values(134, 40);
 INSERT INTO Producer_Credit
 Values(118, 37);
 INSERT INTO Producer_Credit
@@ -3809,7 +3758,7 @@ Values(190, 56);
 INSERT INTO Producer_Credit
 Values(133, 2);
 INSERT INTO Producer_Credit
-Values(121, 53);
+Values(121, 43);
 INSERT INTO Producer_Credit
 Values(151, 5);
 INSERT INTO Producer_Credit
@@ -4465,7 +4414,7 @@ Values(2, 39);
 INSERT INTO User_Community
 Values(10, 56);
 INSERT INTO User_Community
-Values(20, 16);
+Values(20, 26);
 INSERT INTO User_Community
 Values(56, 43);
 INSERT INTO User_Community
@@ -4485,7 +4434,7 @@ Values(31, 40);
 INSERT INTO User_Community
 Values(38, 34);
 INSERT INTO User_Community
-Values(20, 43);
+Values(21, 43);
 INSERT INTO User_Community
 Values(51, 41);
 INSERT INTO User_Community
@@ -4517,7 +4466,7 @@ Values(51, 12);
 INSERT INTO User_Community
 Values(43, 42);
 INSERT INTO User_Community
-Values(27, 59);
+Values(27, 60);
 INSERT INTO User_Community
 Values(57, 42);
 INSERT INTO User_Community
@@ -4573,7 +4522,7 @@ Values(19, 31);
 INSERT INTO User_Community
 Values(26, 18);
 INSERT INTO User_Community
-Values(43, 42);
+Values(43, 22);
 INSERT INTO User_Community
 Values(3, 55);
 INSERT INTO User_Community
@@ -4609,7 +4558,7 @@ Values(46, 59);
 INSERT INTO User_Community
 Values(49, 56);
 INSERT INTO User_Community
-Values(55, 32);
+Values(55, 33);
 INSERT INTO User_Community
 Values(12, 36);
 INSERT INTO User_Community
@@ -4700,7 +4649,7 @@ Values(10, 51);
 INSERT INTO User_Following
 Values(1, 26);
 INSERT INTO User_Following
-Values(9, 24);
+Values(9, 25);
 INSERT INTO User_Following
 Values(18, 56);
 INSERT INTO User_Following
@@ -4776,7 +4725,7 @@ Values(28, 37);
 INSERT INTO User_Following
 Values(49, 48);
 INSERT INTO User_Following
-Values(59, 42);
+Values(59, 41);
 INSERT INTO User_Following
 Values(13, 16);
 INSERT INTO User_Following
@@ -4868,13 +4817,13 @@ Values(36, 32);
 INSERT INTO User_Following
 Values(55, 4);
 INSERT INTO User_Following
-Values(35, 40);
+Values(35, 44);
 INSERT INTO User_Following
 Values(11, 42);
 INSERT INTO User_Following
 Values(34, 18);
 INSERT INTO User_Following
-Values(3, 7);
+Values(3, 8);
 INSERT INTO User_Following
 Values(5, 35);
 INSERT INTO User_Following
@@ -4906,7 +4855,7 @@ Values(45, 12);
 INSERT INTO User_Following
 Values(22, 23);
 INSERT INTO User_Following
-Values(11, 42);
+Values(11, 41);
 INSERT INTO User_Following
 Values(37, 57);
 INSERT INTO User_Following
@@ -4970,7 +4919,7 @@ Values(9, 46);
 INSERT INTO User_Following
 Values(16, 56);
 INSERT INTO User_Following
-Values(42, 16);
+Values(42, 17);
 INSERT INTO User_Following
 Values(21, 5);
 INSERT INTO User_Following
@@ -4998,7 +4947,7 @@ Values(22, 16);
 INSERT INTO User_Following
 Values(43, 14);
 INSERT INTO User_Following
-Values(47, 23);
+Values(47, 13);
 INSERT INTO User_Following
 Values(8, 2);
 INSERT INTO User_Following
@@ -5030,611 +4979,751 @@ Values(12, 33);
 INSERT INTO User_Following
 Values(21, 58);
 -- Data for table UserArtist_Interaction
-INSERT INTO UserArtist_Interactions(1, 3, 'Nulla ac enim.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(1, 3, 'Nulla ac enim.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         33,
         25,
         'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         41,
         2,
         'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(38, 28, 'Nulla tellus.', TRUE);
-INSERT INTO UserArtist_Interactions(46, 71, 'Nullam varius.', TRUE);
-INSERT INTO UserArtist_Interactions(49, 49, 'In eleifend quam a odio.', TRUE);
-INSERT INTO UserArtist_Interactions(38, 66, 'Proin eu mi.', FALSE);
-INSERT INTO UserArtist_Interactions(27, 36, 'Nulla suscipit ligula in lacus.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(38, 28, 'Nulla tellus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(46, 71, 'Nullam varius.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(49, 49, 'In eleifend quam a odio.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(38, 66, 'Proin eu mi.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(27, 36, 'Nulla suscipit ligula in lacus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         10,
         53,
         'Nulla ut erat id mauris vulputate elementum.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         24,
         34,
         'Morbi vel lectus in quam fringilla rhoncus.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(25, 2, 'Phasellus in felis.', TRUE);
-INSERT INTO UserArtist_Interactions(44, 76, 'In eleifend quam a odio.', TRUE);
-INSERT INTO UserArtist_Interactions(40, 71, 'Ut tellus.', FALSE);
-INSERT INTO UserArtist_Interactions(36, 76, 'Proin eu mi.', FALSE);
-INSERT INTO UserArtist_Interactions(58, 15, 'Quisque porta volutpat erat.', TRUE);
-INSERT INTO UserArtist_Interactions(48, 72, 'Aenean sit amet justo.', FALSE);
-INSERT INTO UserArtist_Interactions(31, 12, 'In blandit ultrices enim.', FALSE);
-INSERT INTO UserArtist_Interactions(22, 46, 'Fusce consequat.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(25, 2, 'Phasellus in felis.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(44, 76, 'In eleifend quam a odio.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(40, 71, 'Ut tellus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(36, 76, 'Proin eu mi.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(58, 15, 'Quisque porta volutpat erat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(48, 72, 'Aenean sit amet justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(31, 12, 'In blandit ultrices enim.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(22, 46, 'Fusce consequat.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         42,
         72,
         'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
-        31,
-        36,
-        'In hac habitasse platea dictumst.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(24, 21, 'Donec semper sapien a libero.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(31, 36, 'In hac habitasse platea dictumst.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(24, 21, 'Donec semper sapien a libero.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         18,
         77,
         'Proin at turpis a pede posuere nonummy.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(25, 39, 'Donec ut dolor.', FALSE);
-INSERT INTO UserArtist_Interactions(55, 53, 'Proin eu mi.', FALSE);
-INSERT INTO UserArtist_Interactions(53, 37, 'Fusce posuere felis sed lacus.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(25, 39, 'Donec ut dolor.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(55, 53, 'Proin eu mi.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(53, 37, 'Fusce posuere felis sed lacus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         47,
         48,
         'Morbi non quam nec dui luctus rutrum.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         23,
         2,
         'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(58, 30, 'Ut tellus.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(58, 30, 'Ut tellus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         8,
         64,
         'In est risus, auctor sed, tristique in, tempus sit amet, sem.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(13, 6, 'Suspendisse potenti.', FALSE);
-INSERT INTO UserArtist_Interactions(26, 2, 'Proin risus.', FALSE);
-INSERT INTO UserArtist_Interactions(41, 30, 'Etiam justo.', FALSE);
-INSERT INTO UserArtist_Interactions(51, 48, 'Duis aliquam convallis nunc.', TRUE);
-INSERT INTO UserArtist_Interactions(2, 6, 'Pellentesque ultrices mattis odio.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(13, 6, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(26, 2, 'Proin risus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(41, 30, 'Etiam justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(51, 48, 'Duis aliquam convallis nunc.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(2, 6, 'Pellentesque ultrices mattis odio.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         4,
         38,
         'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(36, 44, 'Mauris sit amet eros.', TRUE);
-INSERT INTO UserArtist_Interactions(31, 41, 'Etiam justo.', FALSE);
-INSERT INTO UserArtist_Interactions(7, 80, 'Quisque ut erat.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(36, 44, 'Mauris sit amet eros.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(31, 41, 'Etiam justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(7, 80, 'Quisque ut erat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         59,
         50,
         'Donec quis orci eget orci vehicula condimentum.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         3,
         22,
         'Curabitur in libero ut massa volutpat convallis.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(29, 17, 'Duis ac nibh.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(29, 17, 'Duis ac nibh.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         26,
         19,
         'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(38, 5, 'Nunc nisl.', FALSE);
-INSERT INTO UserArtist_Interactions(3, 7, 'Nullam molestie nibh in lectus.', TRUE);
-INSERT INTO UserArtist_Interactions(49, 67, 'Nulla facilisi.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(38, 5, 'Nunc nisl.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(3, 7, 'Nullam molestie nibh in lectus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(49, 67, 'Nulla facilisi.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         18,
         43,
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
-        43,
-        52,
-        'In hac habitasse platea dictumst.',
-        TRUE
-    );
-INSERT INTO UserArtist_Interactions(50, 53, 'Morbi a ipsum.', FALSE);
-INSERT INTO UserArtist_Interactions(16, 15, 'Sed accumsan felis.', FALSE);
-INSERT INTO UserArtist_Interactions(24, 12, 'Nulla mollis molestie lorem.', FALSE);
-INSERT INTO UserArtist_Interactions(7, 61, 'Nulla mollis molestie lorem.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(43, 52, 'In hac habitasse platea dictumst.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(50, 53, 'Morbi a ipsum.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(16, 15, 'Sed accumsan felis.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(24, 12, 'Nulla mollis molestie lorem.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(7, 61, 'Nulla mollis molestie lorem.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         44,
         59,
         'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(14, 9, 'Nunc rhoncus dui vel sem.', TRUE);
-INSERT INTO UserArtist_Interactions(40, 36, 'Morbi porttitor lorem id ligula.', TRUE);
-INSERT INTO UserArtist_Interactions(9, 20, 'In hac habitasse platea dictumst.', TRUE);
-INSERT INTO UserArtist_Interactions(32, 25, 'Integer a nibh.', TRUE);
-INSERT INTO UserArtist_Interactions(48, 28, 'Aenean fermentum.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(14, 9, 'Nunc rhoncus dui vel sem.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(40, 36, 'Morbi porttitor lorem id ligula.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(9, 20, 'In hac habitasse platea dictumst.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(32, 25, 'Integer a nibh.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(48, 28, 'Aenean fermentum.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         33,
         5,
         'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         3,
         78,
         'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(52, 27, 'Proin risus.', TRUE);
-INSERT INTO UserArtist_Interactions(16, 17, 'Donec dapibus.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(52, 27, 'Proin risus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(16, 17, 'Donec dapibus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         47,
         61,
         'Cras in purus eu magna vulputate luctus.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(52, 69, 'Aenean lectus.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(52, 69, 'Aenean lectus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         34,
         42,
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(19, 5, 'Sed accumsan felis.', TRUE);
-INSERT INTO UserArtist_Interactions(33, 9, 'Aliquam erat volutpat.', TRUE);
-INSERT INTO UserArtist_Interactions(
-        19,
-        10,
-        'In hac habitasse platea dictumst.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(29, 17, 'Aenean fermentum.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(19, 5, 'Sed accumsan felis.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(33, 9, 'Aliquam erat volutpat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(19, 10, 'In hac habitasse platea dictumst.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(29, 16, 'Aenean fermentum.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         27,
         24,
         'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(7, 32, 'Vestibulum rutrum rutrum neque.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(7, 32, 'Vestibulum rutrum rutrum neque.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         26,
         52,
         'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(6, 36, 'Fusce consequat.', FALSE);
-INSERT INTO UserArtist_Interactions(60, 80, 'Praesent blandit lacinia erat.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(6, 36, 'Fusce consequat.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(60, 80, 'Praesent blandit lacinia erat.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         24,
         68,
         'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         45,
         12,
         'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(46, 64, 'Nulla facilisi.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(46, 64, 'Nulla facilisi.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         38,
         40,
         'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(9, 41, 'Proin risus.', TRUE);
-INSERT INTO UserArtist_Interactions(32, 30, 'Praesent blandit lacinia erat.', TRUE);
-INSERT INTO UserArtist_Interactions(31, 13, 'Morbi ut odio.', TRUE);
-INSERT INTO UserArtist_Interactions(51, 25, 'Proin risus.', TRUE);
-INSERT INTO UserArtist_Interactions(56, 14, 'Quisque ut erat.', TRUE);
-INSERT INTO UserArtist_Interactions(41, 12, 'Pellentesque eget nunc.', FALSE);
-INSERT INTO UserArtist_Interactions(2, 36, 'Cras pellentesque volutpat dui.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(9, 41, 'Proin risus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(32, 30, 'Praesent blandit lacinia erat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(31, 13, 'Morbi ut odio.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(51, 25, 'Proin risus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(56, 14, 'Quisque ut erat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(41, 12, 'Pellentesque eget nunc.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(2, 36, 'Cras pellentesque volutpat dui.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         1,
         61,
         'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         60,
         12,
         'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(55, 26, 'Duis aliquam convallis nunc.', TRUE);
-INSERT INTO UserArtist_Interactions(25, 60, 'Nunc purus.', TRUE);
-INSERT INTO UserArtist_Interactions(
-        45,
-        18,
-        'Pellentesque viverra pede ac diam.',
-        TRUE
-    );
-INSERT INTO UserArtist_Interactions(28, 11, 'Praesent lectus.', TRUE);
-INSERT INTO UserArtist_Interactions(44, 29, 'Pellentesque at nulla.', TRUE);
-INSERT INTO UserArtist_Interactions(
-        12,
-        11,
-        'Donec posuere metus vitae ipsum.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(55, 26, 'Duis aliquam convallis nunc.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(25, 60, 'Nunc purus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(45, 18, 'Pellentesque viverra pede ac diam.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(28, 11, 'Praesent lectus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(44, 29, 'Pellentesque at nulla.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(12, 11, 'Donec posuere metus vitae ipsum.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         27,
         72,
         'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(49, 67, 'Maecenas pulvinar lobortis est.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(49, 63, 'Maecenas pulvinar lobortis est.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         20,
         71,
         'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(13, 60, 'Donec vitae nisi.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(13, 60, 'Donec vitae nisi.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         22,
         55,
         'Phasellus id sapien in sapien iaculis congue.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         30,
         72,
         'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(40, 74, 'Praesent blandit.', TRUE);
-INSERT INTO UserArtist_Interactions(4, 60, 'Suspendisse potenti.', TRUE);
-INSERT INTO UserArtist_Interactions(44, 33, 'Nam dui.', TRUE);
-INSERT INTO UserArtist_Interactions(26, 68, 'Aenean fermentum.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(40, 74, 'Praesent blandit.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(4, 60, 'Suspendisse potenti.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(44, 33, 'Nam dui.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(26, 68, 'Aenean fermentum.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         39,
         47,
         'Maecenas ut massa quis augue luctus tincidunt.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
-        18,
-        23,
-        'Morbi porttitor lorem id ligula.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(18, 23, 'Morbi porttitor lorem id ligula.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         31,
         69,
         'Praesent id massa id nisl venenatis lacinia.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         35,
         39,
         'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(15, 44, 'Suspendisse potenti.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(15, 44, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         8,
         62,
         'Curabitur at ipsum ac tellus semper interdum.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
-        7,
-        68,
-        'Maecenas tincidunt lacus at velit.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(15, 56, 'Nam dui.', FALSE);
-INSERT INTO UserArtist_Interactions(19, 25, 'Nulla facilisi.', FALSE);
-INSERT INTO UserArtist_Interactions(34, 7, 'Etiam pretium iaculis justo.', FALSE);
-INSERT INTO UserArtist_Interactions(53, 16, 'Fusce consequat.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(7, 68, 'Maecenas tincidunt lacus at velit.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(15, 56, 'Nam dui.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(19, 25, 'Nulla facilisi.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(34, 7, 'Etiam pretium iaculis justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(53, 16, 'Fusce consequat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         59,
         48,
         'Morbi quis tortor id nulla ultrices aliquet.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(24, 29, 'Aenean lectus.', TRUE);
-INSERT INTO UserArtist_Interactions(43, 32, 'Nulla facilisi.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(24, 29, 'Aenean lectus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(43, 32, 'Nulla facilisi.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         13,
         42,
         'In est risus, auctor sed, tristique in, tempus sit amet, sem.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(8, 39, 'Sed accumsan felis.', FALSE);
-INSERT INTO UserArtist_Interactions(5, 78, 'Praesent lectus.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(8, 39, 'Sed accumsan felis.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(5, 78, 'Praesent lectus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         26,
         63,
         'Nulla ut erat id mauris vulputate elementum.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         29,
         79,
         'Mauris ullamcorper purus sit amet nulla.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(15, 52, 'Quisque ut erat.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(15, 52, 'Quisque ut erat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         37,
         34,
         'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(28, 10, 'Aenean lectus.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(28, 10, 'Aenean lectus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         46,
         73,
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(59, 12, 'Suspendisse potenti.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(59, 12, 'Suspendisse potenti.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         23,
         74,
         'Praesent id massa id nisl venenatis lacinia.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         46,
         62,
         'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(35, 34, 'Nunc nisl.', TRUE);
-INSERT INTO UserArtist_Interactions(8, 64, 'In hac habitasse platea dictumst.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(35, 34, 'Nunc nisl.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(8, 65, 'In hac habitasse platea dictumst.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         33,
         78,
         'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         51,
         63,
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
-        32,
-        32,
-        'Pellentesque viverra pede ac diam.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(17, 36, 'Pellentesque eget nunc.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(32, 32, 'Pellentesque viverra pede ac diam.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(17, 36, 'Pellentesque eget nunc.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         28,
         53,
         'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         44,
-        29,
+        30,
         'Praesent id massa id nisl venenatis lacinia.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(22, 49, 'Duis mattis egestas metus.', TRUE);
-INSERT INTO UserArtist_Interactions(9, 68, 'In congue.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(22, 49, 'Duis mattis egestas metus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(9, 68, 'In congue.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         60,
         4,
         'Curabitur in libero ut massa volutpat convallis.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         45,
         68,
-        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
+        'Vestibulum ante ipsum primis incubilia Curae; Donec pharetra, magna.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
-        20,
-        34,
-        'Pellentesque viverra pede ac diam.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(
-        42,
-        47,
-        'Integer tincidunt ante vel ipsum.',
-        TRUE
-    );
-INSERT INTO UserArtist_Interactions(37, 26, 'Proin eu mi.', FALSE);
-INSERT INTO UserArtist_Interactions(57, 44, 'Etiam vel augue.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(20, 34, 'Pellentesque viverra pede ac diam.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(42, 47, 'Integer tincidunt ante vel ipsum.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(37, 26, 'Proin eu mi.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(57, 44, 'Etiam vel augue.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         32,
         31,
         'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         23,
         79,
         'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         25,
         54,
         'Vestibulum sed magna at nunc commodo placerat.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         31,
         25,
         'Cras non velit nec nisi vulputate nonummy.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(54, 71, 'Quisque ut erat.', FALSE);
-INSERT INTO UserArtist_Interactions(30, 39, 'Nunc rhoncus dui vel sem.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(54, 71, 'Quisque ut erat.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(30, 39, 'Nunc rhoncus dui vel sem.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         5,
         47,
         'Morbi quis tortor id nulla ultrices aliquet.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         34,
         41,
         'Aliquam sit amet diam in magna bibendum imperdiet.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(15, 73, 'Nam tristique tortor eu pede.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(15, 73, 'Nam tristique tortor eu pede.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         44,
         43,
         'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         57,
         33,
         'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(31, 4, 'Vivamus tortor.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(31, 4, 'Vivamus tortor.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         56,
-        14,
+        15,
         'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(48, 45, 'Nulla tellus.', FALSE);
-INSERT INTO UserArtist_Interactions(54, 67, 'Donec dapibus.', TRUE);
-INSERT INTO UserArtist_Interactions(1, 40, 'Mauris sit amet eros.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(48, 45, 'Nulla tellus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(54, 67, 'Donec dapibus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(1, 40, 'Mauris sit amet eros.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         6,
         53,
         'Mauris ullamcorper purus sit amet nulla.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         27,
         19,
         'Sed vel enim sit amet nunc viverra dapibus.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(55, 24, 'Nulla tempus.', TRUE);
-INSERT INTO UserArtist_Interactions(58, 32, 'Etiam pretium iaculis justo.', FALSE);
-INSERT INTO UserArtist_Interactions(39, 63, 'Morbi non lectus.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(55, 24, 'Nulla tempus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(58, 32, 'Etiam pretium iaculis justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(39, 63, 'Morbi non lectus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         25,
         18,
         'Maecenas ut massa quis augue luctus tincidunt.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(47, 11, 'Duis bibendum.', TRUE);
-INSERT INTO UserArtist_Interactions(37, 73, 'In congue.', TRUE);
-INSERT INTO UserArtist_Interactions(23, 77, 'Suspendisse potenti.', FALSE);
-INSERT INTO UserArtist_Interactions(50, 67, 'Praesent blandit.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(47, 11, 'Duis bibendum.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(37, 73, 'In congue.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(23, 77, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(50, 67, 'Praesent blandit.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         26,
         8,
         'Quisque id justo sit amet sapien dignissim vestibulum.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(46, 60, 'Suspendisse potenti.', FALSE);
-INSERT INTO UserArtist_Interactions(
-        1,
-        5,
-        'Maecenas tincidunt lacus at velit.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(33, 72, 'Etiam pretium iaculis justo.', FALSE);
-INSERT INTO UserArtist_Interactions(16, 11, 'Quisque ut erat.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(46, 60, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(1, 5, 'Maecenas tincidunt lacus at velit.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(33, 72, 'Etiam pretium iaculis justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(16, 11, 'Quisque ut erat.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         44,
         57,
         'Proin at turpis a pede posuere nonummy.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(51, 21, 'Donec vitae nisi.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(51, 21, 'Donec vitae nisi.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         59,
         47,
         'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         34,
         73,
         'Donec quis orci eget orci vehicula condimentum.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         60,
         13,
         'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(45, 12, 'Etiam pretium iaculis justo.', FALSE);
-INSERT INTO UserArtist_Interactions(58, 35, 'Nulla suscipit ligula in lacus.', FALSE);
-INSERT INTO UserArtist_Interactions(34, 44, 'Aenean auctor gravida sem.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(45, 13, 'Etiam pretium iaculis justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(58, 35, 'Nulla suscipit ligula in lacus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(34, 44, 'Aenean auctor gravida sem.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         22,
         8,
         'Vestibulum sed magna at nunc commodo placerat.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(
-        21,
-        16,
-        'Integer tincidunt ante vel ipsum.',
-        FALSE
-    );
-INSERT INTO UserArtist_Interactions(26, 39, 'Duis bibendum.', FALSE);
-INSERT INTO UserArtist_Interactions(7, 71, 'Pellentesque eget nunc.', TRUE);
-INSERT INTO UserArtist_Interactions(41, 67, 'Cras pellentesque volutpat dui.', TRUE);
-INSERT INTO UserArtist_Interactions(34, 78, 'Suspendisse potenti.', FALSE);
-INSERT INTO UserArtist_Interactions(47, 25, 'Aenean auctor gravida sem.', FALSE);
-INSERT INTO UserArtist_Interactions(11, 48, 'In quis justo.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(21, 16, 'Integer tincidunt ante vel ipsum.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(26, 39, 'Duis bibendum.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(7, 71, 'Pellentesque eget nunc.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(41, 67, 'Cras pellentesque volutpat dui.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(34, 78, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(47, 25, 'Aenean auctor gravida sem.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(11, 48, 'In quis justo.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         36,
         19,
         'Vivamus in felis eu sapien cursus vestibulum.',
         FALSE
     );
-INSERT INTO UserArtist_Interactions(44, 27, 'Fusce posuere felis sed lacus.', TRUE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(44, 27, 'Fusce posuere felis sed lacus.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         14,
         28,
         'Sed vel enim sit amet nunc viverra dapibus.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(
         17,
         8,
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
         TRUE
     );
-INSERT INTO UserArtist_Interactions(32, 37, 'Pellentesque eget nunc.', TRUE);
-INSERT INTO UserArtist_Interactions(31, 54, 'Praesent lectus.', FALSE);
-INSERT INTO UserArtist_Interactions(38, 52, 'Maecenas pulvinar lobortis est.', FALSE);
-INSERT INTO UserArtist_Interactions(39, 9, 'Fusce posuere felis sed lacus.', FALSE);
-INSERT INTO UserArtist_Interactions(
+INSERT INTO UserArtist_Interactions
+VALUES(32, 37, 'Pellentesque eget nunc.', TRUE);
+INSERT INTO UserArtist_Interactions
+VALUES(31, 54, 'Praesent lectus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(38, 52, 'Maecenas pulvinar lobortis est.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(39, 9, 'Fusce posuere felis sed lacus.', FALSE);
+INSERT INTO UserArtist_Interactions
+VALUES(
         4,
         36,
         'Aliquam sit amet diam in magna bibendum imperdiet.',
@@ -6040,1042 +6129,2249 @@ Values(37, 107, 45);
 INSERT INTO User_Song
 Values(50, 19, 54);
 INSERT INTO User_Song
-Values(10, 71, 71);
+Values(10, 72, 71);
 -- Data for table Curator_Playlist
-INSERT INTO Curator_Playlist (40, 1);
-INSERT INTO Curator_Playlist (37, 2);
-INSERT INTO Curator_Playlist (30, 3);
-INSERT INTO Curator_Playlist (25, 4);
-INSERT INTO Curator_Playlist (31, 5);
-INSERT INTO Curator_Playlist (8, 6);
-INSERT INTO Curator_Playlist (55, 7);
-INSERT INTO Curator_Playlist (44, 8);
-INSERT INTO Curator_Playlist (7, 9);
-INSERT INTO Curator_Playlist (1, 10);
-INSERT INTO Curator_Playlist (26, 11);
-INSERT INTO Curator_Playlist (33, 12);
-INSERT INTO Curator_Playlist (21, 13);
-INSERT INTO Curator_Playlist (25, 14);
-INSERT INTO Curator_Playlist (5, 15);
-INSERT INTO Curator_Playlist (53, 16);
-INSERT INTO Curator_Playlist (36, 17);
-INSERT INTO Curator_Playlist (48, 18);
-INSERT INTO Curator_Playlist (41, 19);
-INSERT INTO Curator_Playlist (39, 20);
-INSERT INTO Curator_Playlist (18, 21);
-INSERT INTO Curator_Playlist (19, 22);
-INSERT INTO Curator_Playlist (29, 23);
-INSERT INTO Curator_Playlist (5, 24);
-INSERT INTO Curator_Playlist (48, 25);
-INSERT INTO Curator_Playlist (4, 26);
-INSERT INTO Curator_Playlist (52, 27);
-INSERT INTO Curator_Playlist (17, 28);
-INSERT INTO Curator_Playlist (8, 29);
-INSERT INTO Curator_Playlist (49, 30);
-INSERT INTO Curator_Playlist (52, 31);
-INSERT INTO Curator_Playlist (17, 32);
-INSERT INTO Curator_Playlist (33, 33);
-INSERT INTO Curator_Playlist (15, 34);
-INSERT INTO Curator_Playlist (12, 35);
-INSERT INTO Curator_Playlist (56, 36);
-INSERT INTO Curator_Playlist (52, 37);
-INSERT INTO Curator_Playlist (31, 38);
-INSERT INTO Curator_Playlist (4, 39);
-INSERT INTO Curator_Playlist (43, 40);
-INSERT INTO Curator_Playlist (56, 41);
-INSERT INTO Curator_Playlist (55, 42);
-INSERT INTO Curator_Playlist (54, 43);
-INSERT INTO Curator_Playlist (2, 44);
-INSERT INTO Curator_Playlist (46, 45);
-INSERT INTO Curator_Playlist (2, 46);
-INSERT INTO Curator_Playlist (44, 47);
-INSERT INTO Curator_Playlist (58, 48);
-INSERT INTO Curator_Playlist (22, 49);
-INSERT INTO Curator_Playlist (46, 50);
-INSERT INTO Curator_Playlist (47, 51);
-INSERT INTO Curator_Playlist (24, 52);
-INSERT INTO Curator_Playlist (22, 53);
-INSERT INTO Curator_Playlist (23, 54);
-INSERT INTO Curator_Playlist (29, 55);
-INSERT INTO Curator_Playlist (45, 56);
-INSERT INTO Curator_Playlist (27, 57);
-INSERT INTO Curator_Playlist (39, 58);
-INSERT INTO Curator_Playlist (37, 59);
-INSERT INTO Curator_Playlist (22, 60);
+INSERT INTO Curator_Playlist
+VALUES(9, 1);
+INSERT INTO Curator_Playlist
+VALUES(15, 2);
+INSERT INTO Curator_Playlist
+VALUES(38, 3);
+INSERT INTO Curator_Playlist
+VALUES(20, 4);
+INSERT INTO Curator_Playlist
+VALUES(20, 5);
+INSERT INTO Curator_Playlist
+VALUES(6, 6);
+INSERT INTO Curator_Playlist
+VALUES(11, 7);
+INSERT INTO Curator_Playlist
+VALUES(24, 8);
+INSERT INTO Curator_Playlist
+VALUES(49, 9);
+INSERT INTO Curator_Playlist
+VALUES(1, 10);
+INSERT INTO Curator_Playlist
+VALUES(7, 11);
+INSERT INTO Curator_Playlist
+VALUES(44, 12);
+INSERT INTO Curator_Playlist
+VALUES(9, 13);
+INSERT INTO Curator_Playlist
+VALUES(39, 14);
+INSERT INTO Curator_Playlist
+VALUES(21, 15);
+INSERT INTO Curator_Playlist
+VALUES(23, 16);
+INSERT INTO Curator_Playlist
+VALUES(18, 17);
+INSERT INTO Curator_Playlist
+VALUES(55, 18);
+INSERT INTO Curator_Playlist
+VALUES(47, 19);
+INSERT INTO Curator_Playlist
+VALUES(59, 20);
+INSERT INTO Curator_Playlist
+VALUES(32, 21);
+INSERT INTO Curator_Playlist
+VALUES(57, 22);
+INSERT INTO Curator_Playlist
+VALUES(19, 23);
+INSERT INTO Curator_Playlist
+VALUES(46, 24);
+INSERT INTO Curator_Playlist
+VALUES(27, 25);
+INSERT INTO Curator_Playlist
+VALUES(31, 26);
+INSERT INTO Curator_Playlist
+VALUES(18, 27);
+INSERT INTO Curator_Playlist
+VALUES(43, 28);
+INSERT INTO Curator_Playlist
+VALUES(2, 29);
+INSERT INTO Curator_Playlist
+VALUES(38, 30);
+INSERT INTO Curator_Playlist
+VALUES(51, 31);
+INSERT INTO Curator_Playlist
+VALUES(36, 32);
+INSERT INTO Curator_Playlist
+VALUES(11, 33);
+INSERT INTO Curator_Playlist
+VALUES(25, 34);
+INSERT INTO Curator_Playlist
+VALUES(55, 35);
+INSERT INTO Curator_Playlist
+VALUES(55, 36);
+INSERT INTO Curator_Playlist
+VALUES(34, 37);
+INSERT INTO Curator_Playlist
+VALUES(20, 38);
+INSERT INTO Curator_Playlist
+VALUES(26, 39);
+INSERT INTO Curator_Playlist
+VALUES(27, 40);
+INSERT INTO Curator_Playlist
+VALUES(44, 41);
+INSERT INTO Curator_Playlist
+VALUES(12, 42);
+INSERT INTO Curator_Playlist
+VALUES(3, 43);
+INSERT INTO Curator_Playlist
+VALUES(31, 44);
+INSERT INTO Curator_Playlist
+VALUES(29, 45);
+INSERT INTO Curator_Playlist
+VALUES(29, 46);
+INSERT INTO Curator_Playlist
+VALUES(12, 47);
+INSERT INTO Curator_Playlist
+VALUES(6, 48);
+INSERT INTO Curator_Playlist
+VALUES(43, 49);
+INSERT INTO Curator_Playlist
+VALUES(8, 50);
+INSERT INTO Curator_Playlist
+VALUES(41, 51);
+INSERT INTO Curator_Playlist
+VALUES(52, 52);
+INSERT INTO Curator_Playlist
+VALUES(55, 53);
+INSERT INTO Curator_Playlist
+VALUES(16, 54);
+INSERT INTO Curator_Playlist
+VALUES(30, 55);
+INSERT INTO Curator_Playlist
+VALUES(52, 56);
+INSERT INTO Curator_Playlist
+VALUES(26, 57);
+INSERT INTO Curator_Playlist
+VALUES(6, 58);
+INSERT INTO Curator_Playlist
+VALUES(48, 59);
+INSERT INTO Curator_Playlist
+VALUES(22, 60);
 -- Data for table Curator_Post
 INSERT INTO Curator_Post
-VALUES (1, '07-15-2023', 17, 'In sagittis dui vel nisl.');
+VALUES (1, '2023-07-15', 3, 'In sagittis dui vel nisl.');
 INSERT INTO Curator_Post
-VALUES (2, '08-30-2023', 29, 'In blandit ultrices enim.');
+VALUES (2, '2023-08-30', 57, 'In blandit ultrices enim.');
 INSERT INTO Curator_Post
 VALUES (
         3,
-        '01-15-2024',
-        17,
+        '2024-01-15',
+        27,
         'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.'
     );
 INSERT INTO Curator_Post
-VALUES (4, '09-30-2023', 60, 'Vivamus tortor.');
+VALUES (4, '2023-09-30', 18, 'Vivamus tortor.');
 INSERT INTO Curator_Post
-VALUES (5, '12-15-2023', 60, 'Etiam faucibus cursus urna.');
+VALUES (
+        5,
+        '2023-12-15',
+        52,
+        'Etiam faucibus cursus urna.'
+    );
 INSERT INTO Curator_Post
 VALUES (
         6,
-        '11-09-2023',
-        20,
+        '2023-11-09',
+        52,
         'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.'
     );
 INSERT INTO Curator_Post
 VALUES (
         7,
-        '08-24-2023',
-        47,
+        '2023-08-24',
+        55,
         'Praesent blandit lacinia erat.'
     );
 INSERT INTO Curator_Post
-VALUES (8, '11-06-2023', 14, 'Etiam pretium iaculis justo.');
+VALUES (
+        8,
+        '2023-11-06',
+        41,
+        'Etiam pretium iaculis justo.'
+    );
 INSERT INTO Curator_Post
 VALUES (
         9,
-        '01-29-2024',
-        38,
+        '2024-01-29',
+        22,
         'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.'
     );
 INSERT INTO Curator_Post
-VALUES (10, '05-01-2023', 21, 'In congue.');
+VALUES (10, '2023-05-01', 49, 'In congue.');
 INSERT INTO Curator_Post
-VALUES (11, '06-26-2023', 8, 'Nunc purus.');
+VALUES (11, '2023-06-26', 29, 'Nunc purus.');
 INSERT INTO Curator_Post
-VALUES (12, '10-30-2023', 21, 'Phasellus sit amet erat.');
+VALUES (12, '2023-10-30', 58, 'Phasellus sit amet erat.');
 INSERT INTO Curator_Post
 VALUES (
         13,
-        '09-03-2023',
-        46,
+        '2023-09-03',
+        29,
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
     );
 INSERT INTO Curator_Post
 VALUES (
         14,
-        '04-27-2023',
-        27,
+        '2023-04-27',
+        18,
         'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.'
     );
 INSERT INTO Curator_Post
 VALUES (
         15,
-        '10-01-2023',
-        57,
+        '2023-10-01',
+        1,
         'Morbi quis tortor id nulla ultrices aliquet.'
     );
 INSERT INTO Curator_Post
-VALUES (16, '10-03-2023', 45, 'Suspendisse potenti.');
+VALUES (16, '2023-10-03', 15, 'Suspendisse potenti.');
 INSERT INTO Curator_Post
 VALUES (
         17,
-        '12-10-2023',
-        49,
+        '2023-12-10',
+        35,
         'Nulla suscipit ligula in lacus.'
     );
 INSERT INTO Curator_Post
 VALUES (
         18,
-        '02-24-2024',
-        53,
+        '2024-02-24',
+        41,
         'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.'
     );
 INSERT INTO Curator_Post
-VALUES (19, '03-05-2024', 19, 'Morbi ut odio.');
+VALUES (19, '2024-03-05', 44, 'Morbi ut odio.');
 INSERT INTO Curator_Post
-VALUES (20, '01-05-2024', 40, 'Phasellus sit amet erat.');
+VALUES (20, '2024-01-05', 9, 'Phasellus sit amet erat.');
 INSERT INTO Curator_Post
-VALUES (21, '10-24-2023', 21, 'Nullam varius.');
+VALUES (21, '2023-10-24', 40, 'Nullam varius.');
 INSERT INTO Curator_Post
 VALUES (
         22,
-        '05-21-2023',
-        5,
+        '2023-05-21',
+        24,
         'Praesent blandit lacinia erat.'
     );
 INSERT INTO Curator_Post
 VALUES (
         23,
-        '08-30-2023',
-        57,
+        '2023-08-30',
+        45,
         'In hac habitasse platea dictumst.'
     );
 INSERT INTO Curator_Post
 VALUES (
         24,
-        '01-13-2024',
-        1,
+        '2024-01-13',
+        3,
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.'
     );
 INSERT INTO Curator_Post
 VALUES (
         25,
-        '10-03-2023',
-        42,
+        '2023-10-03',
+        32,
         'Vestibulum rutrum rutrum neque.'
     );
 INSERT INTO Curator_Post
-VALUES (26, '11-11-2023', 24, 'Ut tellus.');
+VALUES (26, '2023-11-11', 20, 'Ut tellus.');
 INSERT INTO Curator_Post
 VALUES (
         27,
-        '11-25-2023',
-        33,
+        '2023-11-25',
+        50,
         'Cras pellentesque volutpat dui.'
     );
 INSERT INTO Curator_Post
-VALUES (28, '01-19-2024', 21, 'Phasellus in felis.');
+VALUES (28, '2024-01-19', 49, 'Phasellus in felis.');
 INSERT INTO Curator_Post
 VALUES (
         29,
-        '08-23-2023',
-        21,
+        '2023-08-23',
+        41,
         'Mauris lacinia sapien quis libero.'
     );
 INSERT INTO Curator_Post
 VALUES (
         30,
-        '11-15-2023',
-        52,
+        '2023-11-15',
+        20,
         'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.'
     );
 INSERT INTO Curator_Post
 VALUES (
         31,
-        '04-28-2023',
-        12,
+        '2023-04-28',
+        48,
         'In hac habitasse platea dictumst.'
     );
 INSERT INTO Curator_Post
-VALUES (32, '05-15-2023', 19, 'Proin risus.');
+VALUES (32, '2023-05-15', 28, 'Proin risus.');
 INSERT INTO Curator_Post
-VALUES (33, '05-09-2023', 20, 'Mauris sit amet eros.');
+VALUES (33, '2023-05-09', 17, 'Mauris sit amet eros.');
 INSERT INTO Curator_Post
-VALUES (34, '12-09-2023', 38, 'Donec vitae nisi.');
+VALUES (34, '2023-12-09', 22, 'Donec vitae nisi.');
 INSERT INTO Curator_Post
-VALUES (35, '06-16-2023', 2, 'Praesent lectus.');
+VALUES (35, '2023-06-16', 58, 'Praesent lectus.');
 INSERT INTO Curator_Post
 VALUES (
         36,
-        '11-22-2023',
-        42,
+        '2023-11-22',
+        15,
         'Quisque porta volutpat erat.'
     );
 INSERT INTO Curator_Post
-VALUES (37, '12-13-2023', 18, 'Praesent blandit.');
+VALUES (37, '2023-12-13', 7, 'Praesent blandit.');
 INSERT INTO Curator_Post
 VALUES (
         38,
-        '11-12-2023',
-        32,
+        '2023-11-12',
+        30,
         'Nulla ut erat id mauris vulputate elementum.'
     );
 INSERT INTO Curator_Post
 VALUES (
         39,
-        '04-07-2024',
-        2,
+        '2024-04-07',
+        16,
         'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.'
     );
 INSERT INTO Curator_Post
 VALUES (
         40,
-        '02-26-2024',
-        9,
+        '2024-02-26',
+        8,
         'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.'
     );
 INSERT INTO Curator_Post
-VALUES (41, '01-30-2024', 44, 'Nulla ac enim.');
+VALUES (41, '2024-01-30', 53, 'Nulla ac enim.');
 INSERT INTO Curator_Post
-VALUES (42, '04-23-2023', 40, 'Aliquam erat volutpat.');
+VALUES (42, '2023-04-23', 45, 'Aliquam erat volutpat.');
 INSERT INTO Curator_Post
-VALUES (43, '08-26-2023', 37, 'Integer ac neque.');
+VALUES (43, '2023-08-26', 19, 'Integer ac neque.');
 INSERT INTO Curator_Post
 VALUES (
         44,
-        '04-27-2023',
-        59,
+        '2023-04-27',
+        58,
         'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.'
     );
 INSERT INTO Curator_Post
 VALUES (
         45,
-        '01-30-2024',
-        19,
+        '2024-01-30',
+        2,
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
     );
 INSERT INTO Curator_Post
 VALUES (
         46,
-        '01-12-2024',
-        37,
+        '2024-01-12',
+        11,
         'Morbi porttitor lorem id ligula.'
     );
 INSERT INTO Curator_Post
-VALUES (47, '09-26-2023', 14, 'Ut tellus.');
+VALUES (47, '2023-09-26', 1, 'Ut tellus.');
 INSERT INTO Curator_Post
-VALUES (48, '09-03-2023', 41, 'Duis ac nibh.');
+VALUES (48, '2023-09-03', 5, 'Duis ac nibh.');
 INSERT INTO Curator_Post
 VALUES (
         49,
-        '08-12-2023',
-        4,
+        '2023-08-12',
+        39,
         'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.'
     );
 INSERT INTO Curator_Post
-VALUES (50, '06-17-2023', 44, 'Nulla justo.');
+VALUES (50, '2023-06-17', 13, 'Nulla justo.');
 INSERT INTO Curator_Post
-VALUES (51, '09-05-2023', 39, 'Suspendisse potenti.');
+VALUES (51, '2023-09-05', 3, 'Suspendisse potenti.');
 INSERT INTO Curator_Post
-VALUES (52, '05-23-2023', 19, 'Nunc purus.');
+VALUES (52, '2023-05-23', 17, 'Nunc purus.');
 INSERT INTO Curator_Post
-VALUES (53, '06-25-2023', 60, 'Integer ac leo.');
+VALUES (53, '2023-06-25', 47, 'Integer ac leo.');
 INSERT INTO Curator_Post
 VALUES (
         54,
-        '06-24-2023',
+        '2023-06-24',
         37,
         'Curabitur in libero ut massa volutpat convallis.'
     );
 INSERT INTO Curator_Post
-VALUES (55, '03-31-2024', 7, 'Etiam faucibus cursus urna.');
+VALUES (
+        55,
+        '2024-03-31',
+        16,
+        'Etiam faucibus cursus urna.'
+    );
 INSERT INTO Curator_Post
 VALUES (
         56,
-        '02-10-2024',
-        21,
+        '2024-02-10',
+        48,
         'Donec ut mauris eget massa tempor convallis.'
     );
 INSERT INTO Curator_Post
 VALUES (
         57,
-        '10-12-2023',
-        5,
+        '2023-10-12',
+        26,
         'Nullam sit amet turpis elementum ligula vehicula consequat.'
     );
 INSERT INTO Curator_Post
-VALUES (58, '04-25-2023', 21, 'Aenean fermentum.');
+VALUES (58, '2023-04-25', 12, 'Aenean fermentum.');
 INSERT INTO Curator_Post
 VALUES (
         59,
-        '04-03-2024',
+        '2024-04-03',
         8,
         'Maecenas tincidunt lacus at velit.'
     );
 INSERT INTO Curator_Post
-VALUES (60, '08-10-2023', 21, 'Morbi a ipsum.');
+VALUES (60, '2023-08-10', 23, 'Morbi a ipsum.');
 INSERT INTO Curator_Post
 VALUES (
         61,
-        '02-15-2024',
-        55,
+        '2024-02-15',
+        39,
         'Nullam sit amet turpis elementum ligula vehicula consequat.'
     );
 INSERT INTO Curator_Post
 VALUES (
         62,
-        '11-02-2023',
-        37,
+        '2023-11-02',
+        6,
         'Nulla ut erat id mauris vulputate elementum.'
     );
 INSERT INTO Curator_Post
-VALUES (63, '03-05-2024', 49, 'Nulla nisl.');
+VALUES (63, '2024-03-05', 56, 'Nulla nisl.');
 INSERT INTO Curator_Post
-VALUES (64, '03-15-2024', 35, 'Donec vitae nisi.');
+VALUES (64, '2024-03-15', 42, 'Donec vitae nisi.');
 INSERT INTO Curator_Post
 VALUES (
         65,
-        '12-13-2023',
-        24,
+        '2023-12-13',
+        18,
         'Proin at turpis a pede posuere nonummy.'
     );
 INSERT INTO Curator_Post
 VALUES (
         66,
-        '01-12-2024',
-        55,
+        '2024-01-12',
+        47,
         'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.'
     );
 INSERT INTO Curator_Post
 VALUES (
         67,
-        '12-16-2023',
-        5,
+        '2023-12-16',
+        55,
         'Vivamus vel nulla eget eros elementum pellentesque.'
     );
 INSERT INTO Curator_Post
 VALUES (
         68,
-        '06-15-2023',
-        29,
+        '2023-06-15',
+        37,
         'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.'
     );
 INSERT INTO Curator_Post
 VALUES (
         69,
-        '04-11-2024',
-        47,
+        '2024-04-11',
+        24,
         'Quisque porta volutpat erat.'
     );
 INSERT INTO Curator_Post
-VALUES (70, '07-01-2023', 60, 'Phasellus sit amet erat.');
+VALUES (70, '2023-07-01', 60, 'Phasellus sit amet erat.');
 INSERT INTO Curator_Post
 VALUES (
         71,
-        '06-15-2023',
-        32,
+        '2023-06-15',
+        41,
         'Vivamus vel nulla eget eros elementum pellentesque.'
     );
 INSERT INTO Curator_Post
 VALUES (
         72,
-        '04-09-2024',
-        46,
+        '2024-04-09',
+        20,
         'Suspendisse accumsan tortor quis turpis.'
     );
 INSERT INTO Curator_Post
 VALUES (
         73,
-        '12-31-2023',
-        36,
+        '2023-12-31',
+        56,
         'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.'
     );
 INSERT INTO Curator_Post
 VALUES (
         74,
-        '03-26-2024',
-        28,
+        '2024-03-26',
+        11,
         'Curabitur gravida nisi at nibh.'
     );
 INSERT INTO Curator_Post
-VALUES (75, '09-24-2023', 47, 'Pellentesque at nulla.');
+VALUES (75, '2023-09-24', 20, 'Pellentesque at nulla.');
 INSERT INTO Curator_Post
-VALUES (76, '06-10-2023', 57, 'Nulla facilisi.');
+VALUES (76, '2023-06-10', 20, 'Nulla facilisi.');
 INSERT INTO Curator_Post
-VALUES (77, '06-08-2023', 6, 'Sed ante.');
+VALUES (77, '2023-06-08', 28, 'Sed ante.');
 INSERT INTO Curator_Post
-VALUES (78, '01-13-2024', 59, 'Nullam varius.');
+VALUES (78, '2024-01-13', 5, 'Nullam varius.');
 INSERT INTO Curator_Post
 VALUES (
         79,
-        '12-28-2023',
-        2,
+        '2023-12-28',
+        30,
         'Pellentesque viverra pede ac diam.'
     );
 INSERT INTO Curator_Post
 VALUES (
         80,
-        '07-16-2023',
-        37,
+        '2023-07-16',
+        18,
         'In hac habitasse platea dictumst.'
     );
-
 -- Data for Playlist_Song
-INSERT INTO Playlist_Songs VALUES( 21, 86);
-INSERT INTO Playlist_Songs VALUES( 41, 38);
-INSERT INTO Playlist_Songs VALUES( 3, 193);
-INSERT INTO Playlist_Songs VALUES( 21, 110);
-INSERT INTO Playlist_Songs VALUES( 29, 89);
-INSERT INTO Playlist_Songs VALUES( 2, 160);
-INSERT INTO Playlist_Songs VALUES( 19, 174);
-INSERT INTO Playlist_Songs VALUES( 50, 45);
-INSERT INTO Playlist_Songs VALUES( 2, 58);
-INSERT INTO Playlist_Songs VALUES( 51, 154);
-INSERT INTO Playlist_Songs VALUES( 6, 153);
-INSERT INTO Playlist_Songs VALUES( 25, 53);
-INSERT INTO Playlist_Songs VALUES( 26, 35);
-INSERT INTO Playlist_Songs VALUES( 48, 72);
-INSERT INTO Playlist_Songs VALUES( 17, 200);
-INSERT INTO Playlist_Songs VALUES( 57, 16);
-INSERT INTO Playlist_Songs VALUES( 9, 67);
-INSERT INTO Playlist_Songs VALUES( 40, 38);
-INSERT INTO Playlist_Songs VALUES( 55, 26);
-INSERT INTO Playlist_Songs VALUES( 7, 153);
-INSERT INTO Playlist_Songs VALUES( 55, 114);
-INSERT INTO Playlist_Songs VALUES( 11, 185);
-INSERT INTO Playlist_Songs VALUES( 50, 42);
-INSERT INTO Playlist_Songs VALUES( 13, 112);
-INSERT INTO Playlist_Songs VALUES( 46, 186);
-INSERT INTO Playlist_Songs VALUES( 52, 84);
-INSERT INTO Playlist_Songs VALUES( 7, 161);
-INSERT INTO Playlist_Songs VALUES( 58, 127);
-INSERT INTO Playlist_Songs VALUES( 15, 61);
-INSERT INTO Playlist_Songs VALUES( 48, 83);
-INSERT INTO Playlist_Songs VALUES( 58, 114);
-INSERT INTO Playlist_Songs VALUES( 43, 83);
-INSERT INTO Playlist_Songs VALUES( 23, 99);
-INSERT INTO Playlist_Songs VALUES( 3, 144);
-INSERT INTO Playlist_Songs VALUES( 30, 170);
-INSERT INTO Playlist_Songs VALUES( 7, 139);
-INSERT INTO Playlist_Songs VALUES( 13, 98);
-INSERT INTO Playlist_Songs VALUES( 33, 96);
-INSERT INTO Playlist_Songs VALUES( 35, 153);
-INSERT INTO Playlist_Songs VALUES( 17, 192);
-INSERT INTO Playlist_Songs VALUES( 50, 168);
-INSERT INTO Playlist_Songs VALUES( 39, 93);
-INSERT INTO Playlist_Songs VALUES( 8, 198);
-INSERT INTO Playlist_Songs VALUES( 37, 12);
-INSERT INTO Playlist_Songs VALUES( 29, 135);
-INSERT INTO Playlist_Songs VALUES( 58, 52);
-INSERT INTO Playlist_Songs VALUES( 49, 179);
-INSERT INTO Playlist_Songs VALUES( 4, 163);
-INSERT INTO Playlist_Songs VALUES( 21, 37);
-INSERT INTO Playlist_Songs VALUES( 46, 144);
-INSERT INTO Playlist_Songs VALUES( 32, 115);
-INSERT INTO Playlist_Songs VALUES( 26, 174);
-INSERT INTO Playlist_Songs VALUES( 51, 149);
-INSERT INTO Playlist_Songs VALUES( 28, 51);
-INSERT INTO Playlist_Songs VALUES( 37, 99);
-INSERT INTO Playlist_Songs VALUES( 22, 23);
-INSERT INTO Playlist_Songs VALUES( 40, 155);
-INSERT INTO Playlist_Songs VALUES( 11, 96);
-INSERT INTO Playlist_Songs VALUES( 59, 199);
-INSERT INTO Playlist_Songs VALUES( 57, 52);
-INSERT INTO Playlist_Songs VALUES( 8, 95);
-INSERT INTO Playlist_Songs VALUES( 39, 139);
-INSERT INTO Playlist_Songs VALUES( 42, 173);
-INSERT INTO Playlist_Songs VALUES( 2, 118);
-INSERT INTO Playlist_Songs VALUES( 7, 113);
-INSERT INTO Playlist_Songs VALUES( 53, 53);
-INSERT INTO Playlist_Songs VALUES( 55, 84);
-INSERT INTO Playlist_Songs VALUES( 57, 199);
-INSERT INTO Playlist_Songs VALUES( 3, 121);
-INSERT INTO Playlist_Songs VALUES( 18, 195);
-INSERT INTO Playlist_Songs VALUES( 7, 32);
-INSERT INTO Playlist_Songs VALUES( 50, 150);
-INSERT INTO Playlist_Songs VALUES( 5, 5);
-INSERT INTO Playlist_Songs VALUES( 19, 127);
-INSERT INTO Playlist_Songs VALUES( 54, 55);
-INSERT INTO Playlist_Songs VALUES( 33, 12);
-INSERT INTO Playlist_Songs VALUES( 27, 143);
-INSERT INTO Playlist_Songs VALUES( 2, 131);
-INSERT INTO Playlist_Songs VALUES( 42, 40);
-INSERT INTO Playlist_Songs VALUES( 4, 30);
-INSERT INTO Playlist_Songs VALUES( 30, 52);
-INSERT INTO Playlist_Songs VALUES( 24, 169);
-INSERT INTO Playlist_Songs VALUES( 47, 7);
-INSERT INTO Playlist_Songs VALUES( 21, 143);
-INSERT INTO Playlist_Songs VALUES( 39, 119);
-INSERT INTO Playlist_Songs VALUES( 27, 58);
-INSERT INTO Playlist_Songs VALUES( 38, 68);
-INSERT INTO Playlist_Songs VALUES( 13, 188);
-INSERT INTO Playlist_Songs VALUES( 56, 129);
-INSERT INTO Playlist_Songs VALUES( 43, 189);
-INSERT INTO Playlist_Songs VALUES( 52, 84);
-INSERT INTO Playlist_Songs VALUES( 55, 123);
-INSERT INTO Playlist_Songs VALUES( 41, 62);
-INSERT INTO Playlist_Songs VALUES( 34, 153);
-INSERT INTO Playlist_Songs VALUES( 39, 186);
-INSERT INTO Playlist_Songs VALUES( 23, 137);
-INSERT INTO Playlist_Songs VALUES( 34, 28);
-INSERT INTO Playlist_Songs VALUES( 13, 130);
-INSERT INTO Playlist_Songs VALUES( 20, 56);
-INSERT INTO Playlist_Songs VALUES( 15, 189);
-INSERT INTO Playlist_Songs VALUES( 45, 161);
-INSERT INTO Playlist_Songs VALUES( 29, 191);
-INSERT INTO Playlist_Songs VALUES( 20, 169);
-INSERT INTO Playlist_Songs VALUES( 3, 166);
-INSERT INTO Playlist_Songs VALUES( 18, 96);
-INSERT INTO Playlist_Songs VALUES( 57, 92);
-INSERT INTO Playlist_Songs VALUES( 7, 171);
-INSERT INTO Playlist_Songs VALUES( 52, 60);
-INSERT INTO Playlist_Songs VALUES( 27, 65);
-INSERT INTO Playlist_Songs VALUES( 52, 67);
-INSERT INTO Playlist_Songs VALUES( 5, 127);
-INSERT INTO Playlist_Songs VALUES( 48, 131);
-INSERT INTO Playlist_Songs VALUES( 33, 76);
-INSERT INTO Playlist_Songs VALUES( 29, 17);
-INSERT INTO Playlist_Songs VALUES( 5, 66);
-INSERT INTO Playlist_Songs VALUES( 47, 81);
-INSERT INTO Playlist_Songs VALUES( 2, 63);
-INSERT INTO Playlist_Songs VALUES( 45, 137);
-INSERT INTO Playlist_Songs VALUES( 27, 22);
-INSERT INTO Playlist_Songs VALUES( 44, 41);
-INSERT INTO Playlist_Songs VALUES( 33, 27);
-INSERT INTO Playlist_Songs VALUES( 11, 137);
-INSERT INTO Playlist_Songs VALUES( 14, 106);
-INSERT INTO Playlist_Songs VALUES( 28, 26);
-INSERT INTO Playlist_Songs VALUES( 14, 177);
-INSERT INTO Playlist_Songs VALUES( 20, 11);
-INSERT INTO Playlist_Songs VALUES( 43, 99);
-INSERT INTO Playlist_Songs VALUES( 22, 136);
-INSERT INTO Playlist_Songs VALUES( 17, 124);
-INSERT INTO Playlist_Songs VALUES( 55, 87);
-INSERT INTO Playlist_Songs VALUES( 2, 94);
-INSERT INTO Playlist_Songs VALUES( 16, 110);
-INSERT INTO Playlist_Songs VALUES( 25, 19);
-INSERT INTO Playlist_Songs VALUES( 10, 186);
-INSERT INTO Playlist_Songs VALUES( 9, 136);
-INSERT INTO Playlist_Songs VALUES( 12, 44);
-INSERT INTO Playlist_Songs VALUES( 10, 48);
-INSERT INTO Playlist_Songs VALUES( 7, 113);
-INSERT INTO Playlist_Songs VALUES( 25, 47);
-INSERT INTO Playlist_Songs VALUES( 23, 166);
-INSERT INTO Playlist_Songs VALUES( 35, 137);
-INSERT INTO Playlist_Songs VALUES( 58, 2);
-INSERT INTO Playlist_Songs VALUES( 20, 159);
-INSERT INTO Playlist_Songs VALUES( 27, 73);
-INSERT INTO Playlist_Songs VALUES( 25, 58);
-INSERT INTO Playlist_Songs VALUES( 31, 31);
-INSERT INTO Playlist_Songs VALUES( 58, 54);
-INSERT INTO Playlist_Songs VALUES( 8, 84);
-INSERT INTO Playlist_Songs VALUES( 1, 64);
-INSERT INTO Playlist_Songs VALUES( 27, 113);
-INSERT INTO Playlist_Songs VALUES( 26, 140);
-INSERT INTO Playlist_Songs VALUES( 25, 177);
-INSERT INTO Playlist_Songs VALUES( 28, 200);
-INSERT INTO Playlist_Songs VALUES( 42, 180);
-INSERT INTO Playlist_Songs VALUES( 10, 60);
-INSERT INTO Playlist_Songs VALUES( 53, 68);
-INSERT INTO Playlist_Songs VALUES( 27, 164);
-INSERT INTO Playlist_Songs VALUES( 22, 76);
-INSERT INTO Playlist_Songs VALUES( 13, 104);
-INSERT INTO Playlist_Songs VALUES( 40, 7);
-INSERT INTO Playlist_Songs VALUES( 53, 17);
-INSERT INTO Playlist_Songs VALUES( 10, 155);
-INSERT INTO Playlist_Songs VALUES( 50, 146);
-INSERT INTO Playlist_Songs VALUES( 15, 80);
-INSERT INTO Playlist_Songs VALUES( 1, 64);
-INSERT INTO Playlist_Songs VALUES( 33, 145);
-INSERT INTO Playlist_Songs VALUES( 19, 26);
-INSERT INTO Playlist_Songs VALUES( 54, 54);
-INSERT INTO Playlist_Songs VALUES( 53, 27);
-INSERT INTO Playlist_Songs VALUES( 56, 149);
-INSERT INTO Playlist_Songs VALUES( 14, 148);
-INSERT INTO Playlist_Songs VALUES( 12, 26);
-INSERT INTO Playlist_Songs VALUES( 11, 185);
-INSERT INTO Playlist_Songs VALUES( 36, 120);
-INSERT INTO Playlist_Songs VALUES( 57, 169);
-INSERT INTO Playlist_Songs VALUES( 13, 44);
-INSERT INTO Playlist_Songs VALUES( 6, 121);
-INSERT INTO Playlist_Songs VALUES( 50, 9);
-INSERT INTO Playlist_Songs VALUES( 19, 198);
-INSERT INTO Playlist_Songs VALUES( 21, 127);
-INSERT INTO Playlist_Songs VALUES( 46, 138);
-INSERT INTO Playlist_Songs VALUES( 29, 76);
-INSERT INTO Playlist_Songs VALUES( 19, 180);
-INSERT INTO Playlist_Songs VALUES( 59, 36);
-INSERT INTO Playlist_Songs VALUES( 19, 158);
-INSERT INTO Playlist_Songs VALUES( 21, 162);
-INSERT INTO Playlist_Songs VALUES( 7, 131);
-INSERT INTO Playlist_Songs VALUES( 28, 66);
-INSERT INTO Playlist_Songs VALUES( 39, 81);
-INSERT INTO Playlist_Songs VALUES( 14, 172);
-INSERT INTO Playlist_Songs VALUES( 55, 149);
-INSERT INTO Playlist_Songs VALUES( 59, 11);
-INSERT INTO Playlist_Songs VALUES( 28, 127);
-INSERT INTO Playlist_Songs VALUES( 38, 50);
-INSERT INTO Playlist_Songs VALUES( 20, 181);
-INSERT INTO Playlist_Songs VALUES( 47, 63);
-INSERT INTO Playlist_Songs VALUES( 19, 126);
-INSERT INTO Playlist_Songs VALUES( 26, 143);
-INSERT INTO Playlist_Songs VALUES( 2, 128);
-INSERT INTO Playlist_Songs VALUES( 1, 193);
-
+INSERT INTO Playlist_Songs
+VALUES(21, 86);
+INSERT INTO Playlist_Songs
+VALUES(41, 38);
+INSERT INTO Playlist_Songs
+VALUES(3, 193);
+INSERT INTO Playlist_Songs
+VALUES(21, 110);
+INSERT INTO Playlist_Songs
+VALUES(29, 89);
+INSERT INTO Playlist_Songs
+VALUES(2, 160);
+INSERT INTO Playlist_Songs
+VALUES(19, 174);
+INSERT INTO Playlist_Songs
+VALUES(50, 45);
+INSERT INTO Playlist_Songs
+VALUES(2, 58);
+INSERT INTO Playlist_Songs
+VALUES(51, 154);
+INSERT INTO Playlist_Songs
+VALUES(6, 153);
+INSERT INTO Playlist_Songs
+VALUES(25, 53);
+INSERT INTO Playlist_Songs
+VALUES(26, 35);
+INSERT INTO Playlist_Songs
+VALUES(48, 72);
+INSERT INTO Playlist_Songs
+VALUES(17, 200);
+INSERT INTO Playlist_Songs
+VALUES(57, 16);
+INSERT INTO Playlist_Songs
+VALUES(9, 67);
+INSERT INTO Playlist_Songs
+VALUES(40, 38);
+INSERT INTO Playlist_Songs
+VALUES(55, 26);
+INSERT INTO Playlist_Songs
+VALUES(7, 153);
+INSERT INTO Playlist_Songs
+VALUES(55, 114);
+INSERT INTO Playlist_Songs
+VALUES(11, 185);
+INSERT INTO Playlist_Songs
+VALUES(50, 42);
+INSERT INTO Playlist_Songs
+VALUES(13, 112);
+INSERT INTO Playlist_Songs
+VALUES(46, 186);
+INSERT INTO Playlist_Songs
+VALUES(52, 84);
+INSERT INTO Playlist_Songs
+VALUES(7, 161);
+INSERT INTO Playlist_Songs
+VALUES(58, 127);
+INSERT INTO Playlist_Songs
+VALUES(15, 61);
+INSERT INTO Playlist_Songs
+VALUES(48, 83);
+INSERT INTO Playlist_Songs
+VALUES(58, 114);
+INSERT INTO Playlist_Songs
+VALUES(43, 83);
+INSERT INTO Playlist_Songs
+VALUES(23, 99);
+INSERT INTO Playlist_Songs
+VALUES(3, 144);
+INSERT INTO Playlist_Songs
+VALUES(30, 170);
+INSERT INTO Playlist_Songs
+VALUES(7, 139);
+INSERT INTO Playlist_Songs
+VALUES(13, 98);
+INSERT INTO Playlist_Songs
+VALUES(33, 96);
+INSERT INTO Playlist_Songs
+VALUES(35, 153);
+INSERT INTO Playlist_Songs
+VALUES(17, 192);
+INSERT INTO Playlist_Songs
+VALUES(50, 168);
+INSERT INTO Playlist_Songs
+VALUES(39, 93);
+INSERT INTO Playlist_Songs
+VALUES(8, 198);
+INSERT INTO Playlist_Songs
+VALUES(37, 12);
+INSERT INTO Playlist_Songs
+VALUES(29, 135);
+INSERT INTO Playlist_Songs
+VALUES(58, 52);
+INSERT INTO Playlist_Songs
+VALUES(49, 179);
+INSERT INTO Playlist_Songs
+VALUES(4, 163);
+INSERT INTO Playlist_Songs
+VALUES(21, 37);
+INSERT INTO Playlist_Songs
+VALUES(46, 144);
+INSERT INTO Playlist_Songs
+VALUES(32, 115);
+INSERT INTO Playlist_Songs
+VALUES(26, 174);
+INSERT INTO Playlist_Songs
+VALUES(51, 149);
+INSERT INTO Playlist_Songs
+VALUES(28, 51);
+INSERT INTO Playlist_Songs
+VALUES(37, 99);
+INSERT INTO Playlist_Songs
+VALUES(22, 23);
+INSERT INTO Playlist_Songs
+VALUES(40, 155);
+INSERT INTO Playlist_Songs
+VALUES(11, 96);
+INSERT INTO Playlist_Songs
+VALUES(59, 199);
+INSERT INTO Playlist_Songs
+VALUES(57, 52);
+INSERT INTO Playlist_Songs
+VALUES(8, 95);
+INSERT INTO Playlist_Songs
+VALUES(39, 139);
+INSERT INTO Playlist_Songs
+VALUES(42, 173);
+INSERT INTO Playlist_Songs
+VALUES(2, 118);
+INSERT INTO Playlist_Songs
+VALUES(7, 113);
+INSERT INTO Playlist_Songs
+VALUES(53, 53);
+INSERT INTO Playlist_Songs
+VALUES(55, 84);
+INSERT INTO Playlist_Songs
+VALUES(57, 199);
+INSERT INTO Playlist_Songs
+VALUES(3, 121);
+INSERT INTO Playlist_Songs
+VALUES(18, 195);
+INSERT INTO Playlist_Songs
+VALUES(7, 32);
+INSERT INTO Playlist_Songs
+VALUES(50, 150);
+INSERT INTO Playlist_Songs
+VALUES(5, 5);
+INSERT INTO Playlist_Songs
+VALUES(19, 127);
+INSERT INTO Playlist_Songs
+VALUES(54, 55);
+INSERT INTO Playlist_Songs
+VALUES(33, 12);
+INSERT INTO Playlist_Songs
+VALUES(27, 143);
+INSERT INTO Playlist_Songs
+VALUES(2, 131);
+INSERT INTO Playlist_Songs
+VALUES(42, 40);
+INSERT INTO Playlist_Songs
+VALUES(4, 30);
+INSERT INTO Playlist_Songs
+VALUES(30, 52);
+INSERT INTO Playlist_Songs
+VALUES(24, 169);
+INSERT INTO Playlist_Songs
+VALUES(47, 7);
+INSERT INTO Playlist_Songs
+VALUES(21, 143);
+INSERT INTO Playlist_Songs
+VALUES(39, 119);
+INSERT INTO Playlist_Songs
+VALUES(27, 58);
+INSERT INTO Playlist_Songs
+VALUES(38, 68);
+INSERT INTO Playlist_Songs
+VALUES(13, 188);
+INSERT INTO Playlist_Songs
+VALUES(56, 129);
+INSERT INTO Playlist_Songs
+VALUES(43, 189);
+INSERT INTO Playlist_Songs
+VALUES(52, 83);
+INSERT INTO Playlist_Songs
+VALUES(55, 123);
+INSERT INTO Playlist_Songs
+VALUES(41, 62);
+INSERT INTO Playlist_Songs
+VALUES(34, 153);
+INSERT INTO Playlist_Songs
+VALUES(39, 186);
+INSERT INTO Playlist_Songs
+VALUES(23, 137);
+INSERT INTO Playlist_Songs
+VALUES(34, 28);
+INSERT INTO Playlist_Songs
+VALUES(13, 130);
+INSERT INTO Playlist_Songs
+VALUES(20, 56);
+INSERT INTO Playlist_Songs
+VALUES(15, 189);
+INSERT INTO Playlist_Songs
+VALUES(45, 161);
+INSERT INTO Playlist_Songs
+VALUES(29, 191);
+INSERT INTO Playlist_Songs
+VALUES(20, 169);
+INSERT INTO Playlist_Songs
+VALUES(3, 166);
+INSERT INTO Playlist_Songs
+VALUES(18, 96);
+INSERT INTO Playlist_Songs
+VALUES(57, 92);
+INSERT INTO Playlist_Songs
+VALUES(7, 171);
+INSERT INTO Playlist_Songs
+VALUES(52, 60);
+INSERT INTO Playlist_Songs
+VALUES(27, 65);
+INSERT INTO Playlist_Songs
+VALUES(52, 67);
+INSERT INTO Playlist_Songs
+VALUES(5, 127);
+INSERT INTO Playlist_Songs
+VALUES(48, 131);
+INSERT INTO Playlist_Songs
+VALUES(33, 76);
+INSERT INTO Playlist_Songs
+VALUES(29, 17);
+INSERT INTO Playlist_Songs
+VALUES(5, 66);
+INSERT INTO Playlist_Songs
+VALUES(47, 81);
+INSERT INTO Playlist_Songs
+VALUES(2, 63);
+INSERT INTO Playlist_Songs
+VALUES(45, 137);
+INSERT INTO Playlist_Songs
+VALUES(27, 22);
+INSERT INTO Playlist_Songs
+VALUES(44, 41);
+INSERT INTO Playlist_Songs
+VALUES(33, 27);
+INSERT INTO Playlist_Songs
+VALUES(11, 137);
+INSERT INTO Playlist_Songs
+VALUES(14, 106);
+INSERT INTO Playlist_Songs
+VALUES(28, 26);
+INSERT INTO Playlist_Songs
+VALUES(14, 177);
+INSERT INTO Playlist_Songs
+VALUES(20, 11);
+INSERT INTO Playlist_Songs
+VALUES(43, 99);
+INSERT INTO Playlist_Songs
+VALUES(22, 136);
+INSERT INTO Playlist_Songs
+VALUES(17, 124);
+INSERT INTO Playlist_Songs
+VALUES(55, 87);
+INSERT INTO Playlist_Songs
+VALUES(2, 94);
+INSERT INTO Playlist_Songs
+VALUES(16, 110);
+INSERT INTO Playlist_Songs
+VALUES(25, 19);
+INSERT INTO Playlist_Songs
+VALUES(10, 186);
+INSERT INTO Playlist_Songs
+VALUES(9, 136);
+INSERT INTO Playlist_Songs
+VALUES(12, 44);
+INSERT INTO Playlist_Songs
+VALUES(10, 48);
+INSERT INTO Playlist_Songs
+VALUES(7, 114);
+INSERT INTO Playlist_Songs
+VALUES(25, 47);
+INSERT INTO Playlist_Songs
+VALUES(23, 166);
+INSERT INTO Playlist_Songs
+VALUES(35, 137);
+INSERT INTO Playlist_Songs
+VALUES(58, 2);
+INSERT INTO Playlist_Songs
+VALUES(20, 159);
+INSERT INTO Playlist_Songs
+VALUES(27, 73);
+INSERT INTO Playlist_Songs
+VALUES(25, 58);
+INSERT INTO Playlist_Songs
+VALUES(31, 31);
+INSERT INTO Playlist_Songs
+VALUES(58, 54);
+INSERT INTO Playlist_Songs
+VALUES(8, 84);
+INSERT INTO Playlist_Songs
+VALUES(1, 64);
+INSERT INTO Playlist_Songs
+VALUES(27, 113);
+INSERT INTO Playlist_Songs
+VALUES(26, 140);
+INSERT INTO Playlist_Songs
+VALUES(25, 177);
+INSERT INTO Playlist_Songs
+VALUES(28, 200);
+INSERT INTO Playlist_Songs
+VALUES(42, 180);
+INSERT INTO Playlist_Songs
+VALUES(10, 60);
+INSERT INTO Playlist_Songs
+VALUES(53, 68);
+INSERT INTO Playlist_Songs
+VALUES(27, 164);
+INSERT INTO Playlist_Songs
+VALUES(22, 76);
+INSERT INTO Playlist_Songs
+VALUES(13, 104);
+INSERT INTO Playlist_Songs
+VALUES(40, 7);
+INSERT INTO Playlist_Songs
+VALUES(53, 17);
+INSERT INTO Playlist_Songs
+VALUES(10, 155);
+INSERT INTO Playlist_Songs
+VALUES(50, 146);
+INSERT INTO Playlist_Songs
+VALUES(15, 80);
+INSERT INTO Playlist_Songs
+VALUES(1, 65);
+INSERT INTO Playlist_Songs
+VALUES(33, 145);
+INSERT INTO Playlist_Songs
+VALUES(19, 26);
+INSERT INTO Playlist_Songs
+VALUES(54, 54);
+INSERT INTO Playlist_Songs
+VALUES(53, 27);
+INSERT INTO Playlist_Songs
+VALUES(56, 149);
+INSERT INTO Playlist_Songs
+VALUES(14, 148);
+INSERT INTO Playlist_Songs
+VALUES(12, 26);
+INSERT INTO Playlist_Songs
+VALUES(11, 184);
+INSERT INTO Playlist_Songs
+VALUES(36, 120);
+INSERT INTO Playlist_Songs
+VALUES(57, 169);
+INSERT INTO Playlist_Songs
+VALUES(13, 44);
+INSERT INTO Playlist_Songs
+VALUES(6, 121);
+INSERT INTO Playlist_Songs
+VALUES(50, 9);
+INSERT INTO Playlist_Songs
+VALUES(19, 198);
+INSERT INTO Playlist_Songs
+VALUES(21, 127);
+INSERT INTO Playlist_Songs
+VALUES(46, 138);
+INSERT INTO Playlist_Songs
+VALUES(29, 76);
+INSERT INTO Playlist_Songs
+VALUES(19, 180);
+INSERT INTO Playlist_Songs
+VALUES(59, 36);
+INSERT INTO Playlist_Songs
+VALUES(19, 158);
+INSERT INTO Playlist_Songs
+VALUES(21, 162);
+INSERT INTO Playlist_Songs
+VALUES(7, 131);
+INSERT INTO Playlist_Songs
+VALUES(28, 66);
+INSERT INTO Playlist_Songs
+VALUES(39, 81);
+INSERT INTO Playlist_Songs
+VALUES(14, 172);
+INSERT INTO Playlist_Songs
+VALUES(55, 149);
+INSERT INTO Playlist_Songs
+VALUES(59, 11);
+INSERT INTO Playlist_Songs
+VALUES(28, 127);
+INSERT INTO Playlist_Songs
+VALUES(38, 50);
+INSERT INTO Playlist_Songs
+VALUES(20, 181);
+INSERT INTO Playlist_Songs
+VALUES(47, 63);
+INSERT INTO Playlist_Songs
+VALUES(19, 126);
+INSERT INTO Playlist_Songs
+VALUES(26, 143);
+INSERT INTO Playlist_Songs
+VALUES(2, 128);
+INSERT INTO Playlist_Songs
+VALUES(1, 193);
 -- Data for table User_Downloads
-INSERT INTO User_Downloads VALUES( 7, 29);
-INSERT INTO User_Downloads VALUES( 50, 44);
-INSERT INTO User_Downloads VALUES( 43, 54);
-INSERT INTO User_Downloads VALUES( 48, 48);
-INSERT INTO User_Downloads VALUES( 4, 15);
-INSERT INTO User_Downloads VALUES( 59, 56);
-INSERT INTO User_Downloads VALUES( 13, 47);
-INSERT INTO User_Downloads VALUES( 57, 38);
-INSERT INTO User_Downloads VALUES( 1, 21);
-INSERT INTO User_Downloads VALUES( 44, 12);
-INSERT INTO User_Downloads VALUES( 34, 20);
-INSERT INTO User_Downloads VALUES( 38, 50);
-INSERT INTO User_Downloads VALUES( 30, 56);
-INSERT INTO User_Downloads VALUES( 53, 45);
-INSERT INTO User_Downloads VALUES( 36, 56);
-INSERT INTO User_Downloads VALUES( 41, 56);
-INSERT INTO User_Downloads VALUES( 15, 42);
-INSERT INTO User_Downloads VALUES( 22, 49);
-INSERT INTO User_Downloads VALUES( 53, 31);
-INSERT INTO User_Downloads VALUES( 9, 16);
-INSERT INTO User_Downloads VALUES( 14, 13);
-INSERT INTO User_Downloads VALUES( 8, 44);
-INSERT INTO User_Downloads VALUES( 13, 43);
-INSERT INTO User_Downloads VALUES( 45, 32);
-INSERT INTO User_Downloads VALUES( 54, 32);
-INSERT INTO User_Downloads VALUES( 56, 56);
-INSERT INTO User_Downloads VALUES( 1, 8);
-INSERT INTO User_Downloads VALUES( 39, 8);
-INSERT INTO User_Downloads VALUES( 3, 27);
-INSERT INTO User_Downloads VALUES( 34, 17);
-INSERT INTO User_Downloads VALUES( 44, 1);
-INSERT INTO User_Downloads VALUES( 58, 51);
-INSERT INTO User_Downloads VALUES( 51, 15);
-INSERT INTO User_Downloads VALUES( 56, 32);
-INSERT INTO User_Downloads VALUES( 17, 48);
-INSERT INTO User_Downloads VALUES( 35, 13);
-INSERT INTO User_Downloads VALUES( 40, 22);
-INSERT INTO User_Downloads VALUES( 46, 23);
-INSERT INTO User_Downloads VALUES( 16, 3);
-INSERT INTO User_Downloads VALUES( 31, 29);
-INSERT INTO User_Downloads VALUES( 48, 8);
-INSERT INTO User_Downloads VALUES( 39, 13);
-INSERT INTO User_Downloads VALUES( 29, 48);
-INSERT INTO User_Downloads VALUES( 11, 21);
-INSERT INTO User_Downloads VALUES( 9, 53);
-INSERT INTO User_Downloads VALUES( 46, 53);
-INSERT INTO User_Downloads VALUES( 55, 38);
-INSERT INTO User_Downloads VALUES( 58, 55);
-INSERT INTO User_Downloads VALUES( 55, 54);
-INSERT INTO User_Downloads VALUES( 58, 21);
-INSERT INTO User_Downloads VALUES( 41, 37);
-INSERT INTO User_Downloads VALUES( 21, 34);
-INSERT INTO User_Downloads VALUES( 27, 43);
-INSERT INTO User_Downloads VALUES( 2, 13);
-INSERT INTO User_Downloads VALUES( 1, 17);
-INSERT INTO User_Downloads VALUES( 58, 13);
-INSERT INTO User_Downloads VALUES( 35, 52);
-INSERT INTO User_Downloads VALUES( 45, 10);
-INSERT INTO User_Downloads VALUES( 20, 51);
-INSERT INTO User_Downloads VALUES( 4, 18);
-INSERT INTO User_Downloads VALUES( 55, 40);
-INSERT INTO User_Downloads VALUES( 21, 52);
-INSERT INTO User_Downloads VALUES( 3, 52);
-INSERT INTO User_Downloads VALUES( 16, 8);
-INSERT INTO User_Downloads VALUES( 17, 46);
-INSERT INTO User_Downloads VALUES( 8, 46);
-INSERT INTO User_Downloads VALUES( 54, 59);
-INSERT INTO User_Downloads VALUES( 55, 28);
-INSERT INTO User_Downloads VALUES( 3, 29);
-INSERT INTO User_Downloads VALUES( 18, 6);
-INSERT INTO User_Downloads VALUES( 45, 41);
-INSERT INTO User_Downloads VALUES( 28, 24);
-INSERT INTO User_Downloads VALUES( 41, 29);
-INSERT INTO User_Downloads VALUES( 27, 42);
-INSERT INTO User_Downloads VALUES( 51, 34);
-INSERT INTO User_Downloads VALUES( 25, 12);
-INSERT INTO User_Downloads VALUES( 30, 6);
-INSERT INTO User_Downloads VALUES( 1, 37);
-INSERT INTO User_Downloads VALUES( 16, 12);
-INSERT INTO User_Downloads VALUES( 42, 29);
-INSERT INTO User_Downloads VALUES( 32, 4);
-INSERT INTO User_Downloads VALUES( 4, 34);
-INSERT INTO User_Downloads VALUES( 1, 14);
-INSERT INTO User_Downloads VALUES( 45, 39);
-INSERT INTO User_Downloads VALUES( 34, 9);
-INSERT INTO User_Downloads VALUES( 31, 2);
-INSERT INTO User_Downloads VALUES( 15, 25);
-INSERT INTO User_Downloads VALUES( 26, 48);
-INSERT INTO User_Downloads VALUES( 55, 52);
-INSERT INTO User_Downloads VALUES( 11, 31);
-INSERT INTO User_Downloads VALUES( 24, 27);
-INSERT INTO User_Downloads VALUES( 14, 4);
-INSERT INTO User_Downloads VALUES( 23, 26);
-INSERT INTO User_Downloads VALUES( 34, 5);
-INSERT INTO User_Downloads VALUES( 26, 39);
-INSERT INTO User_Downloads VALUES( 12, 19);
-INSERT INTO User_Downloads VALUES( 38, 48);
-INSERT INTO User_Downloads VALUES( 8, 51);
-INSERT INTO User_Downloads VALUES( 57, 54);
-INSERT INTO User_Downloads VALUES( 1, 4);
-INSERT INTO User_Downloads VALUES( 27, 37);
-INSERT INTO User_Downloads VALUES( 37, 40);
-INSERT INTO User_Downloads VALUES( 54, 43);
-INSERT INTO User_Downloads VALUES( 45, 56);
-INSERT INTO User_Downloads VALUES( 34, 36);
-INSERT INTO User_Downloads VALUES( 36, 10);
-INSERT INTO User_Downloads VALUES( 29, 58);
-INSERT INTO User_Downloads VALUES( 43, 50);
-INSERT INTO User_Downloads VALUES( 10, 15);
-INSERT INTO User_Downloads VALUES( 30, 37);
-INSERT INTO User_Downloads VALUES( 50, 20);
-INSERT INTO User_Downloads VALUES( 34, 20);
-INSERT INTO User_Downloads VALUES( 8, 5);
-INSERT INTO User_Downloads VALUES( 57, 21);
-INSERT INTO User_Downloads VALUES( 20, 28);
-INSERT INTO User_Downloads VALUES( 1, 37);
-INSERT INTO User_Downloads VALUES( 38, 59);
-INSERT INTO User_Downloads VALUES( 4, 23);
-INSERT INTO User_Downloads VALUES( 13, 49);
-INSERT INTO User_Downloads VALUES( 41, 43);
-INSERT INTO User_Downloads VALUES( 35, 48);
-INSERT INTO User_Downloads VALUES( 7, 50);
-INSERT INTO User_Downloads VALUES( 51, 4);
-INSERT INTO User_Downloads VALUES( 45, 45);
-INSERT INTO User_Downloads VALUES( 55, 39);
-INSERT INTO User_Downloads VALUES( 50, 21);
-INSERT INTO User_Downloads VALUES( 17, 46);
-INSERT INTO User_Downloads VALUES( 27, 6);
-INSERT INTO User_Downloads VALUES( 11, 3);
-INSERT INTO User_Downloads VALUES( 44, 39);
-INSERT INTO User_Downloads VALUES( 8, 40);
-INSERT INTO User_Downloads VALUES( 58, 12);
-INSERT INTO User_Downloads VALUES( 4, 20);
-INSERT INTO User_Downloads VALUES( 29, 15);
-INSERT INTO User_Downloads VALUES( 53, 55);
-INSERT INTO User_Downloads VALUES( 1, 45);
-INSERT INTO User_Downloads VALUES( 19, 35);
-INSERT INTO User_Downloads VALUES( 12, 11);
-INSERT INTO User_Downloads VALUES( 49, 47);
-INSERT INTO User_Downloads VALUES( 7, 11);
-INSERT INTO User_Downloads VALUES( 51, 49);
-INSERT INTO User_Downloads VALUES( 27, 54);
-INSERT INTO User_Downloads VALUES( 56, 40);
-INSERT INTO User_Downloads VALUES( 33, 9);
-INSERT INTO User_Downloads VALUES( 15, 31);
-INSERT INTO User_Downloads VALUES( 13, 49);
-INSERT INTO User_Downloads VALUES( 24, 42);
-INSERT INTO User_Downloads VALUES( 30, 32);
-INSERT INTO User_Downloads VALUES( 9, 4);
-INSERT INTO User_Downloads VALUES( 52, 31);
-INSERT INTO User_Downloads VALUES( 36, 49);
-INSERT INTO User_Downloads VALUES( 31, 31);
-INSERT INTO User_Downloads VALUES( 29, 57);
-INSERT INTO User_Downloads VALUES( 4, 44);
-INSERT INTO User_Downloads VALUES( 7, 55);
-INSERT INTO User_Downloads VALUES( 24, 43);
-INSERT INTO User_Downloads VALUES( 34, 19);
-INSERT INTO User_Downloads VALUES( 33, 48);
-INSERT INTO User_Downloads VALUES( 55, 31);
-INSERT INTO User_Downloads VALUES( 54, 31);
-INSERT INTO User_Downloads VALUES( 57, 31);
-INSERT INTO User_Downloads VALUES( 18, 43);
-INSERT INTO User_Downloads VALUES( 11, 17);
-INSERT INTO User_Downloads VALUES( 35, 41);
-INSERT INTO User_Downloads VALUES( 19, 20);
-INSERT INTO User_Downloads VALUES( 56, 6);
-INSERT INTO User_Downloads VALUES( 27, 38);
-INSERT INTO User_Downloads VALUES( 47, 14);
-INSERT INTO User_Downloads VALUES( 60, 55);
-INSERT INTO User_Downloads VALUES( 44, 26);
-INSERT INTO User_Downloads VALUES( 3, 37);
-INSERT INTO User_Downloads VALUES( 1, 3);
-INSERT INTO User_Downloads VALUES( 39, 43);
-INSERT INTO User_Downloads VALUES( 59, 4);
-INSERT INTO User_Downloads VALUES( 10, 39);
-INSERT INTO User_Downloads VALUES( 38, 55);
-INSERT INTO User_Downloads VALUES( 8, 7);
-INSERT INTO User_Downloads VALUES( 30, 51);
-INSERT INTO User_Downloads VALUES( 55, 4);
-INSERT INTO User_Downloads VALUES( 15, 16);
-INSERT INTO User_Downloads VALUES( 53, 7);
-INSERT INTO User_Downloads VALUES( 12, 28);
-INSERT INTO User_Downloads VALUES( 19, 16);
-INSERT INTO User_Downloads VALUES( 10, 39);
-INSERT INTO User_Downloads VALUES( 8, 26);
-INSERT INTO User_Downloads VALUES( 35, 43);
-INSERT INTO User_Downloads VALUES( 60, 56);
-INSERT INTO User_Downloads VALUES( 6, 44);
-INSERT INTO User_Downloads VALUES( 36, 9);
-INSERT INTO User_Downloads VALUES( 47, 34);
-INSERT INTO User_Downloads VALUES( 9, 4);
-INSERT INTO User_Downloads VALUES( 24, 23);
-INSERT INTO User_Downloads VALUES( 54, 20);
-INSERT INTO User_Downloads VALUES( 55, 57);
-INSERT INTO User_Downloads VALUES( 22, 19);
-INSERT INTO User_Downloads VALUES( 56, 6);
-INSERT INTO User_Downloads VALUES( 27, 9);
-INSERT INTO User_Downloads VALUES( 49, 34);
-INSERT INTO User_Downloads VALUES( 30, 51);
-INSERT INTO User_Downloads VALUES( 14, 26);
-
+INSERT INTO User_Downloads
+VALUES(7, 29);
+INSERT INTO User_Downloads
+VALUES(50, 44);
+INSERT INTO User_Downloads
+VALUES(43, 54);
+INSERT INTO User_Downloads
+VALUES(48, 48);
+INSERT INTO User_Downloads
+VALUES(4, 15);
+INSERT INTO User_Downloads
+VALUES(59, 56);
+INSERT INTO User_Downloads
+VALUES(13, 47);
+INSERT INTO User_Downloads
+VALUES(57, 38);
+INSERT INTO User_Downloads
+VALUES(1, 21);
+INSERT INTO User_Downloads
+VALUES(44, 12);
+INSERT INTO User_Downloads
+VALUES(34, 20);
+INSERT INTO User_Downloads
+VALUES(38, 50);
+INSERT INTO User_Downloads
+VALUES(30, 56);
+INSERT INTO User_Downloads
+VALUES(53, 45);
+INSERT INTO User_Downloads
+VALUES(36, 56);
+INSERT INTO User_Downloads
+VALUES(41, 56);
+INSERT INTO User_Downloads
+VALUES(15, 42);
+INSERT INTO User_Downloads
+VALUES(22, 49);
+INSERT INTO User_Downloads
+VALUES(53, 31);
+INSERT INTO User_Downloads
+VALUES(9, 16);
+INSERT INTO User_Downloads
+VALUES(14, 13);
+INSERT INTO User_Downloads
+VALUES(8, 44);
+INSERT INTO User_Downloads
+VALUES(13, 43);
+INSERT INTO User_Downloads
+VALUES(45, 32);
+INSERT INTO User_Downloads
+VALUES(54, 32);
+INSERT INTO User_Downloads
+VALUES(56, 56);
+INSERT INTO User_Downloads
+VALUES(1, 8);
+INSERT INTO User_Downloads
+VALUES(39, 8);
+INSERT INTO User_Downloads
+VALUES(3, 27);
+INSERT INTO User_Downloads
+VALUES(34, 17);
+INSERT INTO User_Downloads
+VALUES(44, 1);
+INSERT INTO User_Downloads
+VALUES(58, 51);
+INSERT INTO User_Downloads
+VALUES(51, 15);
+INSERT INTO User_Downloads
+VALUES(56, 32);
+INSERT INTO User_Downloads
+VALUES(17, 48);
+INSERT INTO User_Downloads
+VALUES(35, 13);
+INSERT INTO User_Downloads
+VALUES(40, 22);
+INSERT INTO User_Downloads
+VALUES(46, 23);
+INSERT INTO User_Downloads
+VALUES(16, 3);
+INSERT INTO User_Downloads
+VALUES(31, 29);
+INSERT INTO User_Downloads
+VALUES(48, 8);
+INSERT INTO User_Downloads
+VALUES(39, 13);
+INSERT INTO User_Downloads
+VALUES(29, 48);
+INSERT INTO User_Downloads
+VALUES(11, 21);
+INSERT INTO User_Downloads
+VALUES(9, 53);
+INSERT INTO User_Downloads
+VALUES(46, 53);
+INSERT INTO User_Downloads
+VALUES(55, 38);
+INSERT INTO User_Downloads
+VALUES(58, 55);
+INSERT INTO User_Downloads
+VALUES(55, 54);
+INSERT INTO User_Downloads
+VALUES(58, 21);
+INSERT INTO User_Downloads
+VALUES(41, 37);
+INSERT INTO User_Downloads
+VALUES(21, 34);
+INSERT INTO User_Downloads
+VALUES(27, 43);
+INSERT INTO User_Downloads
+VALUES(2, 13);
+INSERT INTO User_Downloads
+VALUES(1, 17);
+INSERT INTO User_Downloads
+VALUES(58, 13);
+INSERT INTO User_Downloads
+VALUES(35, 52);
+INSERT INTO User_Downloads
+VALUES(45, 10);
+INSERT INTO User_Downloads
+VALUES(20, 51);
+INSERT INTO User_Downloads
+VALUES(4, 18);
+INSERT INTO User_Downloads
+VALUES(55, 40);
+INSERT INTO User_Downloads
+VALUES(21, 52);
+INSERT INTO User_Downloads
+VALUES(3, 52);
+INSERT INTO User_Downloads
+VALUES(16, 8);
+INSERT INTO User_Downloads
+VALUES(17, 46);
+INSERT INTO User_Downloads
+VALUES(8, 46);
+INSERT INTO User_Downloads
+VALUES(54, 59);
+INSERT INTO User_Downloads
+VALUES(55, 28);
+INSERT INTO User_Downloads
+VALUES(3, 29);
+INSERT INTO User_Downloads
+VALUES(18, 6);
+INSERT INTO User_Downloads
+VALUES(45, 41);
+INSERT INTO User_Downloads
+VALUES(28, 24);
+INSERT INTO User_Downloads
+VALUES(41, 29);
+INSERT INTO User_Downloads
+VALUES(27, 42);
+INSERT INTO User_Downloads
+VALUES(51, 34);
+INSERT INTO User_Downloads
+VALUES(25, 12);
+INSERT INTO User_Downloads
+VALUES(30, 6);
+INSERT INTO User_Downloads
+VALUES(1, 37);
+INSERT INTO User_Downloads
+VALUES(16, 12);
+INSERT INTO User_Downloads
+VALUES(42, 29);
+INSERT INTO User_Downloads
+VALUES(32, 4);
+INSERT INTO User_Downloads
+VALUES(4, 34);
+INSERT INTO User_Downloads
+VALUES(1, 14);
+INSERT INTO User_Downloads
+VALUES(45, 39);
+INSERT INTO User_Downloads
+VALUES(34, 9);
+INSERT INTO User_Downloads
+VALUES(31, 2);
+INSERT INTO User_Downloads
+VALUES(15, 25);
+INSERT INTO User_Downloads
+VALUES(26, 48);
+INSERT INTO User_Downloads
+VALUES(55, 52);
+INSERT INTO User_Downloads
+VALUES(11, 31);
+INSERT INTO User_Downloads
+VALUES(24, 27);
+INSERT INTO User_Downloads
+VALUES(14, 4);
+INSERT INTO User_Downloads
+VALUES(23, 26);
+INSERT INTO User_Downloads
+VALUES(34, 5);
+INSERT INTO User_Downloads
+VALUES(26, 39);
+INSERT INTO User_Downloads
+VALUES(12, 19);
+INSERT INTO User_Downloads
+VALUES(38, 48);
+INSERT INTO User_Downloads
+VALUES(8, 51);
+INSERT INTO User_Downloads
+VALUES(57, 54);
+INSERT INTO User_Downloads
+VALUES(1, 4);
+INSERT INTO User_Downloads
+VALUES(27, 37);
+INSERT INTO User_Downloads
+VALUES(37, 40);
+INSERT INTO User_Downloads
+VALUES(54, 43);
+INSERT INTO User_Downloads
+VALUES(45, 56);
+INSERT INTO User_Downloads
+VALUES(34, 36);
+INSERT INTO User_Downloads
+VALUES(36, 10);
+INSERT INTO User_Downloads
+VALUES(29, 58);
+INSERT INTO User_Downloads
+VALUES(43, 50);
+INSERT INTO User_Downloads
+VALUES(10, 15);
+INSERT INTO User_Downloads
+VALUES(30, 37);
+INSERT INTO User_Downloads
+VALUES(50, 20);
+INSERT INTO User_Downloads
+VALUES(34, 21);
+INSERT INTO User_Downloads
+VALUES(8, 5);
+INSERT INTO User_Downloads
+VALUES(57, 21);
+INSERT INTO User_Downloads
+VALUES(20, 28);
+INSERT INTO User_Downloads
+VALUES(1, 36);
+INSERT INTO User_Downloads
+VALUES(38, 59);
+INSERT INTO User_Downloads
+VALUES(4, 23);
+INSERT INTO User_Downloads
+VALUES(13, 49);
+INSERT INTO User_Downloads
+VALUES(41, 43);
+INSERT INTO User_Downloads
+VALUES(35, 48);
+INSERT INTO User_Downloads
+VALUES(7, 50);
+INSERT INTO User_Downloads
+VALUES(51, 4);
+INSERT INTO User_Downloads
+VALUES(45, 45);
+INSERT INTO User_Downloads
+VALUES(55, 39);
+INSERT INTO User_Downloads
+VALUES(50, 21);
+INSERT INTO User_Downloads
+VALUES(17, 47);
+INSERT INTO User_Downloads
+VALUES(27, 6);
+INSERT INTO User_Downloads
+VALUES(11, 3);
+INSERT INTO User_Downloads
+VALUES(44, 39);
+INSERT INTO User_Downloads
+VALUES(8, 40);
+INSERT INTO User_Downloads
+VALUES(58, 12);
+INSERT INTO User_Downloads
+VALUES(4, 20);
+INSERT INTO User_Downloads
+VALUES(29, 15);
+INSERT INTO User_Downloads
+VALUES(53, 55);
+INSERT INTO User_Downloads
+VALUES(1, 45);
+INSERT INTO User_Downloads
+VALUES(19, 35);
+INSERT INTO User_Downloads
+VALUES(12, 11);
+INSERT INTO User_Downloads
+VALUES(49, 47);
+INSERT INTO User_Downloads
+VALUES(7, 11);
+INSERT INTO User_Downloads
+VALUES(51, 49);
+INSERT INTO User_Downloads
+VALUES(27, 54);
+INSERT INTO User_Downloads
+VALUES(56, 40);
+INSERT INTO User_Downloads
+VALUES(33, 9);
+INSERT INTO User_Downloads
+VALUES(15, 31);
+INSERT INTO User_Downloads
+VALUES(13, 39);
+INSERT INTO User_Downloads
+VALUES(24, 42);
+INSERT INTO User_Downloads
+VALUES(30, 32);
+INSERT INTO User_Downloads
+VALUES(9, 4);
+INSERT INTO User_Downloads
+VALUES(52, 31);
+INSERT INTO User_Downloads
+VALUES(36, 49);
+INSERT INTO User_Downloads
+VALUES(31, 31);
+INSERT INTO User_Downloads
+VALUES(29, 57);
+INSERT INTO User_Downloads
+VALUES(4, 44);
+INSERT INTO User_Downloads
+VALUES(7, 55);
+INSERT INTO User_Downloads
+VALUES(24, 43);
+INSERT INTO User_Downloads
+VALUES(34, 19);
+INSERT INTO User_Downloads
+VALUES(33, 48);
+INSERT INTO User_Downloads
+VALUES(55, 31);
+INSERT INTO User_Downloads
+VALUES(54, 31);
+INSERT INTO User_Downloads
+VALUES(57, 31);
+INSERT INTO User_Downloads
+VALUES(18, 43);
+INSERT INTO User_Downloads
+VALUES(11, 17);
+INSERT INTO User_Downloads
+VALUES(35, 41);
+INSERT INTO User_Downloads
+VALUES(19, 20);
+INSERT INTO User_Downloads
+VALUES(56, 6);
+INSERT INTO User_Downloads
+VALUES(27, 38);
+INSERT INTO User_Downloads
+VALUES(47, 14);
+INSERT INTO User_Downloads
+VALUES(60, 55);
+INSERT INTO User_Downloads
+VALUES(44, 26);
+INSERT INTO User_Downloads
+VALUES(3, 37);
+INSERT INTO User_Downloads
+VALUES(1, 3);
+INSERT INTO User_Downloads
+VALUES(39, 43);
+INSERT INTO User_Downloads
+VALUES(59, 4);
+INSERT INTO User_Downloads
+VALUES(10, 39);
+INSERT INTO User_Downloads
+VALUES(38, 55);
+INSERT INTO User_Downloads
+VALUES(8, 7);
+INSERT INTO User_Downloads
+VALUES(30, 51);
+INSERT INTO User_Downloads
+VALUES(55, 4);
+INSERT INTO User_Downloads
+VALUES(15, 16);
+INSERT INTO User_Downloads
+VALUES(53, 7);
+INSERT INTO User_Downloads
+VALUES(12, 28);
+INSERT INTO User_Downloads
+VALUES(19, 16);
+INSERT INTO User_Downloads
+VALUES(10, 29);
+INSERT INTO User_Downloads
+VALUES(8, 26);
+INSERT INTO User_Downloads
+VALUES(35, 43);
+INSERT INTO User_Downloads
+VALUES(60, 56);
+INSERT INTO User_Downloads
+VALUES(6, 44);
+INSERT INTO User_Downloads
+VALUES(36, 9);
+INSERT INTO User_Downloads
+VALUES(47, 34);
+INSERT INTO User_Downloads
+VALUES(9, 5);
+INSERT INTO User_Downloads
+VALUES(24, 23);
+INSERT INTO User_Downloads
+VALUES(54, 20);
+INSERT INTO User_Downloads
+VALUES(55, 57);
+INSERT INTO User_Downloads
+VALUES(22, 19);
+INSERT INTO User_Downloads
+VALUES(56, 16);
+INSERT INTO User_Downloads
+VALUES(27, 9);
+INSERT INTO User_Downloads
+VALUES(49, 34);
+INSERT INTO User_Downloads
+VALUES(30, 52);
+INSERT INTO User_Downloads
+VALUES(14, 26);
 -- Data for table UserCurator_Interact
-INSERT INTO UserCurator_Interact VALUES( 5, 68,'Nulla tempus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 39, 33,'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 11, 25,'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 60, 22,'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 13, 47,'Ut tellus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 23, 65,'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 57, 31,'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 13, 57,'Curabitur convallis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 51, 55,'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 3, 27,'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 9, 62,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 25, 24,'In blandit ultrices enim.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 6, 80,'Suspendisse potenti.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 13, 17,'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 9, 10,'Pellentesque ultrices mattis odio.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 58, 70,'Proin risus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 25, 69,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 23, 5,'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 11, 80,'Morbi non lectus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 6, 1,'Mauris sit amet eros.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 7, 75,'In congue.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 37, 46,'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 53, 27,'Donec semper sapien a libero.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 34, 37,'Donec posuere metus vitae ipsum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 10, 10,'Curabitur at ipsum ac tellus semper interdum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 41, 67,'Nulla justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 50, 55,'Aenean fermentum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 27, 16,'Nulla ac enim.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 23, 77,'Integer a nibh.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 31, 56,'Morbi ut odio.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 7, 31,'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 46, 72,'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 29, 49,'Suspendisse potenti.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 25, 3,'Donec posuere metus vitae ipsum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 19, 28,'Maecenas ut massa quis augue luctus tincidunt.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 10, 62,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 39, 2,'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 31, 72,'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 4, 67,'Duis consequat dui nec nisi volutpat eleifend.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 41, 77,'Donec ut dolor.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 54, 57,'Cras non velit nec nisi vulputate nonummy.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 24, 17,'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 14, 12,'Suspendisse accumsan tortor quis turpis.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 26, 18,'Sed sagittis.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 16, 21,'Aenean lectus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 54, 13,'In hac habitasse platea dictumst.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 2, 24,'Morbi non quam nec dui luctus rutrum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 11, 52,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 52, 2,'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 49, 51,'Sed accumsan felis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 41, 16,'Vivamus tortor.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 57, 44,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 39, 36,'Integer tincidunt ante vel ipsum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 20, 32,'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 17, 59,'Duis ac nibh.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 7, 52,'Aenean lectus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 51, 46,'Suspendisse potenti.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 39, 4,'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 37, 70,'Nunc nisl.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 6, 53,'Morbi quis tortor id nulla ultrices aliquet.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 16, 24,'Morbi non quam nec dui luctus rutrum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 38, 74,'Aliquam non mauris.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 34, 71,'Etiam vel augue.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 17, 39,'Sed accumsan felis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 41, 32,'Etiam justo.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 23, 11,'Aenean sit amet justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 59, 47,'Proin interdum mauris non ligula pellentesque ultrices.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 19, 44,'Phasellus in felis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 16, 3,'Etiam justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 48, 54,'Proin eu mi.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 44, 7,'Phasellus id sapien in sapien iaculis congue.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 58, 59,'Morbi non lectus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 40, 19,'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 37, 12,'Nunc rhoncus dui vel sem.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 17, 21,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 48, 36,'Praesent id massa id nisl venenatis lacinia.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 7, 50,'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 21, 46,'Nulla tempus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 29, 30,'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 51, 15,'In hac habitasse platea dictumst.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 55, 68,'Donec ut dolor.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 40, 49,'In quis justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 43, 32,'Vivamus in felis eu sapien cursus vestibulum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 45, 27,'Etiam vel augue.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 60, 60,'Pellentesque viverra pede ac diam.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 6, 35,'In quis justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 42, 64,'Vivamus in felis eu sapien cursus vestibulum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 13, 37,'Pellentesque at nulla.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 38, 38,'Mauris sit amet eros.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 56, 28,'Donec ut dolor.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 28, 7,'Nulla justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 50, 58,'Curabitur at ipsum ac tellus semper interdum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 29, 51,'Nulla ac enim.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 19, 11,'Morbi porttitor lorem id ligula.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 2, 75,'Pellentesque viverra pede ac diam.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 13, 13,'Vivamus in felis eu sapien cursus vestibulum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 58, 76,'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 33, 17,'Vivamus vel nulla eget eros elementum pellentesque.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 54, 41,'Donec vitae nisi.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 19, 22,'Morbi a ipsum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 42, 37,'Nullam sit amet turpis elementum ligula vehicula consequat.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 20, 38,'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 35, 70,'Aenean lectus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 32, 67,'Integer ac leo.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 1, 76,'Donec semper sapien a libero.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 21, 12,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 14, 10,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 40, 63,'Nulla nisl.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 21, 69,'Morbi a ipsum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 37, 64,'Duis bibendum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 5, 16,'Morbi a ipsum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 10, 32,'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 9, 51,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 2, 60,'Suspendisse potenti.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 56, 59,'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 57, 57,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 17, 26,'Suspendisse ornare consequat lectus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 52, 11,'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 6, 19,'Praesent blandit lacinia erat.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 13, 14,'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 48, 20,'Sed accumsan felis.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 24, 44,'In hac habitasse platea dictumst.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 15, 23,'Praesent blandit lacinia erat.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 17, 38,'Curabitur in libero ut massa volutpat convallis.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 45, 48,'Mauris ullamcorper purus sit amet nulla.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 27, 74,'Maecenas ut massa quis augue luctus tincidunt.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 22, 7,'Mauris sit amet eros.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 60, 2,'In hac habitasse platea dictumst.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 30, 59,'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 19, 51,'In quis justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 49, 5,'Cras in purus eu magna vulputate luctus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 28, 26,'Cras non velit nec nisi vulputate nonummy.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 32, 78,'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 49, 73,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 35, 22,'Integer ac neque.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 42, 69,'Sed ante.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 4, 4,'Etiam justo.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 41, 31,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 32, 24,'Proin eu mi.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 27, 21,'Praesent blandit.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 44, 69,'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 50, 4,'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 3, 44,'Sed vel enim sit amet nunc viverra dapibus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 22, 46,'Curabitur at ipsum ac tellus semper interdum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 6, 42,'Quisque id justo sit amet sapien dignissim vestibulum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 13, 68,'Aenean lectus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 9, 30,'Nullam sit amet turpis elementum ligula vehicula consequat.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 34, 44,'Mauris lacinia sapien quis libero.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 46, 17,'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 16, 70,'Quisque ut erat.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 20, 70,'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 33, 41,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 2, 34,'Duis bibendum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 37, 59,'In eleifend quam a odio.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 16, 44,'Mauris ullamcorper purus sit amet nulla.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 19, 29,'Duis consequat dui nec nisi volutpat eleifend.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 39, 57,'Vivamus vestibulum sagittis sapien.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 6, 70,'Integer ac leo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 45, 32,'Sed ante.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 35, 34,'Nunc rhoncus dui vel sem.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 59, 41,'Suspendisse ornare consequat lectus.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 50, 29,'Cras in purus eu magna vulputate luctus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 36, 45,'Etiam pretium iaculis justo.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 4, 64,'Duis bibendum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 38, 40,'Pellentesque ultrices mattis odio.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 2, 7,'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 42, 33,'In sagittis dui vel nisl.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 53, 70,'In hac habitasse platea dictumst.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 32, 21,'Integer tincidunt ante vel ipsum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 49, 29,'Proin eu mi.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 29, 39,'Aenean sit amet justo.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 50, 43,'Quisque porta volutpat erat.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 33, 2,'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 58, 74,'Maecenas pulvinar lobortis est.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 59, 22,'Etiam justo.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 48, 62,'Morbi a ipsum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 14, 33,'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 32, 55,'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 24, 3,'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 44, 40,'Nunc rhoncus dui vel sem.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 42, 74,'Vivamus in felis eu sapien cursus vestibulum.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 11, 14,'Pellentesque viverra pede ac diam.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 51, 80,'Phasellus in felis.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 5, 4,'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 24, 48,'Curabitur at ipsum ac tellus semper interdum.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 41, 34,'Nunc rhoncus dui vel sem.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 3, 41,'Nullam molestie nibh in lectus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 9, 72,'Integer a nibh.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 45, 73,'Vivamus tortor.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 53, 79,'Suspendisse potenti.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 26, 27,'Suspendisse potenti.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 57, 45,'Pellentesque viverra pede ac diam.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 50, 39,'Fusce consequat.', TRUE);
-INSERT INTO UserCurator_Interact VALUES( 51, 4,'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 44, 44,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 59, 77,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 40, 7,'Morbi quis tortor id nulla ultrices aliquet.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 55, 25,'In est risus, auctor sed, tristique in, tempus sit amet, sem.', FALSE);
-INSERT INTO UserCurator_Interact VALUES( 36, 21,'Praesent lectus.', True);
-INSERT INTO UserCurator_Interact VALUES( 37, 23,'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(5, 68, 'Nulla tempus.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        39,
+        33,
+        'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        11,
+        25,
+        'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        60,
+        22,
+        'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(13, 47, 'Ut tellus.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        23,
+        65,
+        'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        57,
+        31,
+        'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(13, 57, 'Curabitur convallis.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        51,
+        55,
+        'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        3,
+        27,
+        'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        9,
+        62,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(25, 24, 'In blandit ultrices enim.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(6, 80, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        13,
+        17,
+        'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        9,
+        10,
+        'Pellentesque ultrices mattis odio.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(58, 70, 'Proin risus.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        25,
+        69,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        23,
+        5,
+        'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(11, 80, 'Morbi non lectus.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(6, 1, 'Mauris sit amet eros.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(7, 75, 'In congue.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        37,
+        46,
+        'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(53, 27, 'Donec semper sapien a libero.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        34,
+        37,
+        'Donec posuere metus vitae ipsum.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        10,
+        10,
+        'Curabitur at ipsum ac tellus semper interdum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(41, 67, 'Nulla justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(50, 55, 'Aenean fermentum.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(27, 16, 'Nulla ac enim.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(23, 77, 'Integer a nibh.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(31, 56, 'Morbi ut odio.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        7,
+        31,
+        'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        46,
+        72,
+        'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(29, 49, 'Suspendisse potenti.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(25, 3, 'Donec posuere metus vitae ipsum.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        19,
+        28,
+        'Maecenas ut massa quis augue luctus tincidunt.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        10,
+        62,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        39,
+        2,
+        'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        31,
+        72,
+        'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        4,
+        67,
+        'Duis consequat dui nec nisi volutpat eleifend.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(41, 77, 'Donec ut dolor.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        54,
+        57,
+        'Cras non velit nec nisi vulputate nonummy.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        24,
+        17,
+        'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        14,
+        12,
+        'Suspendisse accumsan tortor quis turpis.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(26, 18, 'Sed sagittis.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(16, 21, 'Aenean lectus.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        54,
+        13,
+        'In hac habitasse platea dictumst.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        2,
+        24,
+        'Morbi non quam nec dui luctus rutrum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        11,
+        52,
+        'V cubilia Curae; erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        52,
+        2,
+        'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(49, 51, 'Sed accumsan felis.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(41, 16, 'Vivamus tortor.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        57,
+        44,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        39,
+        36,
+        'Integer tincidunt ante vel ipsum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        20,
+        32,
+        'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(17, 59, 'Duis ac nibh.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(7, 52, 'Aenean lectus.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(51, 46, 'Suspendisse potenti.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        39,
+        4,
+        'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(37, 70, 'Nunc nisl.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        6,
+        53,
+        'Morbi quis tortor id nulla ultrices aliquet.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        16,
+        24,
+        'Morbi non quam nec dui luctus rutrum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(38, 74, 'Aliquam non mauris.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(34, 71, 'Etiam vel augue.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(17, 39, 'Sed accumsan felis.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(41, 32, 'Etiam justo.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(23, 11, 'Aenean sit amet justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        59,
+        47,
+        'Proin interdum mauris non ligula pellentesque ultrices.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(19, 44, 'Phasellus in felis.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(16, 3, 'Etiam justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(48, 54, 'Proin eu mi.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        44,
+        7,
+        'Phasellus id sapien in sapien iaculis congue.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(58, 59, 'Morbi non lectus.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        40,
+        19,
+        'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(37, 12, 'Nunc rhoncus dui vel sem.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        17,
+        21,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        48,
+        36,
+        'Praesent id massa id nisl venenatis lacinia.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        7,
+        50,
+        'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(21, 46, 'Nulla tempus.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        29,
+        30,
+        'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        51,
+        15,
+        'In hac habitasse platea dictumst.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(55, 68, 'Donec ut dolor.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(40, 49, 'In quis justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        43,
+        32,
+        'Vivamus in felis eu sapien cursus vestibulum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(45, 27, 'Etiam vel augue.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        60,
+        60,
+        'Pellentesque viverra pede ac diam.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(6, 35, 'In quis justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        42,
+        64,
+        'Vivamus in felis eu sapien cursus vestibulum.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(13, 37, 'Pellentesque at nulla.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(38, 38, 'Mauris sit amet eros.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(56, 28, 'Donec ut dolor.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(28, 7, 'Nulla justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        50,
+        58,
+        'Curabitur at ipsum ac tellus semper interdum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(29, 51, 'Nulla ac enim.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        19,
+        11,
+        'Morbi porttitor lorem id ligula.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        2,
+        75,
+        'Pellentesque viverra pede ac diam.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        13,
+        13,
+        'Vivamus in felis eu sapien cursus vestibulum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        58,
+        76,
+        'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        33,
+        17,
+        'Vivamus vel nulla eget eros elementum pellentesque.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(54, 41, 'Donec vitae nisi.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(19, 22, 'Morbi a ipsum.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        42,
+        37,
+        'Nullam sit amet turpis elementum ligula vehicula consequat.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        20,
+        38,
+        'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(35, 70, 'Aenean lectus.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(32, 67, 'Integer ac leo.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(1, 76, 'Donec semper sapien a libero.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        21,
+        12,
+        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        14,
+        10,
+        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(40, 63, 'Nulla nisl.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(21, 69, 'Morbi a ipsum.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(37, 64, 'Duis bibendum.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(5, 16, 'Morbi a ipsum.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        10,
+        32,
+        'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        9,
+        51,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(2, 60, 'Suspendisse potenti.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        56,
+        59,
+        'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        57,
+        57,
+        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        17,
+        26,
+        'Suspendisse ornare consequat lectus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        52,
+        11,
+        'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(6, 19, 'Praesent blandit lacinia erat.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        13,
+        14,
+        'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(48, 20, 'Sed accumsan felis.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        24,
+        44,
+        'In hac habitasse platea dictumst.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(15, 23, 'Praesent blandit lacinia erat.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        17,
+        38,
+        'Curabitur in libero ut massa volutpat convallis.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        45,
+        48,
+        'Mauris ullamcorper purus sit amet nulla.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        27,
+        74,
+        'Maecenas ut massa quis augue luctus tincidunt.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(22, 7, 'Mauris sit amet eros.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(60, 2, 'In hac habitasse platea dictumst.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        30,
+        59,
+        'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(19, 51, 'In quis justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        49,
+        5,
+        'Cras in purus eu magna vulputate luctus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        28,
+        26,
+        'Cras non velit nec nisi vulputate nonummy.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        32,
+        78,
+        'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        49,
+        73,
+        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(35, 22, 'Integer ac neque.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(42, 69, 'Sed ante.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(4, 4, 'Etiam justo.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        41,
+        31,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(32, 24, 'Proin eu mi.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(27, 21, 'Praesent blandit.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        44,
+        69,
+        'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        50,
+        4,
+        'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        3,
+        44,
+        'Sed vel enim sit amet nunc viverra dapibus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        22,
+        46,
+        'Curabitur at ipsum ac tellus semper interdum.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        6,
+        42,
+        'Quisque id justo sit amet sapien dignissim vestibulum.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(13, 68, 'Aenean lectus.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        9,
+        30,
+        'Nullam sit amet turpis elementum ligula vehicula consequat.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        34,
+        44,
+        'Mauris lacinia sapien quis libero.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        46,
+        17,
+        'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(16, 70, 'Quisque ut erat.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        20,
+        70,
+        'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        33,
+        41,
+        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(2, 34, 'Duis bibendum.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(37, 59, 'In eleifend quam a odio.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        16,
+        44,
+        'Mauris ullamcorper purus sit amet nulla.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        19,
+        29,
+        'Duis consequat dui nec nisi volutpat eleifend.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        39,
+        57,
+        'Vivamus vestibulum sagittis sapien.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(6, 70, 'Integer ac leo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(45, 32, 'Sed ante.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(35, 34, 'Nunc rhoncus dui vel sem.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        59,
+        41,
+        'Suspendisse ornare consequat lectus.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        50,
+        29,
+        'Cras in purus eu magna vulputate luctus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(36, 45, 'Etiam pretium iaculis justo.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(4, 64, 'Duis bibendum.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        38,
+        40,
+        'Pellentesque ultrices mattis odio.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        2,
+        7,
+        'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(42, 33, 'In sagittis dui vel nisl.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        53,
+        70,
+        'In hac habitasse platea dictumst.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        32,
+        21,
+        'Integer tincidunt ante vel ipsum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(49, 29, 'Proin eu mi.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(29, 39, 'Aenean sit amet justo.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(50, 43, 'Quisque porta volutpat erat.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        33,
+        2,
+        'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(58, 74, 'Maecenas pulvinar lobortis est.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(59, 22, 'Etiam justo.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(48, 62, 'Morbi a ipsum.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        14,
+        33,
+        'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        32,
+        55,
+        'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        24,
+        3,
+        'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(44, 40, 'Nunc rhoncus dui vel sem.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        42,
+        74,
+        'Vivamus in felis eu sapien cursus vestibulum.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        11,
+        14,
+        'Pellentesque viverra pede ac diam.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(51, 80, 'Phasellus in felis.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        5,
+        4,
+        'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        24,
+        48,
+        'Curabitur at ipsum ac tellus semper interdum.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(41, 34, 'Nunc rhoncus dui vel sem.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(3, 41, 'Nullam molestie nibh in lectus.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(9, 72, 'Integer a nibh.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(45, 73, 'Vivamus tortor.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(53, 79, 'Suspendisse potenti.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(26, 27, 'Suspendisse potenti.', FALSE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        57,
+        45,
+        'Pellentesque viverra pede ac diam.',
+        TRUE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(50, 39, 'Fusce consequat.', TRUE);
+INSERT INTO UserCurator_Interact
+VALUES(
+        51,
+        4,
+        'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        44,
+        44,
+        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        59,
+        77,
+        'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        40,
+        7,
+        'Morbi quis tortor id nulla ultrices aliquet.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(
+        55,
+        25,
+        'In est risus, auctor sed, tristique in, tempus sit amet, sem.',
+        FALSE
+    );
+INSERT INTO UserCurator_Interact
+VALUES(36, 21, 'Praesent lectus.', True);
+INSERT INTO UserCurator_Interact
+VALUES(
+        37,
+        23,
+        'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
+        TRUE
+    );
