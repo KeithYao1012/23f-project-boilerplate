@@ -12,7 +12,9 @@ def get_songs():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT ArtistID, GenreID, TItle, Length, Plays, CreatedAt FROM Songs')
+    cursor.execute('SELECT Artist_Name, GenreName, Title, Length, \
+                   Plays, CreatedAt FROM Songs NATURAL JOIN Artists \
+                   NATURAL JOIN Genre')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
