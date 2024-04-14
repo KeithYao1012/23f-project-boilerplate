@@ -56,14 +56,12 @@ def add_new_user():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    id = the_data['UserID']
     name = the_data['Username']
 
 
     # Constructing the query
-    query = 'insert into users (UserID, Username) values ("'
-    query += id + '", "'
-    query += name + '", "'
+    query = 'insert into users (Username) values ("'
+    query += name + '")'
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
@@ -74,18 +72,18 @@ def add_new_user():
     return 'Success!'
 
 # Updates a current user
-@users.route('/users/<userID>', methods=['PUT'])
-def update_user(userID):
-    user = users.query.get_or_404(userID)
+@users.route('/users/<username>', methods=['PUT'])
+def update_user(username):
+    user = users.query.get_or_404(username)
     data = request.get_json()
     user.username = data['username']
     db.session.commit()
     return jsonify({'message': 'User updated successfully!'}), 200
 
 # Delete the user with user_id
-@users.route('/users/<userID>', methods=['DELETE'])
-def delete_user(userID):
-    user = users.query.get_or_404(userID)
+@users.route('/users/<username>', methods=['DELETE'])
+def delete_user(username):
+    user = users.query.get_or_404(username)
     db.session.delete(user)
     db.session.commit()
     return jsonify({'message': 'User deleted successfully'}), 200
