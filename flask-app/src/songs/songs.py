@@ -107,7 +107,27 @@ def delete_song(songID):
 @songs.route('/song/<genreID>', methods=['GET'])
 def get_song_by_id(genreID):
 
-    query = 'SELECT ArtistID, GenreID, TItle, Length, Plays, CreatedAt FROM Songs WHERE GenreID = ' + str(genreID)
+    query = 'SELECT ArtistID, GenreID, Title, Length, Plays, CreatedAt FROM Songs WHERE GenreID = ' + str(genreID)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+
+
+# Gets all songs by a certain artist
+@songs.route('/song/<artist_name>', methods=['GET'])
+def get_song_by_artist(artist_name):
+
+    query = 'SELECT s.Title, s.Plays, s.Length, s.CreatedAt \
+            FROM Songs s JOIN Artist_Songs as ON s.SongID = as.SongID \
+            JOIN Artist a ON a.ArtistID = as.ArtistID \
+            WHERE a.Artist_Name = ' + str(artist_name)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
