@@ -3,7 +3,7 @@ import json
 from src import db
 
 
-curatorpost  = Blueprint('curatopost', __name__)
+curatorpost  = Blueprint('curatorpost', __name__)
 
 # Get all the curatorposts
 @curatorpost.route('/curatorpost', methods=['GET'])

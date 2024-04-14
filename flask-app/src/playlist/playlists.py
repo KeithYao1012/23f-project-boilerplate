@@ -148,7 +148,7 @@ def get_curator_playlist(curatorID):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Retreives all playlists a curator made
+# Retreives all playlists a curator made of a certain Genre
 @playlists.route('/playlist/<genreID>', methods=['GET'])
 def get_paylist_by_genre(genreID):
     query = 'SELECT p.PlaylistID, p.PlaylistName, p. FROM Playlist p \
