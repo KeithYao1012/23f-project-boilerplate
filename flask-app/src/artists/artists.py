@@ -76,14 +76,12 @@ def add_new_artist():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    id = the_data['ArtistID']
     name = the_data['Artist_Name']
 
 
     # Constructing the query
-    query = 'insert into artists (ArtistID, Artist_Name) values ("'
-    query += id + '", "'
-    query += name + '", "'
+    query = 'insert into Artists (Artist_Name) values("'
+    query += name + '")'
     current_app.logger.info(query)
 
     # executing and committing the insert statement 

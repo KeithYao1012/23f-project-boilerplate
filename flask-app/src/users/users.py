@@ -60,7 +60,7 @@ def add_new_user():
 
 
     # Constructing the query
-    query = 'insert into users (Username) values ("'
+    query = 'insert into Users (Username) values ("'
     query += name + '")'
     current_app.logger.info(query)
 
