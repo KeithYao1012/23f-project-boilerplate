@@ -3,10 +3,10 @@ import json
 from src import db
 
 
-artistpost  = Blueprint('artistpost', __name__)
+curatorpost  = Blueprint('curatopost', __name__)
 
 # Get all the artists
-@artistpost.route('/artistpost', methods=['GET'])
+@curatorpost.route('/curatorpost', methods=['GET'])
 def get_artistsposts():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
@@ -31,9 +31,9 @@ def get_artistsposts():
 
     return jsonify(json_data)
 
-# Adds a new artistpost
-@artistpost.route('/artistpost', methods=['POST'])
-def add_new_artistpost():
+# Adds a new curatorpost
+@curatorpost.route('/curatorpost', methods=['POST'])
+def add_new_curatorpost():
     
     # collecting data from the request object 
     the_data = request.json
@@ -60,8 +60,8 @@ def add_new_artistpost():
     return 'Success!'
 
 # Get all artist posts by a certain artist
-@artistpost.route('/artistpost/<artist_name>', methods=['GET'])
-def get_artistpost_by_artist(artist_name):
+@curatorpost.route('/curatorpost/<artist_name>', methods=['GET'])
+def get_curatorpost_by_artist(artist_name):
 
     query = 'SELECT Artist_Name, Creation_Date, Content \
           FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name)
@@ -77,8 +77,8 @@ def get_artistpost_by_artist(artist_name):
     return jsonify(json_data)
 
 # Get all artist posts by a certain postID
-@artistpost.route('/artistpost/<postID>', methods=['GET'])
-def get_artistpost_by_artist(postID):
+@curatorpost.route('/curatorpost/<postID>', methods=['GET'])
+def get_curatorpost_by_artist(postID):
 
     query = 'SELECT Artist_Name, Creation_Date, Content \
           FROM Artist_Post NATURAL JOIN Artists WHERE PostID = ' + str(postID)
@@ -94,10 +94,10 @@ def get_artistpost_by_artist(postID):
     return jsonify(json_data)
 
 
-# Updates a current artistpost
-@artistpost.route('/artistpost/<postID>', methods=['PUT'])
-def update_artistpost(PostID):
-    ap = artistpost.query.get_or_404(PostID)
+# Updates a current curatorpost
+@curatorpost.route('/curatorpost/<postID>', methods=['PUT'])
+def update_curatorpost(PostID):
+    ap = curatorpost.query.get_or_404(PostID)
     data = request.get_json()
     ap.content = data['content']
     db.session.commit()
@@ -105,9 +105,9 @@ def update_artistpost(PostID):
 
 
 # Delete the post with the given <PostID>
-@artistpost.route('/artistpost/<postID>', methods=['DELETE'])
-def delete_artistpost(PostID):
-    ap = artistpost.query.get_or_404(PostID)
-    db.session.delete(ap)
+@curatorpost.route('/curatorpost/<postID>', methods=['DELETE'])
+def delete_curatorpost(PostID):
+    cp = curatorpost.query.get_or_404(PostID)
+    db.session.delete(cp)
     db.session.commit()
     return jsonify({'message': 'Post #%s deleted successfully'%(PostID)}), 200
