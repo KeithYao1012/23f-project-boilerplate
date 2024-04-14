@@ -59,9 +59,9 @@ def add_new_artistpost():
     
     return 'Success!'
 
-# Get a specific artistpost
+# Get all artist posts by a certain artist
 @artistpost.route('/artistpost/<artist_name>', methods=['GET'])
-def get_producer(artist_name):
+def get_artistpost_by_artist(artist_name):
 
     query = 'SELECT Artist_Name, Creation_Date, Content \
           FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name)
@@ -76,4 +76,38 @@ def get_producer(artist_name):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
+# Get all artist posts by a certain postID
+@artistpost.route('/artistpost/<postID>', methods=['GET'])
+def get_artistpost_by_artist(postID):
 
+    query = 'SELECT Artist_Name, Creation_Date, Content \
+          FROM Artist_Post NATURAL JOIN Artists WHERE PostID = ' + str(postID)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+
+
+# Updates a current artistpost
+@artistpost.route('/artistpost/<postID>', methods=['PUT'])
+def update_artistpost(PostID):
+    ap = artistpost.query.get_or_404(PostID)
+    data = request.get_json()
+    ap.content = data['content']
+    db.session.commit()
+    return jsonify({'message': 'Post #%s updated successfully!'%(PostID)}), 200
+
+
+# Delete the producer with the given <PostID>
+@artistpost.route('/artistpost/<postID>', methods=['DELETE'])
+def delete_artistpost(PostID):
+    ap = artistpost.query.get_or_404(PostID)
+    db.session.delete(ap)
+    db.session.commit()
+    return jsonify({'message': 'Post #%s deleted successfully'%(PostID)}), 200

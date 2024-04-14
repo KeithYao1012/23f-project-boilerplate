@@ -108,4 +108,3 @@ def delete_artist(ArtistID):
     db.session.delete(artist)
     db.session.commit()
     return jsonify({'message': 'Artist deleted successfully'}), 200
-
