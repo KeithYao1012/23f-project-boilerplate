@@ -43,7 +43,7 @@ def create_app():
     from src.songs.songs import songs
     from src.artistpost.artistpost import artistpost
     from src.curatorpost.curatopost import curatorpost
-    from userartist.userartist import user_support_artist
+    from src.userartist.userartist import follows
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
@@ -57,7 +57,7 @@ def create_app():
     app.register_blueprint(songs, url_prefix='/s')
     app.register_blueprint(artistpost, url_prefix='/ap')
     app.register_blueprint(curatorpost, url_prefix='/cp')
-    app.register_blueprint(user_support_artist, url_prefix='/usa')
+    app.register_blueprint(follows, url_prefix='/f')
 
     # Don't forget to return the app object
     return app
