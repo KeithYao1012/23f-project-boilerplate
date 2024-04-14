@@ -5,14 +5,14 @@ from src import db
 
 curatorpost  = Blueprint('curatopost', __name__)
 
-# Get all the artists
+# Get all the curatorposts
 @curatorpost.route('/curatorpost', methods=['GET'])
-def get_artistsposts():
+def get_curatorposts():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT * FROM Artist_Post')
+    cursor.execute('SELECT * FROM Curator_Post')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -40,15 +40,13 @@ def add_new_curatorpost():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    artist_name = the_data['Artist_Name']
+    curator_id = the_data['CuratorID']
     content = the_data['Post_Content']
 
 
     # Constructing the query
-    query = 'insert into Artist_Post (ArtistID, Content) values ('
-    query += '(select ArtistID FROM Artists WHERE Artist_name = ' + str(artist_name) + '), "'
-    # query += post_id + '", "'
-    # query += creation_date + '", "'
+    query = 'insert into Curator_Post (CuratorID, Post_Content) values ('
+    query += curator_id + '", "'
     query += content + '")'
     current_app.logger.info(query)
 
@@ -59,12 +57,14 @@ def add_new_curatorpost():
     
     return 'Success!'
 
-# Get all artist posts by a certain artist
-@curatorpost.route('/curatorpost/<artist_name>', methods=['GET'])
-def get_curatorpost_by_artist(artist_name):
+# Get all CuratorPosts by a certain curator
+@curatorpost.route('/curatorpost/<curator_name>', methods=['GET'])
+def get_curatorpost_by_curator(curator_name):
 
-    query = 'SELECT Artist_Name, Creation_Date, Content \
-          FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name)
+    query = 'SELECT c.Name, cp.PostID, cp.Post_Content, cp.Creation_Date \
+            FROM Curator_Post cp JOIN Curator c ON c.CuratorID = cp.CuratorID \
+            WHERE c.Name = ' + str(curator_name)
+
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -76,12 +76,14 @@ def get_curatorpost_by_artist(artist_name):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Get all artist posts by a certain postID
+# Get curator posts by a certain postID
 @curatorpost.route('/curatorpost/<postID>', methods=['GET'])
-def get_curatorpost_by_artist(postID):
+def get_curatorpost_by_id(postID):
 
-    query = 'SELECT Artist_Name, Creation_Date, Content \
-          FROM Artist_Post NATURAL JOIN Artists WHERE PostID = ' + str(postID)
+    query = 'SELECT c.Name, cp.PostID, cp.Post_Content, cp.Creation_Date \
+            FROM Curator_Post cp JOIN Curator c ON c.CuratorID = cp.CuratorID \
+            WHERE cp.PostID = ' + str(postID)
+    
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -99,7 +101,7 @@ def get_curatorpost_by_artist(postID):
 def update_curatorpost(PostID):
     ap = curatorpost.query.get_or_404(PostID)
     data = request.get_json()
-    ap.content = data['content']
+    ap.Post_Content = data['content']
     db.session.commit()
     return jsonify({'message': 'Post #%s updated successfully!'%(PostID)}), 200
 

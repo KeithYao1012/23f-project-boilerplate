@@ -78,7 +78,7 @@ def get_artistpost_by_artist(artist_name):
 
 # Get all artist posts by a certain postID
 @artistpost.route('/artistpost/<postID>', methods=['GET'])
-def get_artistpost_by_artist(postID):
+def get_artistpost_by_id(postID):
 
     query = 'SELECT Artist_Name, Creation_Date, Content \
           FROM Artist_Post NATURAL JOIN Artists WHERE PostID = ' + str(postID)
