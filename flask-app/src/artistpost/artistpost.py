@@ -12,7 +12,7 @@ def get_artistsposts():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT * FROM Artist_Post')
+    cursor.execute('SELECT * FROM Artist_Post NATURAL JOIN Artists')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]

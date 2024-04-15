@@ -106,3 +106,21 @@ def get_users_from_community(com_name):
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
+
+# Get all users other than specific user
+@users.route('/users/otherusers/<username>', methods=['GET'])
+def get_otherusers(username):
+
+    query = 'SELECT * FROM Users WHERE NOT Username = ' + str(username)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+
+

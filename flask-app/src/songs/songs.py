@@ -12,8 +12,7 @@ def get_songs():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT Artist_Name, GenreName, Title, Length, \
-                   Plays, CreatedAt FROM Songs NATURAL JOIN Artists \
+    cursor.execute('SELECT * FROM Songs NATURAL JOIN Artists \
                    NATURAL JOIN Genre')
 
     # grab the column headers from the returned data
@@ -158,4 +157,28 @@ def get_downloaded_songs(username):
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
+
+# Gets all songs by a that a specfic user has downloaded
+@songs.route('/song/usersong/<username>', methods=['POST'])
+def add_downloaded_song(username):
+
+    # collecting data from the request object 
+    data = request.json
+    current_app.logger.info(data)
+
+    # Constructing the query
+    query = 'insert into User_Song values ('
+    query += '(SELECT UserID FROM Users WHERE Username = ' + str(username) + '), '
+    query += str(data) + ', '
+    query += '1)'
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'Success!'
+
+
 
