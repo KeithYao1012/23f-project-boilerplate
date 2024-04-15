@@ -12,7 +12,7 @@ def get_curators():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT CuratorID, Name FROM Curatos')
+    cursor.execute('SELECT CuratorID, Name FROM Curator')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -31,7 +31,7 @@ def get_curators():
 
     return jsonify(json_data)
 
-# Get a specific curator
+# Get a specific curator given a <CuratorID>
 @curators.route('/curator/<CuratorID>', methods=['GET'])
 def get_curator(CuratorID):
 
@@ -72,7 +72,7 @@ def add_new_curator():
     
     return 'Success!'
 
-# Updates a current curator
+# Updates a current curator with the given <curatorID>
 @curators.route('/curator/<curatorID>', methods=['PUT'])
 def update_curator(CuratorID):
     curator = curators.query.get_or_404(CuratorID)

@@ -23,6 +23,7 @@ AgentKettlepot - Keith Yao (NUID: 002603831)
 beastmodeactivated123 - Ray Gutierrez (NUID: 002935468)
 michaelp2002 - Michael Ault (NUID: 001014770)
 mubgade - Maithili Ubgade (NUID: 002286249)
+alyssachang - Alyssa Chang (NUID: 002946772)
 
 ## Spotigram
 
