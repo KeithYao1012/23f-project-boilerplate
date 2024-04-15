@@ -106,7 +106,7 @@ def delete_song(songID):
 
 
 # Gets all songs with a certain genre
-@songs.route('/song/<genreID>', methods=['GET'])
+@songs.route('/song/genresong/<genreID>', methods=['GET'])
 def get_song_by_id(genreID):
 
     query = 'SELECT ArtistID, GenreID, Title, Length, Plays, CreatedAt FROM Songs WHERE GenreID = ' + str(genreID)
@@ -123,7 +123,7 @@ def get_song_by_id(genreID):
 
 
 # Gets all songs by a certain artist
-@songs.route('/song/<artist_name>', methods=['GET'])
+@songs.route('/song/artistsong/<artist_name>', methods=['GET'])
 def get_song_by_artist(artist_name):
 
     query = 'SELECT s.Title, s.Plays, s.Length, s.CreatedAt \
@@ -140,3 +140,22 @@ def get_song_by_artist(artist_name):
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
+
+# Gets all songs by a that a specfic user has downloaded
+@songs.route('/song/usersong/<username>', methods=['GET'])
+def get_downloaded_songs(username):
+    
+    query = 'SELECT * FROM Users NATURAL JOIN User_Song \
+        NATURAL JOIN Songs NATURAL JOIN Genre \
+            NATURAL JOIN Artists WHERE Username = ' + str(username)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+

@@ -723,7 +723,6 @@ VALUES(59, 'Glyn');
 INSERT INTO Producer
 VALUES(60, 'Kippie');
 -- Data for table Artist_Post
-SQL STATEMENT
 INSERT INTO Artist_Post
 Values(
         1,
