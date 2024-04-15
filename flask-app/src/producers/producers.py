@@ -83,7 +83,7 @@ def update_producer(producerID):
     return jsonify({'message': 'Producer updated successfully!'}), 200
 
 # Delete the producer with the given <ProducerID>
-@producers.route('/producers/<producerrID>', methods=['DELETE'])
+@producers.route('/producers/<producerID>', methods=['DELETE'])
 def delete_producer(producerID):
     prod = producers.query.get_or_404(producerID)
     db.session.delete(prod)
