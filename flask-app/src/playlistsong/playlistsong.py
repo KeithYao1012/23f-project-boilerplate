@@ -5,20 +5,20 @@ from src import db
 
 playlistsong  = Blueprint('Playlist_Songs', __name__)
 
-
-
 # Adds a song to a playlist
-@playlistsong.route('/playlistsong/<pID>/<songID>', methods=['POST'])
-def add_new_song_to_playlist(pID, songID):
+@playlistsong.route('/playlistsong', methods=['POST'])
+def add_new_song_to_playlist():
     
     # collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
+    pID = str(the_data["PlaylistID"])
+    songID = str(the_data["SongID"])
 
     # Constructing the query
-    query = 'insert into Playlist_Songs (PlaylistID, SongID) values ("'
-    query += pID + '", "'
-    query += songID + '") "'
+    query = 'insert into Playlist_Songs (PlaylistID, SongID) values ('
+    query += pID + ', '
+    query += songID + ')'
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
@@ -32,11 +32,19 @@ def add_new_song_to_playlist(pID, songID):
 
 
 # Deletes a song from a playlist
-@playlistsong.route('/playlistsong/<pID>/<songID>', methods=['DELETE'])
-def delete_song_playlist(pID, songID):
-    playlistsong = playlistsong.query.get_or_404(PlaylistID = pID, SongID = songID)
-    db.session.delete(playlistsong)
-    db.session.commit()
+@playlistsong.route('/playlistsong', methods=['DELETE'])
+def delete_song_playlist():
+    the_data = request.json
+    pID = str(the_data["PlaylistID"])
+    songID = str(the_data["SongID"])
+
+    query = 'DELETE FROM Playlist_Songs WHERE PlaylistID = ' + pID + ' AND SongID = ' + songID
+    # executing and committing the insert statement 
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
     return jsonify({'message': 'Song deleted successfully'}), 200
 
 

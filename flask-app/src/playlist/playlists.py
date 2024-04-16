@@ -12,7 +12,8 @@ def get_playlists():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT PlaylistID, PlaylistName FROM Playlist')
+    cursor.execute('SELECT p.PlaylistID, p.PlaylistName g.GenreName FROM Playlist p\
+                   JOIN Genre g ON p.GenreID = g.GenreID')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -35,7 +36,11 @@ def get_playlists():
 @playlists.route('/playlist/<pID>', methods=['GET'])
 def get_playlist(pID):
 
-    query = 'SELECT PlaylistID, PlaylistName FROM Playlists WHERE PlaylistID = ' + str(pID)
+    query = 'SELECT p.PlaylistID, p.PlaylistName, s.Title, p.GenreID, g.GenreName, s.SongID FROM Playlist p \
+            JOIN Playlist_Songs ps ON ps.PlaylistID = p.PlaylistID \
+            JOIN Songs s ON s.SongID = ps.SongID \
+            JOIN Genre g ON p.GenreID = g.GenreID \
+            WHERE p.PlaylistID = ' + str(pID)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -131,11 +136,12 @@ def get_downloaded_playlist(userID):
 
 
 # Retreives all playlists a curator made
-@playlists.route('/playlist/<curatorID>', methods=['GET'])
+@playlists.route('/playlist/curator/<curatorID>', methods=['GET'])
 def get_curator_playlist(curatorID):
-    query = 'SELECT p.PlaylistID, p.PlaylistName FROM Playlist p \
+    query = 'SELECT p.PlaylistID, p.PlaylistName, g.GenreName FROM Playlist p \
         JOIN Curator_Playlist cp ON cp.PlaylistID = p.PlaylistID \
         JOIN Curator c ON c.CuratorID = cp.CuratorID \
+        JOIN Genre g ON p.GenreID = g.GenreID \
         WHERE c.CuratorID = ' + str(curatorID)
     current_app.logger.info(query)
 

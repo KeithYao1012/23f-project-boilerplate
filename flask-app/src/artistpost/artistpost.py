@@ -41,12 +41,12 @@ def add_new_artistpost():
 
     #extracting the variable
     artist_name = the_data['Artist_Name']
-    content = the_data['Post_Content']
+    content = the_data['Content']
 
 
     # Constructing the query
     query = 'insert into Artist_Post (ArtistID, Content) values ('
-    query += '(select ArtistID FROM Artists WHERE Artist_name = ' + str(artist_name) + '), "'
+    query += '(select ArtistID FROM Artists WHERE Artist_name = \'' + str(artist_name) + '\'), "'
     # query += post_id + '", "'
     # query += creation_date + '", "'
     query += content + '")'
@@ -63,8 +63,8 @@ def add_new_artistpost():
 @artistpost.route('/artistpost/<artist_name>', methods=['GET'])
 def get_artistpost_by_artist(artist_name):
 
-    query = 'SELECT Artist_Name, Creation_Date, Content \
-          FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name)
+    query = 'SELECT Artist_Name, Creation_Date, Content, PostID \
+          FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = \'' + str(artist_name) + '\';'
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
