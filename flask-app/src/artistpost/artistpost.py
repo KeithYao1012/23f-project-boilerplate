@@ -76,7 +76,7 @@ def get_artistpost_by_artist(artist_name):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Get all artist posts by a certain postID
+# Get all interactions on a a certain postID
 @artistpost.route('/artistpost/<postID>', methods=['GET'])
 def get_artistpost_by_id(postID):
 
@@ -92,6 +92,49 @@ def get_artistpost_by_id(postID):
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
+
+# Get all artist posts by a certain postID
+@artistpost.route('/artistpost/interactions/<postID>', methods=['GET'])
+def get_artistpostinteractions_by_id(postID):
+
+    query = 'SELECT * FROM Artist_Post NATURAL JOIN \
+        Artists NATURAL JOIN UserArtist_Interactions \
+            NATURAL JOIN Users WHERE PostID = ' + str(postID)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+
+# Adds a comment to a specific artist post
+@artistpost.route('/artistpost/interact/<username>/<postid>', methods=['POST'])
+def add_artistpostinteraction(username, postid):
+
+    # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    comment = the_data['Comment']
+
+    # Constructing the query
+    query = 'insert into UserArtist_Interactions(UserID, PostID, Comments, Interactions) values ('
+    query += '(SELECT UserID FROM Users WHERE Username = ' + str(username) + '), '
+    query += str(postid) + ', "'
+    query += comment + '", '
+    query += '0)'
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'Success!'
 
 
 # Updates a current artistpost
