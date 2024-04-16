@@ -76,7 +76,7 @@ def get_artistpost_by_artist(artist_name):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Get all interactions on a a certain postID
+# Get all artist posts by a certain postID
 @artistpost.route('/artistpost/<postID>', methods=['GET'])
 def get_artistpost_by_id(postID):
 
@@ -93,7 +93,7 @@ def get_artistpost_by_id(postID):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Get all artist posts by a certain postID
+# Get all interactions on a a certain postID
 @artistpost.route('/artistpost/interactions/<postID>', methods=['GET'])
 def get_artistpostinteractions_by_id(postID):
 
