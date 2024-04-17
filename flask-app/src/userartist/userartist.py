@@ -5,11 +5,9 @@ from src import db
 
 follows  = Blueprint('User_Following', __name__)
 
-
-
 # Adds a user who supports an artist
-@follows.route('/users/<userID>/<artistID>', methods=['POST'])
-def user_support_artist(userID, artistID):
+@follows.route('/users/userfollowing', methods=['POST'])
+def user_support_artist():
  # collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
@@ -17,7 +15,6 @@ def user_support_artist(userID, artistID):
     #extracting the variable
     user_id = the_data['UserID']
     artist_id = the_data['ArtistID']
-
 
     # Constructing the query
     query = 'insert into User_Following(UserID, ArtistID) values ("'
@@ -33,9 +30,17 @@ def user_support_artist(userID, artistID):
     return 'Success!'
 
 # Deletes a connection from a user who supporsts an artist
-@follows.route('/users/<userID>/<artistID>', methods=['DELETE'])
-def delete_support_artist(userID, artistID):
-    query = 'DELETE FROM User_Artist WHERE UserID = ' + str(userID) + ' && AristID = ' + str(artistID)
+@follows.route('/users/userfollowing', methods=['DELETE'])
+def delete_support_artist():
+     # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    user_id = the_data['UserID']
+    artist_id = the_data['ArtistID']
+
+    query = 'DELETE FROM User_Artist WHERE UserID = ' + str(user_id) + ' && AristID = ' + str(artist_id)
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
