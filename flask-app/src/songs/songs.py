@@ -99,9 +99,13 @@ def update_song(songID):
 # Delete the song with the given <songID>
 @songs.route('/song/<songID>', methods=['DELETE'])
 def delete_song(songID):
-    song = songs.query.get_or_404(songID)
-    db.session.delete(song)
-    db.session.commit()
+    query = 'DELETE FROM Song WHERE SongID = ' + str(songID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Song deleted successfully'}), 200
 
 

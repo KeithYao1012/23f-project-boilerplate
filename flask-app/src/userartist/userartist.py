@@ -35,8 +35,12 @@ def user_support_artist(userID, artistID):
 # Deletes a connection from a user who supporsts an artist
 @follows.route('/users/<userID>/<artistID>', methods=['DELETE'])
 def delete_support_artist(userID, artistID):
-    userart = follows.query.get_or_404(UserId = userID, ArtistId = artistID)
-    db.session.delete(userart)
-    db.session.commit()
+    query = 'DELETE FROM User_Artist WHERE UserID = ' + str(userID) + ' && AristID = ' + str(artistID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    return jsonify({'message': 'Connection deleted successfully'}), 200
     
-    return 'Success!'

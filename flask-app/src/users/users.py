@@ -83,9 +83,13 @@ def update_user(username):
 # Delete the user with user_id
 @users.route('/users/<username>', methods=['DELETE'])
 def delete_user(username):
-    user = users.query.get_or_404(username)
-    db.session.delete(user)
-    db.session.commit()
+    query = 'DELETE FROM Users WHERE Username = ' + str(username)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'User deleted successfully'}), 200
 
 # Gets all users in a certain community

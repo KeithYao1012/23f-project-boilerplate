@@ -84,8 +84,12 @@ def update_curator(CuratorID):
 # Delete the curator with the given <curatorID>
 @curators.route('/curator/<curatorID>', methods=['DELETE'])
 def curator(curatorID):
-    curator = curators.query.get_or_404(curatorID)
-    db.session.delete(curator)
-    db.session.commit()
+    query = 'DELETE FROM Curator WHERE CuratorID = ' + str(curatorID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Curator deleted successfully'}), 200
 

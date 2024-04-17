@@ -33,7 +33,11 @@ def add_new_playlist_to_curator(pID, curatorID):
 # Deletes a playlist from a Curator's Portfolio
 @curatorplaylist.route('/curatorplaylist/<pID>/<curatorID>', methods=['DELETE'])
 def delete_curator_playlist(pID, curatorID):
-    curatorplaylist = curatorplaylist.query.get_or_404(PlaylistID = pID, CuratorID = curatorID)
-    db.session.delete(curatorplaylist)
-    db.session.commit()
+    query = 'DELETE FROM Curator_Playlist WHERE PlayistID = ' + str(pID) + ' && CuratorID = ' + str(curatorID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Playlist deleted successfully'}), 200

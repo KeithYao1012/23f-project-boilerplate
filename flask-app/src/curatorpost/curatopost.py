@@ -150,13 +150,12 @@ def update_curatorpost(PostID):
 
 
 # Delete the post with the given <PostID>
-@curatorpost.route('/curatorpost', methods=['DELETE'])
-def delete_curatorpost():
-    the_data = request.json
-    pID = str(the_data["PostID"])
-    query = 'DELETE FROM Curator_Post WHERE PostID = ' + pID
-    # executing and committing the insert statement 
+@curatorpost.route('/curatorpost/<postID>', methods=['DELETE'])
+def delete_curatorpost(pID):
+    query = 'DELETE FROM Community WHERE PostID = ' + str(pID)
     current_app.logger.info(query)
+
+    # executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()

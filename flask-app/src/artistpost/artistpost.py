@@ -64,7 +64,7 @@ def add_new_artistpost():
 def get_artistpost_by_artist(artist_name):
 
     query = 'SELECT Artist_Name, Creation_Date, Content \
-          FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name)
+          FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name) 
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -84,7 +84,7 @@ def get_artistpost_by_id(postID):
           FROM Artist_Post NATURAL JOIN Artists WHERE PostID = ' + str(postID)
     current_app.logger.info(query)
 
-    cursor = db.get_db().cursor()
+    cursor = db.get_db().cursor() 
     cursor.execute(query)
     column_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -148,9 +148,13 @@ def update_artistpost(PostID):
 
 
 # Delete the post with the given <PostID>
-@artistpost.route('/artistpost/<postID>', methods=['DELETE'])
+@artistpost.route('/artistpost/d/<postID>', methods=['DELETE'])
 def delete_artistpost(PostID):
-    ap = artistpost.query.get_or_404(PostID)
-    db.session.delete(ap)
-    db.session.commit()
-    return jsonify({'message': 'Post #%s deleted successfully'%(PostID)}), 200
+    query = 'DELETE FROM Artist_Post WHERE PostID = ' + str(PostID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    return jsonify({'message': 'Arist Post deleted successfully'}), 200

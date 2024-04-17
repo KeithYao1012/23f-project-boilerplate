@@ -108,9 +108,13 @@ def update_community(CommunityID):
     return jsonify({'message': 'Community updated successfully!'}), 200
 
 # Delete the community with the given <CommunityID>
-@community.route('/community/<Com_Name>', methods=['DELETE'])
-def delete_community(Com_Name):
-    community = community.query.get_or_404(Com_Name)
-    db.session.delete(community)
-    db.session.commit()
+@community.route('/community/<CommunityID>', methods=['DELETE'])
+def delete_community(Comm_ID):
+    query = 'DELETE FROM Community WHERE CommunityID = ' + str(Comm_ID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Community deleted successfully'}), 200

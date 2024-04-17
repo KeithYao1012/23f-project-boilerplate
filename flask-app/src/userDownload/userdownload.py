@@ -9,7 +9,11 @@ downloads  = Blueprint('User_Downloads', __name__)
  # Deletes a playlist given the pID
 @downloads.route('/userdownloads/<userID>/<playlistID>', methods=['DELETE'])
 def delete_playlist(userID, playlistID):
-    playlist = downloads.query.get_or_404(PlaylistID = playlistID, UserID = userID)
-    db.session.delete(playlist)
-    db.session.commit()
+    query = 'DELETE FROM User_Downloads WHERE UserID = ' + str(userID) + ' && PlaylistID = ' + str(playlistID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Playlist deleted successfully from User'}), 200

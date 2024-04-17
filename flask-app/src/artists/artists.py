@@ -11,8 +11,8 @@ def get_artists():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
-    # use cursor to query the database for a list of products
-    cursor.execute('SELECT Artist_Name FROM Artists')
+    # use cursor to query the database for a list of artist
+    cursor.execute('SELECT * FROM Artists')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -104,7 +104,11 @@ def update_artist(ArtistID):
 # Delete the producer with the given <ProducerID>
 @artists.route('/artists/<artistID>', methods=['DELETE'])
 def delete_artist(ArtistID):
-    artist = artists.query.get_or_404(ArtistID)
-    db.session.delete(artist)
-    db.session.commit()
+    query = 'DELETE FROM Artists WHERE ArtistID = ' + str(ArtistID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Artist deleted successfully'}), 200

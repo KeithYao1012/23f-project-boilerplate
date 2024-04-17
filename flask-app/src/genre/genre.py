@@ -70,3 +70,14 @@ def add_new_genre():
     db.get_db().commit()
     
     return 'Success!'
+
+@genre.route('/genre/<GenreID>', methods=['DELETE'])
+def delete_genre(Genre_ID):
+    query = 'DELETE FROM Genre WHERE GenreID = ' + str(Genre_ID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    return jsonify({'message': 'Genre deleted successfully'}), 200

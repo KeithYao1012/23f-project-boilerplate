@@ -111,9 +111,13 @@ def update_playlist(pID):
 # Deletes a playlist given the pID
 @playlists.route('/playlist/<pID>', methods=['DELETE'])
 def delete_playlist(pID):
-    playlist = playlists.query.get_or_404(pID)
-    db.session.delete(playlist)
-    db.session.commit()
+    query = 'DELETE FROM Playlist WHERE PlaylistID = ' + str(pID)
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Playlist deleted successfully'}), 200
 
 # Retreives all playlists of a certain user downloaded

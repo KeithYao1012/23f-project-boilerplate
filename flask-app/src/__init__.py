@@ -47,6 +47,8 @@ def create_app():
     from src.messages.messages import messages
     from src.usersongs.usersongs import usersongs
     from src.playlistsong.playlistsong import playlistsong
+    from src.curatorplaylist.curator_playlist import curatorplaylist
+    from src.genre.genre import genre
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
@@ -64,6 +66,9 @@ def create_app():
     app.register_blueprint(messages, url_prefix='/m')
     app.register_blueprint(usersongs, url_prefix='/us')
     app.register_blueprint(playlistsong, url_prefix='/pls')
+    app.register_blueprint(curatorplaylist, url_prefix='/cpl')
+    app.register_blueprint(genre, url_prefix='/g')
+
 
     # Don't forget to return the app object
     return app
