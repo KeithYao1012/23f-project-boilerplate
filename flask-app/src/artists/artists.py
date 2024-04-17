@@ -35,7 +35,7 @@ def get_artists():
 @artists.route('/artists/<Artist_Name>', methods=['GET'])
 def get_artist(Artist_Name):
 
-    query = 'SELECT Artist_Name FROM Artists WHERE Artist_Name = ' + str(Artist_Name)
+    query = 'SELECT * FROM Artists WHERE Artist_Name = ' + str(Artist_Name)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -78,7 +78,6 @@ def add_new_artist():
     #extracting the variable
     name = the_data['Artist_Name']
 
-
     # Constructing the query
     query = 'insert into Artists (Artist_Name) values("'
     query += name + '")'
@@ -91,13 +90,20 @@ def add_new_artist():
     
     return 'Success!'
 
-
 # Updates a current artist
 @artists.route('/artists/<ArtistID>', methods=['PUT'])
 def update_artist(ArtistID):
-    artist = artists.query.get_or_404(ArtistID)
-    data = request.get_json()
-    artist.name = data['Artist_Name']
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    name = the_data['Name']
+    # Constructing the query
+    query = 'UPDATE Artists SET Artist_Name = \'' + name + '\' WHERE ArtistID =' + ArtistID
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
     db.session.commit()
     return jsonify({'message': 'Artist updated successfully!'}), 200
 
