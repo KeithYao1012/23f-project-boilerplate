@@ -5,7 +5,7 @@ from src import db
 
 artistpost  = Blueprint('artistpost', __name__)
 
-# Get all the artists
+# Get all the artist posts
 @artistpost.route('/artistpost', methods=['GET'])
 def get_artistsposts():
     # get a cursor object from the database
@@ -45,7 +45,7 @@ def add_new_artistpost():
 
     # Constructing the query
     query = 'insert into Artist_Post (ArtistID, Content) values ('
-    query += '(select ArtistID FROM Artists WHERE Artist_name = ' + str(artist_name) + '), "'
+    query += '(select ArtistID FROM Artists WHERE Artist_name = "' + artist_name + '"), "'
     query += content + '")'
     current_app.logger.info(query)
 
@@ -60,7 +60,7 @@ def add_new_artistpost():
 @artistpost.route('/artistpost/<artist_name>', methods=['GET'])
 def get_artistpost_by_artist(artist_name):
 
-    query = 'SELECT Artist_Name, Creation_Date, Content \
+    query = 'SELECT Artist_Name, Creation_Date, Content, PostID \
           FROM Artist_Post NATURAL JOIN Artists WHERE Artist_Name = ' + str(artist_name) 
     current_app.logger.info(query)
 
@@ -151,8 +151,8 @@ def update_artistpost(PostID):
 
 # Delete the post with the given <PostID>
 @artistpost.route('/artistpost/d/<postID>', methods=['DELETE'])
-def delete_artistpost(PostID):
-    query = 'DELETE FROM Artist_Post WHERE PostID = ' + str(PostID)
+def delete_artistpost(postID):
+    query = 'DELETE FROM Artist_Post WHERE PostID = ' + str(postID)
     current_app.logger.info(query)
 
     # executing and committing the insert statement 

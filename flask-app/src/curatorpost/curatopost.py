@@ -156,12 +156,12 @@ def update_curatorpost(PostID):
 
 # Delete the post with the given <PostID>
 @curatorpost.route('/curatorpost/<postID>', methods=['DELETE'])
-def delete_curatorpost(pID):
-    query = 'DELETE FROM Curator_Post WHERE PostID = ' + str(pID)
+def delete_curatorpost(postID):
+    query = 'DELETE FROM Curator_Post WHERE PostID = ' + str(postID)
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
-    return jsonify({'message': 'Post #%s deleted successfully'%(pID)}), 200
+    return jsonify({'message': 'Post #%s deleted successfully'%(postID)}), 200
