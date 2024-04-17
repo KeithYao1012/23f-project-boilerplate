@@ -43,12 +43,9 @@ def add_new_artistpost():
     artist_name = the_data['Artist_Name']
     content = the_data['Post_Content']
 
-
     # Constructing the query
     query = 'insert into Artist_Post (ArtistID, Content) values ('
     query += '(select ArtistID FROM Artists WHERE Artist_name = ' + str(artist_name) + '), "'
-    # query += post_id + '", "'
-    # query += creation_date + '", "'
     query += content + '")'
     current_app.logger.info(query)
 
@@ -140,10 +137,15 @@ def add_artistpostinteraction(username, postid):
 # Updates a current artistpost
 @artistpost.route('/artistpost/<postID>', methods=['PUT'])
 def update_artistpost(PostID):
-    ap = artistpost.query.get_or_404(PostID)
     data = request.get_json()
-    ap.content = data['content']
-    db.session.commit()
+    # Constructing the query
+    query = 'UPDATE Artist_Post SET Content = \'' + str(data['content']) + '\' WHERE PostID =' + str(PostID)
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
     return jsonify({'message': 'Post #%s updated successfully!'%(PostID)}), 200
 
 

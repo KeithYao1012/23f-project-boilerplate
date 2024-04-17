@@ -86,11 +86,7 @@ def update_producer(producerID):
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    column_headers = [x[0] for x in cursor.description]
-    json_data = []
-    the_data = cursor.fetchall()
-    for row in the_data:
-        json_data.append(dict(zip(column_headers, row)))
+    db.get_db().commit()
     return jsonify({'message': 'Producer updated successfully!'}), 200
 
 # Delete the producer with the given <ProducerID>

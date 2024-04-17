@@ -83,14 +83,11 @@ def add_new_playlist():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    id = the_data['PlaylistID']
     name = the_data['PlaylistName']
 
-
     # Constructing the query
-    query = 'insert into playlists (PlaylistID, PlaylistName) values ("'
-    query += id + '", "'
-    query += name + '", "'
+    query = 'insert into Playlist (PlaylistName) values (\''
+    query += name + '\') '
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
@@ -103,10 +100,17 @@ def add_new_playlist():
 # Updates a current playlist
 @playlists.route('/playlist/<pID>', methods=['PUT'])
 def update_playlist(pID):
-    playlist = playlists.query.get_or_404(pID)
-    data = request.get_json()
-    playlist.name = data['PlaylistName']
-    db.session.commit()
+    the_data = request.json
+    current_app.logger.info(the_data)
+    #extracting the variable
+    name = the_data['Name']
+    # Constructing the query
+    query = 'UPDATE Playlist SET PlaylistName = \'' + name + '\' WHERE PlaylistID =' + pID
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
     return jsonify({'message': 'Playlist updated successfully!'}), 200
 
 # Deletes a playlist given the pID
@@ -127,7 +131,7 @@ def get_downloaded_playlist(userID):
     query = 'SELECT p.PlaylistID, p.PlaylistName FROM Playlist p \
         JOIN User_downloads ud ON ud.PlaylistID = p.PlaylistID \
         JOIN Users u ON u.UserID = ud.UserID \
-        WHERE u.UserID = ' + str(userID)
+        WHERE u.UserID = \'' + str(userID) + '\''
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -147,7 +151,7 @@ def get_curator_playlist(curatorID):
         JOIN Curator_Playlist cp ON cp.PlaylistID = p.PlaylistID \
         JOIN Curator c ON c.CuratorID = cp.CuratorID \
         JOIN Genre g ON p.GenreID = g.GenreID \
-        WHERE c.CuratorID = ' + str(curatorID)
+        WHERE c.CuratorID = \'' + str(curatorID) + '\''
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -164,7 +168,7 @@ def get_curator_playlist(curatorID):
 def get_paylist_by_genre(genreID):
     query = 'SELECT p.PlaylistID, p.PlaylistName, p. FROM Playlist p \
         JOIN genre g ON g.GenreID = p.GenreID \
-        WHERE g.GenreID = ' + str(genreID)
+        WHERE g.GenreID = \'' + str(genreID) + '\''
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
