@@ -28,6 +28,28 @@ def add_new_song_to_playlist():
     
     return 'Success!'
 
+# Get a songs from specific playlist
+@playlistsong.route('/playlistsong/<pID>', methods=['GET'])
+def get_playlistsong(pID):
+
+
+   query = 'SELECT * FROM Playlist_Songs ps NATURAL JOIN \
+       Playlist p JOIN Songs s ON ps.SongID = s.SongID \
+           JOIN Genre g on p.GenreID = g.GenreID  \
+               JOIN Artists a ON s.ArtistID = a.ArtistID WHERE PlaylistID = ' + str(pID)
+   current_app.logger.info(query)
+
+
+   cursor = db.get_db().cursor()
+   cursor.execute(query)
+   column_headers = [x[0] for x in cursor.description]
+   json_data = []
+   the_data = cursor.fetchall()
+   for row in the_data:
+       json_data.append(dict(zip(column_headers, row)))
+   return jsonify(json_data)
+
+
 
 
 
@@ -46,7 +68,3 @@ def delete_song_playlist():
     db.get_db().commit()
 
     return jsonify({'message': 'Song deleted successfully'}), 200
-
-
-
-

@@ -12,8 +12,9 @@ def get_playlists():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT p.PlaylistID, p.PlaylistName g.GenreName FROM Playlist p\
-                   JOIN Genre g ON p.GenreID = g.GenreID')
+    cursor.execute('SELECT p.PlaylistID, p.PlaylistName, g.GenreName, c.Name FROM Playlist p\
+                   JOIN Genre g ON p.GenreID = g.GenreID JOIN Curator_Playlist cp \
+                   ON p.PlaylistID = cp.PlaylistID JOIN Curator c ON cp.CuratorID = c.CuratorID')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
