@@ -35,7 +35,7 @@ def get_users():
 @users.route('/users/<username>', methods=['GET'])
 def get_user(username):
 
-    query = 'SELECT Username FROM Users WHERE Username = ' + str(username)
+    query = 'SELECT Username FROM Users WHERE Username = \'' + str(username) + '\''
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -58,10 +58,9 @@ def add_new_user():
     #extracting the variable
     name = the_data['Username']
 
-
     # Constructing the query
-    query = 'insert into Users (Username) values ("'
-    query += name + '")'
+    query = 'insert into Users (Username) values (\''
+    query += name + '\')'
     current_app.logger.info(query)
 
     # executing and committing the insert statement 
@@ -72,13 +71,24 @@ def add_new_user():
     return 'Success!'
 
 # Updates a current user
-@users.route('/users/<username>', methods=['PUT'])
-def update_user(username):
-    user = users.query.get_or_404(username)
-    data = request.get_json()
-    user.username = data['username']
-    db.session.commit()
-    return jsonify({'message': 'User updated successfully!'}), 200
+@users.route('/users/<userID>', methods=['PUT'])
+def update_user(userID):
+    # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    name = the_data['Username']
+    # Constructing the query
+    query = 'UPDATE Users SET username = \'' + name + '\' WHERE UserID =' + userID
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return jsonify({'message': 'User %s updated successfully!'%(userID)}), 200
 
 # Delete the user with user_id
 @users.route('/users/<username>', methods=['DELETE'])
