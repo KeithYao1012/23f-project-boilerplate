@@ -12,7 +12,7 @@ def get_producers():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT Name, ProducerID FROM Producer')
+    cursor.execute('SELECT * FROM Producer')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -35,7 +35,7 @@ def get_producers():
 @producers.route('/producers/<producerID>', methods=['GET'])
 def get_producer(producerID):
 
-    query = 'SELECT Name, ProducerID FROM Producer WHERE ProducerID = ' + str(producerID)
+    query = 'SELECT * FROM Producer WHERE ProducerID = ' + str(producerID)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -59,9 +59,8 @@ def add_new_producer():
     id = the_data['ProducerID']
     name = the_data['Name']
 
-
     # Constructing the query
-    query = 'insert into producers (ProducerID, Name) values ("'
+    query = 'insert into producers values ("'
     query += id + '", "'
     query += name + '", "'
     current_app.logger.info(query)
@@ -76,10 +75,22 @@ def add_new_producer():
 # Updates a current producer
 @producers.route('/producers/<producerID>', methods=['PUT'])
 def update_producer(producerID):
-    prod = producers.query.get_or_404(producerID)
-    data = request.get_json()
-    prod.name = data['name']
-    db.session.commit()
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    name = the_data['Name']
+    # Constructing the query
+    query = 'UPDATE Producers SET Name = \'' + name + '\' WHERE ProducerID =' + producerID
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
     return jsonify({'message': 'Producer updated successfully!'}), 200
 
 # Delete the producer with the given <ProducerID>

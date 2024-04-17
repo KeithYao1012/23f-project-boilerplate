@@ -105,7 +105,6 @@ def delete_user(username):
 # Gets all users in a certain community
 @users.route('/users/<com_name>', methods=['GET'])
 def get_users_from_community(com_name):
-
     query = 'SELECT u.Username FROM Users u \
         JOIN User_Community uc ON u.UserID = uc.UserID \
         JOIN Community c ON uc.CommunityID = c.CommunityID \
