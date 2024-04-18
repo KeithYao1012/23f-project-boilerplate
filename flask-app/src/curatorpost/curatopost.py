@@ -141,17 +141,17 @@ def add_artistpostinteraction(username, postid):
 
 # Updates a current curatorpost
 @curatorpost.route('/curatorpost/<postID>', methods=['PUT'])
-def update_curatorpost(PostID):
+def update_curatorpost(postID):
     data = request.get_json()
     # Constructing the query
-    query = 'UPDATE Curator_Post SET Content = \'' + str(data['content']) + '\' WHERE PostID =' + str(PostID)
+    query = 'UPDATE Curator_Post SET Post_Content = "' + (data) + '" WHERE PostID =' + str(postID)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
 
-    return jsonify({'message': 'Post #%s updated successfully!'%(PostID)}), 200
+    return jsonify({'message': 'Post #%s updated successfully!'%(postID)}), 200
 
 
 # Delete the post with the given <PostID>
