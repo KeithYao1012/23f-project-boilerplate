@@ -52,8 +52,11 @@ def add_downloaded_playlist(username):
 
 
  # Deletes a playlist given the pID
-@downloads.route('/userdownloads/<userID>/<playlistID>', methods=['DELETE'])
-def delete_playlist(userID, playlistID):
+@downloads.route('/userdownloads', methods=['DELETE'])
+def delete_playlist():
+    data = request.json
+    userID = data['userID']
+    playlistID = data['pID']
     query = 'DELETE FROM User_Downloads WHERE UserID = ' + str(userID) + ' && PlaylistID = ' + str(playlistID)
     current_app.logger.info(query)
 

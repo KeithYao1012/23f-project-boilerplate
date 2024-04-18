@@ -138,7 +138,7 @@ def add_artistpostinteraction(username, postid):
 @artistpost.route('/artistpost', methods=['PUT'])
 def update_artistpost():
     data = request.get_json()
-    PostID = str(data['postID'])
+    PostID = data['postID']
     content = str(data['content'])
     # Constructing the query
     query = 'UPDATE Artist_Post SET Content = \'' + content + '\' WHERE PostID =' + str(PostID)
@@ -152,8 +152,10 @@ def update_artistpost():
 
 
 # Delete the post with the given <PostID>
-@artistpost.route('/artistpost/d/<postID>', methods=['DELETE'])
-def delete_artistpost(postID):
+@artistpost.route('/artistpost', methods=['DELETE'])
+def delete_artistpost():
+    data = request.get_json()
+    postID = str(data['PostID'])
     query = 'DELETE FROM Artist_Post WHERE PostID = ' + str(postID)
     current_app.logger.info(query)
 

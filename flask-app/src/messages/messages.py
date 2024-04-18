@@ -77,7 +77,6 @@ def send_Message(username):
 
     content = the_data['Content']
     toUsername = the_data['Username']
-    
 
     # Constructing the query
     query = 'INSERT INTO Message(ToUserID, FromUserID, Content) VALUES ('
