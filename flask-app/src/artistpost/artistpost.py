@@ -135,11 +135,13 @@ def add_artistpostinteraction(username, postid):
 
 
 # Updates a current artistpost
-@artistpost.route('/artistpost/<postID>', methods=['PUT'])
-def update_artistpost(PostID):
+@artistpost.route('/artistpost', methods=['PUT'])
+def update_artistpost():
     data = request.get_json()
+    PostID = str(data['postID'])
+    content = str(data['content'])
     # Constructing the query
-    query = 'UPDATE Artist_Post SET Content = \'' + str(data['content']) + '\' WHERE PostID =' + str(PostID)
+    query = 'UPDATE Artist_Post SET Content = \'' + content + '\' WHERE PostID =' + str(PostID)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
